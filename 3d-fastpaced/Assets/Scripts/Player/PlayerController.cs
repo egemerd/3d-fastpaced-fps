@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 
 public class PlayerController : MonoBehaviour
@@ -14,7 +15,9 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
     private PlayerInput playerInput;
     private Camera mainCamera;
-    
+    private CharacterController characterController;
+    [SerializeField] private Transform cameraHead;
+
     [Header("Input")]
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -28,9 +31,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mouseSens;
     [SerializeField] private float lookRange;
 
+    [Header("Jumping")]
+    [SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private float gravity = -9.81f;
 
+    private Vector3 velocity;
+    private bool isGrounded;
     private bool isMoving;
     Vector3 moveDirection;
+
     private void Start()
     {
         mainCamera = Camera.main;
@@ -46,56 +55,44 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
-        
+        characterController = GetComponent<CharacterController>();
     }
     private void Update()
     {
         lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
-        PlayerLook();
-        
+        CalculateMoveDirection();
+        Movement();
     }
-
-    private void FixedUpdate()
-    {
-        Movement();  
-    }
+    
 
     private void Movement()
     {
-        float speedtMultiplier = sprintAction.ReadValue<float>() > 0 ? sprintMultiplier : 1f;
+        float speedMultiplier = sprintAction.ReadValue<float>() > 0 ? sprintMultiplier : 1f;
+    
+        Vector3 horizontalMove = moveDirection * moveSpeed * speedMultiplier * Time.deltaTime;
 
-        CalculateMoveDirection();
+        velocity.y += gravity * Time.deltaTime;
+        Vector3 verticalMove = velocity * Time.deltaTime;
 
-        Vector3 newVelocity = moveDirection * moveSpeed ;
-        newVelocity.y = rb.linearVelocity.y; 
-        rb.linearVelocity = newVelocity;
+        Vector3 finalMove = horizontalMove + verticalMove;
+        characterController.Move(finalMove);
 
     }
 
     private void CalculateMoveDirection()
     {
-        Vector3 forward = mainCamera.transform.forward;
-        Vector3 right = mainCamera.transform.right;
-
+        Vector3 forward = transform.forward;
+        Vector3 right = transform.right;
         forward.y = 0;
         right.y = 0;
-
         forward.Normalize();
         right.Normalize();
-
         moveDirection = (forward * moveInput.y + right * moveInput.x).normalized;
     }
 
-    private void PlayerLook()
-    {
-        transform.Rotate(Vector3.up * lookInput.x * mouseSens * Time.deltaTime) ;
-
-        verticalRotation -= lookInput.y* mouseSens *Time.deltaTime;
-        verticalRotation = Mathf.Clamp(verticalRotation, -lookRange, lookRange);
-        mainCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
-    }
+    
 
     public void StartSpeedBoost(float duration , float amount)
     {
