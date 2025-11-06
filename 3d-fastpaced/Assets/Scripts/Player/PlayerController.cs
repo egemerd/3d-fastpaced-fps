@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
@@ -29,8 +30,10 @@ public class PlayerController : MonoBehaviour
 
 
     private bool isMoving;
+    Vector3 moveDirection;
     private void Start()
     {
+        mainCamera = Camera.main;
         moveAction = playerInput.actions.FindAction("Move");
         jumpAction = playerInput.actions.FindAction("Jump");
         sprintAction = playerInput.actions.FindAction("Sprint");
@@ -43,19 +46,36 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
-        mainCamera = Camera.main;
+        
     }
+    private void Update()
+    {
+        lookInput = lookAction.ReadValue<Vector2>();
+        moveInput = moveAction.ReadValue<Vector2>();
+
+        PlayerLook();
+        
+    }
+
     private void FixedUpdate()
     {
-        Movement();
-        PlayerLook();
+        Movement();  
     }
 
     private void Movement()
     {
         float speedtMultiplier = sprintAction.ReadValue<float>() > 0 ? sprintMultiplier : 1f;
 
-        moveInput = moveAction.ReadValue<Vector2>();
+        CalculateMoveDirection();
+
+        Vector3 newVelocity = moveDirection * moveSpeed ;
+        newVelocity.y = rb.linearVelocity.y; 
+        rb.linearVelocity = newVelocity;
+
+    }
+
+    private void CalculateMoveDirection()
+    {
         Vector3 forward = mainCamera.transform.forward;
         Vector3 right = mainCamera.transform.right;
 
@@ -65,20 +85,14 @@ public class PlayerController : MonoBehaviour
         forward.Normalize();
         right.Normalize();
 
-        Vector3 moveDirection = (forward * moveInput.y + right * moveInput.x).normalized;
-
-        rb.linearVelocity = moveDirection * moveSpeed * moveSpeed * Time.deltaTime + new Vector3(0, rb.linearVelocity.y, 0);
-
+        moveDirection = (forward * moveInput.y + right * moveInput.x).normalized;
     }
 
     private void PlayerLook()
     {
-        lookInput = lookAction.ReadValue<Vector2>();
+        transform.Rotate(Vector3.up * lookInput.x * mouseSens * Time.deltaTime) ;
 
-        float mouseXRotation = lookInput.x* mouseSens;
-        transform.Rotate(0, mouseXRotation,0);
-
-        verticalRotation -= lookInput.y* mouseSens;
+        verticalRotation -= lookInput.y* mouseSens *Time.deltaTime;
         verticalRotation = Mathf.Clamp(verticalRotation, -lookRange, lookRange);
         mainCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
     }
