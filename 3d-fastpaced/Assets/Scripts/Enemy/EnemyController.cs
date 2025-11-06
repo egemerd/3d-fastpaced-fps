@@ -1,16 +1,28 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] private Transform target;
+
+    Rigidbody rb;
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody>();
+    }
+    private void Update()
+    {
+        FollowPlayer();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FollowPlayer()
     {
-        
+        var delta = target.position - transform.position;
+        delta.y = 0; 
+        Vector3 direction = delta.normalized;
+        Debug.Log(direction);
+        transform.LookAt(target);
+        rb.linearVelocity = direction * Time.deltaTime * moveSpeed;
     }
 }

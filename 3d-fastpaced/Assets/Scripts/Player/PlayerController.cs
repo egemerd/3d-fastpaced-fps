@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         Movement();
         PlayerLook();
