@@ -34,11 +34,14 @@ public class PlayerController : MonoBehaviour
     [Header("Jumping")]
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float groundCheckDistance;
 
     private Vector3 velocity;
     private bool isGrounded;
     private bool isMoving;
     Vector3 moveDirection;
+    
 
     private void Start()
     {
@@ -62,6 +65,14 @@ public class PlayerController : MonoBehaviour
         lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
+        GroundCheck();
+        Debug.Log(isGrounded);
+
+        if (jumpAction.triggered && isGrounded)
+        {
+            Jump();
+        }
+
         CalculateMoveDirection();
         Movement();
     }
@@ -69,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
-        float speedMultiplier = sprintAction.ReadValue<float>() > 0 ? sprintMultiplier : 1f;
+        float speedMultiplier = sprintAction.ReadValue<float>() > 0 && isGrounded ? sprintMultiplier : 1f;
     
         Vector3 horizontalMove = moveDirection * moveSpeed * speedMultiplier * Time.deltaTime;
 
@@ -79,6 +90,23 @@ public class PlayerController : MonoBehaviour
         Vector3 finalMove = horizontalMove + verticalMove;
         characterController.Move(finalMove);
 
+    }
+
+    private void GroundCheck()
+    {
+        isGrounded = Physics.CheckSphere(transform.position + Vector3.down * characterController.height/2 , 
+            groundCheckDistance, 
+            groundMask);
+
+        if(isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+    }
+    private void Jump()
+    {
+        Debug.Log("Jumped");
+        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 
     private void CalculateMoveDirection()
@@ -92,7 +120,15 @@ public class PlayerController : MonoBehaviour
         moveDirection = (forward * moveInput.y + right * moveInput.x).normalized;
     }
 
-    
+    private void OnDrawGizmos()
+    {
+        if (characterController != null)
+        {
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Vector3 checkPosition = transform.position + Vector3.down * (characterController.height / 2f);
+            Gizmos.DrawWireSphere(checkPosition, groundCheckDistance);
+        }
+    }
 
     public void StartSpeedBoost(float duration , float amount)
     {
