@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 355344428}
   - component: {fileID: 355344427}
   - component: {fileID: 355344426}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 565956395}
   - component: {fileID: 565956394}
   - component: {fileID: 565956393}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1049,7 +1049,7 @@ GameObject:
   - component: {fileID: 741204535}
   - component: {fileID: 741204534}
   - component: {fileID: 741204533}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1160,7 +1160,7 @@ GameObject:
   - component: {fileID: 744742154}
   - component: {fileID: 744742153}
   - component: {fileID: 744742152}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1352,7 +1352,7 @@ GameObject:
   - component: {fileID: 1032721476}
   - component: {fileID: 1032721475}
   - component: {fileID: 1032721474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1463,7 +1463,7 @@ GameObject:
   - component: {fileID: 1081533040}
   - component: {fileID: 1081533039}
   - component: {fileID: 1081533038}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1574,7 +1574,7 @@ GameObject:
   - component: {fileID: 1119044019}
   - component: {fileID: 1119044018}
   - component: {fileID: 1119044017}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1685,7 +1685,7 @@ GameObject:
   - component: {fileID: 1223081068}
   - component: {fileID: 1223081067}
   - component: {fileID: 1223081066}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1858,7 +1858,7 @@ GameObject:
   - component: {fileID: 1560702682}
   - component: {fileID: 1560702681}
   - component: {fileID: 1560702680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1966,7 +1966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1575606752}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enviroment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2159,14 +2159,19 @@ MonoBehaviour:
   bodyTransform: {fileID: 97967344}
   moveSpeed: 10
   sprintMultiplier: 1.8
+  airMovementController: 0.8
   mouseSens: 25
   lookRange: 70
   jumpHeight: 1.5
+  sprintingJumpHeight: 2.5
   gravity: -9.81
+  fallGravity: 3
+  jumpGravity: 1.7
+  airControlTime: 0.4
   jumpRayOffset: 0.2
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   groundCheckDistance: 1
 --- !u!114 &2120203498
 MonoBehaviour:

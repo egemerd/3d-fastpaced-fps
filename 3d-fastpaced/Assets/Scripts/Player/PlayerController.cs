@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float sprintMultiplier = 2f;
+    [SerializeField] private float airMovementController = 0.8f;
+
 
     [Header("Look")]
     [SerializeField] private float mouseSens;
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float sprintingJumpHeight = 2.5f;
     [SerializeField] private float gravity = -15f;
     [SerializeField] private float fallGravity = 1.5f;
+    [SerializeField] private float jumpGravity = 1.5f;
     [SerializeField] private float airControlTime = -9.81f;
     [SerializeField] private float jumpRayOffset = 0.5f;
     [SerializeField] private LayerMask groundMask;
@@ -47,7 +51,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isMoving;
     Vector3 moveDirection;
-    private bool isSprinting;   
+    private bool isSprinting;
+    private Vector3 horizontalVelocity;
 
 
     private void Start()
@@ -90,13 +95,21 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
-        float speedMultiplier = sprintAction.ReadValue<float>() > 0 && isGrounded ? sprintMultiplier : 1f;
-    
-        Vector3 horizontalMove = moveDirection * moveSpeed * speedMultiplier * Time.deltaTime;
+      
+        float speedMultiplier = sprintAction.ReadValue<float>() > 0  ? sprintMultiplier : 1f;
+        Vector3 desiredVelocity = moveDirection * moveSpeed * speedMultiplier;
 
-        
+        if (isGrounded)
+        {
+            horizontalVelocity = desiredVelocity;
+        }
+        else
+        {
+            horizontalVelocity = Vector3.Lerp(horizontalVelocity, desiredVelocity, airControlTime* Time.deltaTime);
+        }
+
         Vector3 verticalMove = velocity * Time.deltaTime;
-
+        Vector3 horizontalMove = horizontalVelocity * Time.deltaTime;   
         Vector3 finalMove = horizontalMove + verticalMove;
         characterController.Move(finalMove);
 
@@ -137,6 +150,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Applying Fall Gravity");
             Debug.Log(velocity.y);
             currentGravity *= fallGravity;
+        }
+        else if (velocity.y > 0)
+        {
+            currentGravity *= jumpGravity;
         }
         Debug.Log("Current Gravity: " + currentGravity);
         velocity.y += currentGravity * Time.deltaTime;
