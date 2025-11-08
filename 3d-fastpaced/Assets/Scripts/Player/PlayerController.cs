@@ -8,6 +8,8 @@ using UnityEngine.InputSystem.XR;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private Transform cameraHead;
+    [SerializeField] private Transform bodyTransform;
     Rigidbody rb;
     private InputAction moveAction;
     private InputAction sprintAction;
@@ -16,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private Camera mainCamera;
     private CharacterController characterController;
-    [SerializeField] private Transform cameraHead;
+    
 
     [Header("Input")]
     private Vector2 moveInput;
@@ -33,7 +35,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jumping")]
     [SerializeField] private float jumpHeight = 2f;
-    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float sprintingJumpHeight = 2.5f;
+    [SerializeField] private float gravity = -15f;
+    [SerializeField] private float fallGravity = 1.5f;
+    [SerializeField] private float airControlTime = -9.81f;
+    [SerializeField] private float jumpRayOffset = 0.5f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundCheckDistance;
 
@@ -41,7 +47,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isMoving;
     Vector3 moveDirection;
-    
+    private bool isSprinting;   
+
 
     private void Start()
     {
@@ -67,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
         GroundCheck();
         Debug.Log(isGrounded);
+        ApplyGravity();
 
         if (jumpAction.triggered && isGrounded)
         {
@@ -76,6 +84,8 @@ public class PlayerController : MonoBehaviour
         CalculateMoveDirection();
         Movement();
     }
+
+
     
 
     private void Movement()
@@ -84,7 +94,7 @@ public class PlayerController : MonoBehaviour
     
         Vector3 horizontalMove = moveDirection * moveSpeed * speedMultiplier * Time.deltaTime;
 
-        velocity.y += gravity * Time.deltaTime;
+        
         Vector3 verticalMove = velocity * Time.deltaTime;
 
         Vector3 finalMove = horizontalMove + verticalMove;
@@ -94,8 +104,10 @@ public class PlayerController : MonoBehaviour
 
     private void GroundCheck()
     {
-        isGrounded = Physics.CheckSphere(transform.position + Vector3.down * characterController.height/2 , 
-            groundCheckDistance, 
+        Vector3 bodyPosition = bodyTransform.position;
+        isGrounded = Physics.Raycast(bodyPosition , 
+            Vector3.down , 
+            (characterController.height/2 + jumpRayOffset),
             groundMask);
 
         if(isGrounded && velocity.y < 0)
@@ -105,8 +117,29 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        Debug.Log("Jumped");
-        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        isSprinting = sprintAction.ReadValue<float>() > 0;
+        float height = jumpHeight;
+
+        if(isSprinting)
+        {
+            height = sprintingJumpHeight;
+            
+        }
+        velocity.y = Mathf.Sqrt(height * -2 * gravity);
+    }
+
+    private void ApplyGravity()
+    {
+        float currentGravity = gravity;
+
+        if (velocity.y < 0)
+        {
+            Debug.Log("Applying Fall Gravity");
+            Debug.Log(velocity.y);
+            currentGravity *= fallGravity;
+        }
+        Debug.Log("Current Gravity: " + currentGravity);
+        velocity.y += currentGravity * Time.deltaTime;
     }
 
     private void CalculateMoveDirection()
@@ -126,7 +159,10 @@ public class PlayerController : MonoBehaviour
         {
             Gizmos.color = isGrounded ? Color.green : Color.red;
             Vector3 checkPosition = transform.position + Vector3.down * (characterController.height / 2f);
-            Gizmos.DrawWireSphere(checkPosition, groundCheckDistance);
+            //Gizmos.DrawWireSphere(checkPosition, groundCheckDistance);
+            Vector3 rayPosition = bodyTransform.position;
+            
+            Gizmos.DrawRay(rayPosition, Vector3.down * groundCheckDistance);
         }
     }
 

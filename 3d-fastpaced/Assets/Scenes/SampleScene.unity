@@ -178,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 97967343}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.14, z: 0}
+  m_LocalPosition: {x: 0, y: 0.319, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2134,7 +2134,7 @@ Transform:
   m_GameObject: {fileID: 2120203494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.74, y: 0.96, z: 0}
+  m_LocalPosition: {x: 2.74, y: 0.869, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2156,16 +2156,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   cameraHead: {fileID: 535243768}
+  bodyTransform: {fileID: 97967344}
   moveSpeed: 10
   sprintMultiplier: 1.8
   mouseSens: 25
   lookRange: 70
-  jumpHeight: 2
+  jumpHeight: 1.5
   gravity: -9.81
+  jumpRayOffset: 0.2
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  groundCheckDistance: 0.3
+  groundCheckDistance: 1
 --- !u!114 &2120203498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2243,7 +2245,7 @@ CharacterController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120203494}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 41b2bb212eee5ac428e2d056fac522d1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2260,7 +2262,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.17, z: 0}
+  m_Center: {x: 0, y: 0.33, z: 0}
 --- !u!1001 &1965027768949606742
 PrefabInstance:
   m_ObjectHideFlags: 0
