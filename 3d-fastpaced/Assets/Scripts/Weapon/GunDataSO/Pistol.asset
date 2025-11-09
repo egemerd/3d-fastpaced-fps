@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6612a8b942fbbbc4aad4c012e2a75e68, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::GunData
-  gunName: 
+  gunName: Pistol
   whatToHit:
     serializedVersion: 2
     m_Bits: 0
   fireRate: 0
   fireRange: 0
-  reloadSpeed: 0
+  reloadTime: 0
   magazineSize: 0
