@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
         if (velocity.y < 0)
         {
             Debug.Log("Applying Fall Gravity");
-            Debug.Log(velocity.y);
+            //Debug.Log(velocity.y);
             currentGravity *= fallGravity;
         }
         else if (velocity.y > 0)

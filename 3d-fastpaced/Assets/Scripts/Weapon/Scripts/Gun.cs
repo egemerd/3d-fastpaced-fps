@@ -4,17 +4,22 @@ using UnityEngine;
 public abstract class Gun : MonoBehaviour
 {
     public GunData gunData;
-    [SerializeField] private Transform mainCamera;
+    [SerializeField] public Transform mainCamera;
     public PlayerController playerController;
 
     private int currentAmmo = 0;    
-    private float netTimeToFire = 0f;   
+    private float nextTimeToFire = 0f;   
     private bool isReloading = false;
 
     private void Start()
     {
         currentAmmo = gunData.magazineSize;
             
+    }
+
+    public virtual void Update()
+    {
+
     }
 
     public void HandleReload()
@@ -37,18 +42,18 @@ public abstract class Gun : MonoBehaviour
     }
 
 
-    private void TryShoot()
+    public void TryShoot()
     {
         if (isReloading || currentAmmo <= 0)
             return;
  
-        if (Time.time >= netTimeToFire)
+        if (Time.time >= nextTimeToFire)
         {
-            netTimeToFire = Time.time + 1 / gunData.fireRate;
+            nextTimeToFire = Time.time + 1 / gunData.fireRate;
             HandleShoot();
         }
     }
-    public void HandleShoot()
+    private void HandleShoot()
     {
         currentAmmo--;
         Shoot();
