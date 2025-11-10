@@ -5,6 +5,7 @@ public abstract class Gun : MonoBehaviour
 {
     public GunData gunData;
     [SerializeField] public Transform mainCamera;
+    [SerializeField] public GameObject bulletMarkPrefab;
     public PlayerController playerController;
 
     private int currentAmmo = 0;    
@@ -53,10 +54,13 @@ public abstract class Gun : MonoBehaviour
             HandleShoot();
         }
     }
+
+
     private void HandleShoot()
     {
         currentAmmo--;
         Shoot();
     }
     public abstract void Shoot();
+    public abstract void BulletMark(RaycastHit hit);
 }

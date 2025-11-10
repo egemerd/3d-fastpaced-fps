@@ -1389,6 +1389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pistol
   gunData: {fileID: 11400000, guid: fe7963a17cf8a614cb1ff310c846736c, type: 2}
   mainCamera: {fileID: 330585546}
+  bulletMarkPrefab: {fileID: 5459865809937446181, guid: 40806e74ff343f849bb34b427731ec3d, type: 3}
   playerController: {fileID: 0}
 --- !u!4 &989847650 stripped
 Transform:
