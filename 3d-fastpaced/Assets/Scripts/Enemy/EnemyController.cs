@@ -21,7 +21,8 @@ public class EnemyController : MonoBehaviour
         var delta = target.position - transform.position;
         delta.y = 0; 
         Vector3 direction = delta.normalized;
-        Debug.Log(direction);
+
+        //Debug.Log(direction);
         transform.LookAt(target);
         rb.linearVelocity = direction * Time.deltaTime * moveSpeed;
     }

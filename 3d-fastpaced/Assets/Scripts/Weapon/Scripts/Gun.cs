@@ -34,10 +34,10 @@ public abstract class Gun : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
-        Debug.Log("Reloading...");
+        Debug.Log("Reloading");
         yield return new WaitForSeconds(gunData.reloadTime);
         currentAmmo = gunData.magazineSize;
-        Debug.Log("Reloaded...");
+        Debug.Log("Reloaded");
 
         isReloading = false;
     }
