@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     private InputAction moveAction;
     private InputAction sprintAction;
-    private InputAction jumpAction;
+    public InputAction jumpAction;
     private InputAction lookAction;
     private PlayerInput playerInput;
     private Camera mainCamera;
@@ -48,12 +49,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
 
     private Vector3 velocity;
-    private bool isGrounded;
-    private bool isMoving;
+    public bool isGrounded;
+    public bool isMoving;
     Vector3 moveDirection;
-    private bool isSprinting;
+    public bool isSprinting;
     private Vector3 horizontalVelocity;
 
+    private IState currentState;
+    [SerializeField] private TextMeshProUGUI stateText;
 
     private void Start()
     {
@@ -65,6 +68,9 @@ public class PlayerController : MonoBehaviour
         
         Cursor.lockState= CursorLockMode.Locked;
         Cursor.visible = false;
+
+        currentState = new IdleState(); 
+        currentState.EnterState(this);  
     }
     private void Awake()
     {
@@ -77,25 +83,34 @@ public class PlayerController : MonoBehaviour
         lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
+        isMoving = moveInput.magnitude > 0.1f;
+
         GroundCheck();
-        Debug.Log(isGrounded);
+        Debug.Log(isMoving);
         ApplyGravity();
 
-        if (jumpAction.triggered && isGrounded)
-        {
-            Jump();
-        }
+        currentState.UpdateState(this);
 
-        CalculateMoveDirection();
-        Movement();
+        stateText.text = currentState.StateName;
+        //if (jumpAction.triggered && isGrounded)
+        //{
+        //    Jump();
+        //}
+
+        //CalculateMoveDirection();
+        //Movement();
     }
 
 
-    
-
-    private void Movement()
+    public void ChangeState(IState newState)
     {
-      
+        currentState.ExitState(this);
+        currentState = newState;
+        currentState.EnterState(this);
+    }
+
+    public void Movement()
+    {
         float speedMultiplier = sprintAction.ReadValue<float>() > 0  ? sprintMultiplier : 1f;
         Vector3 desiredVelocity = moveDirection * moveSpeed * speedMultiplier;
 
@@ -128,7 +143,7 @@ public class PlayerController : MonoBehaviour
             velocity.y = -2f;
         }
     }
-    private void Jump()
+    public void Jump()
     {
         isSprinting = sprintAction.ReadValue<float>() > 0;
         float height = jumpHeight;
@@ -159,7 +174,7 @@ public class PlayerController : MonoBehaviour
         velocity.y += currentGravity * Time.deltaTime;
     }
 
-    private void CalculateMoveDirection()
+    public void CalculateMoveDirection()
     {
         Vector3 forward = transform.forward;
         Vector3 right = transform.right;
@@ -196,5 +211,9 @@ public class PlayerController : MonoBehaviour
         moveSpeed = baseSpeed;
     }
     
+    public float GetVelocityY()
+    {
+        return velocity.y;
+    }
 
 }
