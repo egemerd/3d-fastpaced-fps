@@ -4,9 +4,9 @@ public class SlidingState : IState
 {
     public string StateName => "Sliding";
 
-    public void EnterState(PlayerController player)
+    public void EnterState(PlayerController player )
     {
-        if (player.minSlideSpeedReached())
+        if (player.minSlideSpeedReached() && player.isSprinting)
         {
             player.StartSlide();
         }

@@ -170,6 +170,14 @@ public class PlayerController : MonoBehaviour
         float speedMultiplier = sprintAction.ReadValue<float>() > 0  ? sprintMultiplier : 1f;
         Vector3 desiredVelocity = moveDirection * moveSpeed * speedMultiplier;
 
+        if (isSliding)
+        {
+            Vector3 verticalMove2 = velocity * Time.deltaTime;
+            Vector3 horizontalMove2 = horizontalVelocity * Time.deltaTime;
+            Vector3 finalMove2 = horizontalMove2 + verticalMove2;
+            characterController.Move(finalMove2);
+            return; 
+        }
         if (isGrounded)
         {
             float currentSpeed = horizontalVelocity.magnitude;
@@ -347,13 +355,14 @@ public class PlayerController : MonoBehaviour
 
     public void HandleSliding()
     {
-        if (isSliding)
+        if (isSliding && isSprinting)
         {
             slideTimer += Time.deltaTime;
 
+            
             currentSlideSpeed -= slideSpeedDecay * Time.deltaTime;
             currentSlideSpeed = Mathf.Max(currentSlideSpeed, 0f);
-
+            
 
             horizontalVelocity = slideDirection * currentSlideSpeed;
 
@@ -362,7 +371,7 @@ public class PlayerController : MonoBehaviour
                 CalculateMoveDirection();
 
                 slideDirection = Vector3.Lerp(slideDirection, moveDirection, 
-                    slideControlMultiplier * Time.deltaTime).normalized;
+                slideControlMultiplier * Time.deltaTime).normalized;
             }
 
             bool slideTimeOut = slideTimer >= slideDuration;
@@ -373,7 +382,7 @@ public class PlayerController : MonoBehaviour
             //{
             //    slideEnded = true;
             //}
-            if (crouchReleased )
+            if (crouchReleased)
             {
                 slideEnded = true;
             }
@@ -382,7 +391,6 @@ public class PlayerController : MonoBehaviour
 
     public void StartSlide()
     {
-
         Debug.Log("Starting Slide");
         slideEnded = false;
         isSliding = true;
