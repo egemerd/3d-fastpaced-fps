@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using TMPro;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -66,8 +66,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slideJumpForwardBoost = 8f; // Forward speed boost
     [SerializeField] private bool maintainSlideSpeedOnJump = true; // Keep momentum
 
+    [Header("Momentum Settings")]
+    [SerializeField] private float momentumDecayRate = 5f;
+
     //Movement
     private Vector3 velocity;
+
+    [Header("Checkers")]
     public bool isGrounded;
     public bool isMoving;  
     Vector3 moveDirection;
@@ -92,6 +97,8 @@ public class PlayerController : MonoBehaviour
     private IState currentState;
 
     [SerializeField] private TextMeshProUGUI stateText;
+    [SerializeField] private TextMeshProUGUI speedText;
+
 
     private void Start()
     {
@@ -125,6 +132,7 @@ public class PlayerController : MonoBehaviour
         moveInput = moveAction.ReadValue<Vector2>();
 
         isMoving = moveInput.magnitude > 0.1f;
+        isSprinting = sprintAction.ReadValue<float>() > 0;
 
         GroundCheck();
         //Debug.Log(isMoving);
@@ -134,6 +142,12 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(horizontalVelocity);
         currentState.UpdateState(this);
         stateText.text = currentState.StateName;
+        if (speedText != null)
+        {
+            float currentSpeed = horizontalVelocity.magnitude;
+            
+            speedText.text = $"Speed: {currentSpeed:F1} m/s";
+        }
         //if (jumpAction.triggered && isGrounded)
         //{
         //    Jump();
@@ -158,11 +172,42 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded)
         {
-            horizontalVelocity = desiredVelocity;
+            float currentSpeed = horizontalVelocity.magnitude;
+            float desiredSpeed = desiredVelocity.magnitude;
+            if (!isMoving)
+            {
+                //hýzlý dur
+                horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero,
+                    10f * Time.deltaTime); 
+            }
+            else if (!isSprinting && currentSpeed > desiredSpeed && currentSpeed < (moveSpeed * sprintMultiplier * 1.1f))
+            {
+                horizontalVelocity = desiredVelocity;
+            }
+            else if (currentSpeed>desiredSpeed)
+            {
+                Vector3 currentDirection = horizontalVelocity.normalized;
+
+                float newSpeed = currentSpeed - (slideSpeedDecay * Time.deltaTime);
+                newSpeed = Mathf.Max(newSpeed, desiredSpeed);
+
+                Vector3 targetDirection = Vector3.Lerp(currentDirection, moveDirection, 
+                    momentumDecayRate * Time.deltaTime);
+
+                horizontalVelocity = targetDirection.normalized * newSpeed;
+            
+            }
+            else
+            {
+                horizontalVelocity = desiredVelocity;
+
+            }
+
         }
         else
         {
-            horizontalVelocity = Vector3.Lerp(horizontalVelocity, desiredVelocity, airControlTime* Time.deltaTime);
+            horizontalVelocity = Vector3.Lerp(horizontalVelocity, desiredVelocity, 
+                airControlTime * Time.deltaTime);
         }
 
         Vector3 verticalMove = velocity * Time.deltaTime;
@@ -189,7 +234,7 @@ public class PlayerController : MonoBehaviour
     
     private void NormalJump()
     {
-        isSprinting = sprintAction.ReadValue<float>() > 0;
+       
         float height = jumpHeight;
 
         if(isSprinting)
@@ -202,7 +247,23 @@ public class PlayerController : MonoBehaviour
 
     private void SlideJumpBoost()
     {
-        
+        float boostedHeight = jumpHeight * slideJumpHeightMultiplier;
+        velocity.y = Mathf.Sqrt(boostedHeight * -2 * gravity);
+
+        if(maintainSlideSpeedOnJump)
+        {
+            float totalForwardSpeed = currentSlideSpeed + slideJumpForwardBoost;
+            horizontalVelocity = slideDirection * totalForwardSpeed;
+
+            Debug.Log($"Slide Jump: Speed = {totalForwardSpeed}, Direction = {slideDirection}");
+            Debug.Log($"Horizontal Velocity after Slide Jump: {horizontalVelocity.magnitude}");
+        }
+        else
+        {
+            horizontalVelocity += slideDirection * slideJumpForwardBoost;
+        }
+
+        StopSlide();
     }
 
     public void Jump()
