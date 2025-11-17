@@ -26,9 +26,15 @@ public class WalkingState : IState
             player.Jump();
             player.ChangeState(new JumpingState());
         }
+        if (player.crouchAction.ReadValue<float>() > 0 && !player.isSliding && player.canSlide && player.isGrounded)
+        {
+            player.ChangeState(new SlidingState());
+        }
         if (!player.isMoving && player.isGrounded)
         {
             player.ChangeState(new IdleState());
         }
+        
+
     }
 }

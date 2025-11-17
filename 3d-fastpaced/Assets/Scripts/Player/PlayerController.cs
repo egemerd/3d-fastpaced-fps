@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform cameraHead;
     [SerializeField] private Transform bodyTransform;
-    Rigidbody rb;
+    
     private InputAction moveAction;
     private InputAction sprintAction;
     public InputAction jumpAction;
+    public InputAction crouchAction;
     private InputAction lookAction;
     private PlayerInput playerInput;
+
     private Camera mainCamera;
     private CharacterController characterController;
     
@@ -48,14 +50,47 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundCheckDistance;
 
+    [Header("Sliding")]
+    [SerializeField] private float slideSpeed = 15f;
+    [SerializeField] private float slideSpeedDecay = 5f;
+    [SerializeField] private float minSlideSpeed = 1f; // min to stay sliding
+    [SerializeField] private float minSlideInitialSpeed = 1f; // min to start sliding
+    [SerializeField] private float slideDuration = 2f;
+    [SerializeField] private float slideCooldown = 0.1f;
+    [SerializeField] private float slideControlMultiplier = 0.5f;
+    [SerializeField] private float crouchHeight = 1f;
+    [SerializeField] private float standingHeight = 2f;
+
+    [Header("Slide Jump Boost")]
+    [SerializeField] private float slideJumpHeightMultiplier = 1.5f; // Jump boost (1.5 = 50% higher)
+    [SerializeField] private float slideJumpForwardBoost = 8f; // Forward speed boost
+    [SerializeField] private bool maintainSlideSpeedOnJump = true; // Keep momentum
+
+    //Movement
     private Vector3 velocity;
     public bool isGrounded;
-    public bool isMoving;
+    public bool isMoving;  
     Vector3 moveDirection;
     public bool isSprinting;
     private Vector3 horizontalVelocity;
 
+    //Sliding
+    public bool isSliding;
+    private float slideTimer;
+    public bool canSlide = true;
+    private Vector3 slideDirection;
+    private float currentSlideSpeed;
+    public bool slideEnded; 
+
+
+    //camera height
+    private float originalCameraHeight;
+    private float targetCameraHeight;
+    [SerializeField] private float cameraTransitionSpeed = 10f;
+    private Transform originalHeadTransform;
+
     private IState currentState;
+
     [SerializeField] private TextMeshProUGUI stateText;
 
     private void Start()
@@ -65,17 +100,23 @@ public class PlayerController : MonoBehaviour
         jumpAction = playerInput.actions.FindAction("Jump");
         sprintAction = playerInput.actions.FindAction("Sprint");
         lookAction = playerInput.actions.FindAction("Look");
-        
+        crouchAction = playerInput.actions.FindAction("Crouch");
+
         Cursor.lockState= CursorLockMode.Locked;
         Cursor.visible = false;
 
+        originalCameraHeight = cameraHead.localPosition.y;
+        targetCameraHeight = originalCameraHeight;
+
+        characterController.height = standingHeight;
+        originalHeadTransform = cameraHead;
         currentState = new IdleState(); 
         currentState.EnterState(this);  
     }
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        rb = GetComponent<Rigidbody>();
+        
         characterController = GetComponent<CharacterController>();
     }
     private void Update()
@@ -86,11 +127,12 @@ public class PlayerController : MonoBehaviour
         isMoving = moveInput.magnitude > 0.1f;
 
         GroundCheck();
-        Debug.Log(isMoving);
+        //Debug.Log(isMoving);
         ApplyGravity();
-
+        SmoothCameraHeight();
+        
+        //Debug.Log(horizontalVelocity);
         currentState.UpdateState(this);
-
         stateText.text = currentState.StateName;
         //if (jumpAction.triggered && isGrounded)
         //{
@@ -143,7 +185,9 @@ public class PlayerController : MonoBehaviour
             velocity.y = -2f;
         }
     }
-    public void Jump()
+
+    
+    private void NormalJump()
     {
         isSprinting = sprintAction.ReadValue<float>() > 0;
         float height = jumpHeight;
@@ -156,13 +200,31 @@ public class PlayerController : MonoBehaviour
         velocity.y = Mathf.Sqrt(height * -2 * gravity);
     }
 
+    private void SlideJumpBoost()
+    {
+        
+    }
+
+    public void Jump()
+    {
+        if (isSliding)
+        {
+            SlideJumpBoost();
+        }
+        else
+        {
+            NormalJump();
+        }
+
+    }
+
     private void ApplyGravity()
     {
         float currentGravity = gravity;
 
         if (velocity.y < 0)
         {
-            Debug.Log("Applying Fall Gravity");
+            //Debug.Log("Applying Fall Gravity");
             //Debug.Log(velocity.y);
             currentGravity *= fallGravity;
         }
@@ -170,7 +232,7 @@ public class PlayerController : MonoBehaviour
         {
             currentGravity *= jumpGravity;
         }
-        Debug.Log("Current Gravity: " + currentGravity);
+        //Debug.Log("Current Gravity: " + currentGravity);
         velocity.y += currentGravity * Time.deltaTime;
     }
 
@@ -201,7 +263,7 @@ public class PlayerController : MonoBehaviour
     public void StartSpeedBoost(float duration , float amount)
     {
         StartCoroutine(SpeedBoost(duration, amount));
-        Debug.Log("New Speed: " + moveSpeed);
+        //Debug.Log("New Speed: " + moveSpeed);
     }
     private IEnumerator SpeedBoost(float duration, float amount)
     {
@@ -216,4 +278,91 @@ public class PlayerController : MonoBehaviour
         return velocity.y;
     }
 
+    public bool minSlideSpeedReached()
+    {
+        return horizontalVelocity.magnitude >= minSlideInitialSpeed;
+    }
+
+
+    public void HandleSliding()
+    {
+        if (isSliding)
+        {
+            slideTimer += Time.deltaTime;
+
+            currentSlideSpeed -= slideSpeedDecay * Time.deltaTime;
+            currentSlideSpeed = Mathf.Max(currentSlideSpeed, 0f);
+
+
+            horizontalVelocity = slideDirection * currentSlideSpeed;
+
+            if (isMoving)
+            {
+                CalculateMoveDirection();
+
+                slideDirection = Vector3.Lerp(slideDirection, moveDirection, 
+                    slideControlMultiplier * Time.deltaTime).normalized;
+            }
+
+            bool slideTimeOut = slideTimer >= slideDuration;
+            bool slideSpeedTooLow = currentSlideSpeed <= minSlideSpeed;
+            bool crouchReleased = crouchAction.ReadValue<float>() == 0f;
+
+            //if (slideTimeOut || slideSpeedTooLow || crouchReleased || !isGrounded)
+            //{
+            //    slideEnded = true;
+            //}
+            if (crouchReleased )
+            {
+                slideEnded = true;
+            }
+        }
+    }
+
+    public void StartSlide()
+    {
+
+        Debug.Log("Starting Slide");
+        slideEnded = false;
+        isSliding = true;
+        slideTimer = 0f;
+
+        slideDirection = horizontalVelocity.normalized;
+
+        currentSlideSpeed = Mathf.Max(horizontalVelocity.magnitude, slideSpeed);
+
+        //cameraHead.localPosition = new Vector3(0, -0.150000006f, -0.0160000008f);
+        characterController.height = crouchHeight;
+        targetCameraHeight = originalCameraHeight - (standingHeight - crouchHeight);
+
+        
+    }
+
+    public void StopSlide()
+    {
+        Debug.Log("Stopping Slide");
+        isSliding = false;
+
+        characterController.height = standingHeight;
+        targetCameraHeight = originalCameraHeight;
+        //cameraHead.localPosition = originalHeadTransform.localPosition;
+        StartCoroutine(SlideCooldown());
+        
+    }
+
+
+    private IEnumerator SlideCooldown()
+    {
+        canSlide = false;
+        yield return new WaitForSeconds(slideCooldown);
+        canSlide = true;
+    }
+
+    private void SmoothCameraHeight()
+    {
+        Vector3 currentPos = cameraHead.localPosition;
+        currentPos.y = Mathf.Lerp(currentPos.y, targetCameraHeight,
+            cameraTransitionSpeed * Time.deltaTime);
+        cameraHead.localPosition = currentPos;
+    }
 }

@@ -3497,6 +3497,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  crouchAction:
+    m_Name: Crouch
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c9471ced-40dc-42e6-af6d-8e31bd9eee70
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   moveSpeed: 10
   sprintMultiplier: 1.8
   airMovementController: 0.8
@@ -3513,9 +3522,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   groundCheckDistance: 1
+  slideSpeed: 15
+  slideSpeedDecay: 5
+  minSlideSpeed: 1
+  minSlideInitialSpeed: 1
+  slideDuration: 2
+  slideCooldown: 0.1
+  slideControlMultiplier: 0.5
+  crouchHeight: 1
+  standingHeight: 2
+  slideJumpHeightMultiplier: 1.5
+  slideJumpForwardBoost: 8
+  maintainSlideSpeedOnJump: 1
   isGrounded: 0
   isMoving: 0
   isSprinting: 0
+  isSliding: 0
+  canSlide: 1
+  cameraTransitionSpeed: 10
   stateText: {fileID: 1968850857}
 --- !u!114 &2120203498
 MonoBehaviour:

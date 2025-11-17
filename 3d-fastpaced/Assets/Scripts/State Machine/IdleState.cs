@@ -14,7 +14,10 @@ public class IdleState : IState
     }
 
     public void UpdateState(PlayerController player)
-    {  
+    {
+        player.CalculateMoveDirection();
+        player.Movement();
+
         if (player.isMoving && player.isGrounded)
         {
             player.ChangeState(new WalkingState());
