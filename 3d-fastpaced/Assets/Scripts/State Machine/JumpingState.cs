@@ -20,7 +20,7 @@ public class JumpingState : IState
 
         if (player.isGrounded && player.GetVelocityY()<0)
         {
-            if (player.crouchAction.ReadValue<float>() > 0 && player.canSlide)
+            if (player.GetCrouchAction().ReadValue<float>() > 0 && player.canSlide)
             {
                 player.ChangeState(new SlidingState());
             }

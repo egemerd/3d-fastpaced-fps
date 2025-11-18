@@ -21,12 +21,12 @@ public class WalkingState : IState
         player.CalculateMoveDirection();
         player.Movement();
 
-        if (player.jumpAction.triggered && player.isGrounded)
+        if (player.GetJumpAction().triggered && player.isGrounded)
         {
             player.Jump();
             player.ChangeState(new JumpingState());
         }
-        if (player.crouchAction.ReadValue<float>() > 0 && !player.isSliding && player.canSlide && player.isGrounded)
+        if (player.GetCrouchAction().ReadValue<float>() > 0 && !player.isSliding && player.canSlide && player.isGrounded)
         {
             player.ChangeState(new SlidingState());
         }

@@ -12,14 +12,9 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform cameraHead;
     [SerializeField] private Transform bodyTransform;
+    private InputManager input;
     CameraShakeMovement cameraShake;
     
-    private InputAction moveAction;
-    private InputAction sprintAction;
-    public InputAction jumpAction;
-    public InputAction crouchAction;
-    private InputAction lookAction;
-    private PlayerInput playerInput;
 
     private Camera mainCamera;
     private CharacterController characterController;
@@ -103,12 +98,9 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        input = InputManager.Instance;
+
         mainCamera = Camera.main;
-        moveAction = playerInput.actions.FindAction("Move");
-        jumpAction = playerInput.actions.FindAction("Jump");
-        sprintAction = playerInput.actions.FindAction("Sprint");
-        lookAction = playerInput.actions.FindAction("Look");
-        crouchAction = playerInput.actions.FindAction("Crouch");
 
         cameraShake = GetComponent<CameraShakeMovement>();
 
@@ -125,19 +117,17 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-        
         characterController = GetComponent<CharacterController>();
     }
     private void Update()
     {
-        lookInput = lookAction.ReadValue<Vector2>();
-        moveInput = moveAction.ReadValue<Vector2>();
+        lookInput = input.lookInput;
+        moveInput =input.moveInput;
 
-        isMoving = moveInput.magnitude > 0.1f;
-        isSprinting = sprintAction.ReadValue<float>() > 0;
+        isMoving = input.isMoving;
+        isSprinting = input.isSprinting;
 
-        
+
         GroundCheck();
         //Debug.Log(isMoving);
         ApplyGravity();
@@ -163,6 +153,8 @@ public class PlayerController : MonoBehaviour
         //Movement();
     }
 
+    public InputAction GetJumpAction() => input.jumpAction;
+    public InputAction GetCrouchAction() => input.crouchAction;
 
     public void ChangeState(IState newState)
     {
@@ -174,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
     public void Movement()
     {
-        float speedMultiplier = sprintAction.ReadValue<float>() > 0  ? sprintMultiplier : 1f;
+        float speedMultiplier = isSprinting  ? sprintMultiplier : 1f;
         Vector3 desiredVelocity = moveDirection * moveSpeed * speedMultiplier;
 
         if (isSliding)
@@ -383,7 +375,7 @@ public class PlayerController : MonoBehaviour
 
             bool slideTimeOut = slideTimer >= slideDuration;
             bool slideSpeedTooLow = currentSlideSpeed <= minSlideSpeed;
-            bool crouchReleased = crouchAction.ReadValue<float>() == 0f;
+            bool crouchReleased = input.crouchAction.ReadValue<float>() == 0f;
 
             //if (slideTimeOut || slideSpeedTooLow || crouchReleased || !isGrounded)
             //{

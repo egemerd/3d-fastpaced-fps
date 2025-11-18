@@ -29,7 +29,7 @@ public class SlidingState : IState
         player.HandleSliding();
         player.Movement();
          
-        if (player.jumpAction.triggered && player.isGrounded)
+        if (player.GetJumpAction().triggered && player.isGrounded)
         {
             player.Jump(); 
             player.ChangeState(new JumpingState());         
