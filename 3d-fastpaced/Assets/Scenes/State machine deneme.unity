@@ -504,8 +504,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.17999995, z: 0.078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1686897794}
+  m_Children: []
   m_Father: {fileID: 535243768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &330585547
@@ -905,7 +904,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.078, z: -0.141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1686897794}
   m_Father: {fileID: 535243768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &504256676
@@ -3268,14 +3268,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686897793}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.00000006760353, y: 0.00000013006448, z: 8.792818e-15, w: 1}
+  m_LocalPosition: {x: 0, y: -0.101999916, z: 0.21900001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 903984864}
   - {fileID: 691273942}
-  m_Father: {fileID: 330585546}
+  m_Father: {fileID: 504256675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1888176692
 PrefabInstance:
@@ -3594,6 +3594,7 @@ GameObject:
   - component: {fileID: 2120203498}
   - component: {fileID: 2120203502}
   - component: {fileID: 2120203503}
+  - component: {fileID: 2120203504}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3653,7 +3654,7 @@ MonoBehaviour:
     m_Flags: 0
   moveSpeed: 8
   sprintMultiplier: 1.6
-  airMovementController: 0.8
+  airMovementController: 3.89
   mouseSens: 25
   lookRange: 70
   jumpHeight: 1.5
@@ -3661,7 +3662,7 @@ MonoBehaviour:
   gravity: -9.81
   fallGravity: 3
   jumpGravity: 1.7
-  airControlTime: 5
+  airControlTime: 7
   jumpRayOffset: 0.2
   groundMask:
     serializedVersion: 2
@@ -3784,6 +3785,25 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.33, z: 0}
+--- !u!114 &2120203504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120203494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8d9ad9a6dbb5a458925687e497b50d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShakeMovement
+  playerCamera: {fileID: 330585545}
+  targetCameraRotationZ: 15
+  swayAmount: 1.5
+  swayFrequency: 10
+  swaySpeed: 0.5
+  targetFov: 82
+  fovTransitionSpeed: 4
 --- !u!1001 &1965027768949606742
 PrefabInstance:
   m_ObjectHideFlags: 0

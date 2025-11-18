@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform cameraHead;
     [SerializeField] private Transform bodyTransform;
+    CameraShakeMovement cameraShake;
     
     private InputAction moveAction;
     private InputAction sprintAction;
@@ -109,6 +110,8 @@ public class PlayerController : MonoBehaviour
         lookAction = playerInput.actions.FindAction("Look");
         crouchAction = playerInput.actions.FindAction("Crouch");
 
+        cameraShake = GetComponent<CameraShakeMovement>();
+
         Cursor.lockState= CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -134,13 +137,16 @@ public class PlayerController : MonoBehaviour
         isMoving = moveInput.magnitude > 0.1f;
         isSprinting = sprintAction.ReadValue<float>() > 0;
 
+        
         GroundCheck();
         //Debug.Log(isMoving);
         ApplyGravity();
         SmoothCameraHeight();
         
-        //Debug.Log(horizontalVelocity);
+        Debug.Log("moveInput:" + moveInput);
         currentState.UpdateState(this);
+        //cameraShake.SprintSway(moveInput); 
+        cameraShake.SprintFovBoost(isSprinting,moveInput);
         stateText.text = currentState.StateName;
         if (speedText != null)
         {
@@ -164,6 +170,7 @@ public class PlayerController : MonoBehaviour
         currentState = newState;
         currentState.EnterState(this);
     }
+
 
     public void Movement()
     {
@@ -347,7 +354,7 @@ public class PlayerController : MonoBehaviour
         return velocity.y;
     }
 
-    public bool minSlideSpeedReached()
+    public bool MinSlideSpeedReached()
     {
         return horizontalVelocity.magnitude >= minSlideInitialSpeed;
     }

@@ -6,7 +6,7 @@ public class SlidingState : IState
 
     public void EnterState(PlayerController player )
     {
-        if (player.minSlideSpeedReached() && player.isSprinting)
+        if (player.MinSlideSpeedReached() && player.isSprinting)
         {
             player.StartSlide();
         }
