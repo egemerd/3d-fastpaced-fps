@@ -6,7 +6,7 @@ public class AR : Gun
     public override void Update()
     {
         base.Update();
-        if (Input.GetButton("Fire1"))
+        if (InputManager.Instance.fireAction.IsPressed())
         {
             TryShoot();
         }

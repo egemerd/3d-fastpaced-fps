@@ -1474,6 +1474,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5786097810451525583, guid: 260ff1508afea5241b6511d8fbe92201, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1658837867}
+    - targetCorrespondingSourceObject: {fileID: 5786097810451525583, guid: 260ff1508afea5241b6511d8fbe92201, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1658837868}
   m_SourcePrefab: {fileID: 100100000, guid: 260ff1508afea5241b6511d8fbe92201, type: 3}
 --- !u!4 &691273942 stripped
 Transform:
@@ -3254,6 +3257,20 @@ MonoBehaviour:
   mainCamera: {fileID: 330585546}
   bulletMarkPrefab: {fileID: 5459865809937446181, guid: 40806e74ff343f849bb34b427731ec3d, type: 3}
   playerController: {fileID: 0}
+--- !u!114 &1658837868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658837866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584fbb5d95213a942a027b9b27211ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponAnim
+  swaySpeed: 1
+  swayAmount: 0.04
 --- !u!1 &1663899336
 GameObject:
   m_ObjectHideFlags: 0
@@ -3754,24 +3771,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   cameraHead: {fileID: 535243768}
   bodyTransform: {fileID: 97967344}
-  jumpAction:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 08aa04ad-13eb-41cc-a2e9-f6f889a4bb8f
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  crouchAction:
-    m_Name: Crouch
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: c9471ced-40dc-42e6-af6d-8e31bd9eee70
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
   moveSpeed: 8
   sprintMultiplier: 1.6
   airMovementController: 3.89
