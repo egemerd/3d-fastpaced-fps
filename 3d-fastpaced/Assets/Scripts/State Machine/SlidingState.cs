@@ -25,6 +25,7 @@ public class SlidingState : IState
     public void UpdateState(PlayerController player)
     {
         Debug.Log("Updating Sliding State");
+
         player.CalculateMoveDirection();
         player.HandleSliding();
         player.Movement();

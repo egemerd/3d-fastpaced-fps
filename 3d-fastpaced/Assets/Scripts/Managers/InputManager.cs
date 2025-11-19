@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     
     private InputAction moveAction;
     private InputAction lookAction;
-    private InputAction sprintAction;
+    public InputAction sprintAction;
     public InputAction jumpAction;
     public InputAction crouchAction;
     public InputAction fireAction;

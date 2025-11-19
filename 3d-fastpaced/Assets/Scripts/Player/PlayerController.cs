@@ -354,37 +354,29 @@ public class PlayerController : MonoBehaviour
 
     public void HandleSliding()
     {
-        if (isSliding && isSprinting)
+        if (!isSliding) return; 
+
+        bool crouchReleased = input.crouchAction.ReadValue<float>() == 0f;
+        bool sprintReleased = !isSprinting;
+
+        if (crouchReleased || sprintReleased)
         {
-            slideTimer += Time.deltaTime;
+            slideEnded = true;
+            return; 
+        }
 
-            
-            currentSlideSpeed -= slideSpeedDecay * Time.deltaTime;
-            currentSlideSpeed = Mathf.Max(currentSlideSpeed, 0f);
-            
+        slideTimer += Time.deltaTime;
 
-            horizontalVelocity = slideDirection * currentSlideSpeed;
+        currentSlideSpeed -= slideSpeedDecay * Time.deltaTime;
+        currentSlideSpeed = Mathf.Max(currentSlideSpeed, 0f);
 
-            if (isMoving)
-            {
-                CalculateMoveDirection();
+        horizontalVelocity = slideDirection * currentSlideSpeed;
 
-                slideDirection = Vector3.Lerp(slideDirection, moveDirection, 
+        if (isMoving)
+        {
+            CalculateMoveDirection();
+            slideDirection = Vector3.Lerp(slideDirection, moveDirection,
                 slideControlMultiplier * Time.deltaTime).normalized;
-            }
-
-            bool slideTimeOut = slideTimer >= slideDuration;
-            bool slideSpeedTooLow = currentSlideSpeed <= minSlideSpeed;
-            bool crouchReleased = input.crouchAction.ReadValue<float>() == 0f;
-
-            //if (slideTimeOut || slideSpeedTooLow || crouchReleased || !isGrounded)
-            //{
-            //    slideEnded = true;
-            //}
-            if (crouchReleased)
-            {
-                slideEnded = true;
-            }
         }
     }
 
