@@ -20,3 +20,7 @@ MonoBehaviour:
   fireRange: 40
   reloadTime: 2
   magazineSize: 30
+  gunTrailPrefab: {fileID: 3339241507942766886, guid: f83007fd0b124474eb70045bfeeaa392, type: 3}
+  bulletSpeed: 200
+  bulletMarkPrefab: {fileID: 2312379900193495804, guid: 4fd6914becf3961409bac973d1a1fad7, type: 3}
+  hitParticlePrefab: {fileID: 8456025056792511607, guid: f3de2991dbd8c284cbfe3e15e62f7b5e, type: 3}

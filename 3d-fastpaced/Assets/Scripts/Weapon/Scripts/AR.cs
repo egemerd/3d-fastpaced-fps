@@ -23,21 +23,26 @@ public class AR : Gun
     public override void Shoot()
     {
         RaycastHit hit;
+        Vector3 target = Vector3.zero;
 
         if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange))
         {
             Debug.Log("AR hit: " + hit.collider.name);
+            target = hit.point;
             if (hit.collider.CompareTag("Enemy"))
             {
                 Debug.Log("AR hit enemy: " + hit.collider.name);
                 Destroy(hit.collider.gameObject);
             }
-            BulletMark(hit);
+            
         }
+        else
+        {
+            target = mainCamera.position + mainCamera.forward * gunData.fireRange;
+        }
+        StartBulletFire(target,hit);
+        
     }
-    public override void BulletMark(RaycastHit hit)
-    {
-        GameObject bulletMark = Instantiate(base.bulletMarkPrefab, hit.point, Quaternion.LookRotation(hit.normal));
 
-    }
+    
 }

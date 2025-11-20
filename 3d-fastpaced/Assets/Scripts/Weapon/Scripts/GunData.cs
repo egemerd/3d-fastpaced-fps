@@ -14,4 +14,10 @@ public class GunData : ScriptableObject
     [Header("Reload Config")]
     public float reloadTime;
     public int magazineSize;
+
+    [Header("VFX")]
+    public GameObject gunTrailPrefab;
+    public float bulletSpeed;
+    [SerializeField] public GameObject bulletMarkPrefab;
+    [SerializeField] public GameObject hitParticlePrefab;
 }

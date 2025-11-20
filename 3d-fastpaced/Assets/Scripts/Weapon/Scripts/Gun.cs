@@ -5,7 +5,7 @@ public abstract class Gun : MonoBehaviour
 {
     public GunData gunData;
     [SerializeField] public Transform mainCamera;
-    [SerializeField] public GameObject bulletMarkPrefab;
+    [SerializeField] public Transform gunMuzzle;
     public PlayerController playerController;
 
     private int currentAmmo = 0;    
@@ -61,6 +61,45 @@ public abstract class Gun : MonoBehaviour
         currentAmmo--;
         Shoot();
     }
+
+    public void StartBulletFire(Vector3 target,RaycastHit hit)
+    {
+        StartCoroutine(BulletFire(target,hit));
+    }
+
+    private IEnumerator BulletFire(Vector3 target , RaycastHit hit)
+    {
+        GameObject bulletTrail = Instantiate(gunData.gunTrailPrefab, gunMuzzle.position, Quaternion.identity);
+        while (bulletTrail != null && Vector3.Distance(bulletTrail.transform.position , target) > 0.1f)
+        {
+            Debug.Log("Moving bullet trail");
+            bulletTrail.transform.position = Vector3.MoveTowards(bulletTrail.transform.position, target,
+                Time.deltaTime * gunData.bulletSpeed);
+            yield return null;
+        }
+
+        Destroy(bulletTrail);
+
+        if(hit.collider != null)
+        {
+            BulletHitFX(hit);
+        }
+    }
+
+    private void BulletHitFX(RaycastHit hit)
+    {
+        
+        Vector3 hitPoint = hit.point + hit.normal * 0.01f;
+        //GameObject hitParticle = Instantiate(gunData.hitParticlePrefab, hitPoint, Quaternion.LookRotation(hit.normal));
+        GameObject bulletMark = Instantiate(gunData.bulletMarkPrefab, hitPoint, Quaternion.LookRotation(hit.normal));
+    
+        //hitParticle.transform.parent = hit.collider.transform;
+        bulletMark.transform.parent = hit.collider.transform;
+
+        //Destroy(hitParticle, 3f);
+        Destroy(bulletMark, 3f);
+    }
+
     public abstract void Shoot();
-    public abstract void BulletMark(RaycastHit hit);
+    
 }

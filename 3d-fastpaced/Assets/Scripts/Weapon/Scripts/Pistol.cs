@@ -26,11 +26,8 @@ public class Pistol : Gun
                 Debug.Log("Pistol hit enemy: " + hit.collider.name);
                 Destroy(hit.collider.gameObject);
             }   
-            BulletMark(hit);
+            
         }
     }
-    public override void BulletMark(RaycastHit hit)
-    {
-        GameObject bulletMark = Instantiate(base.bulletMarkPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-    }
+    
 }
