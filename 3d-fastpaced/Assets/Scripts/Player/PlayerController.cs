@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform bodyTransform;
     private InputManager input;
     CameraShakeMovement cameraShake;
-    
+    Climbing climbing;
+
 
     private Camera mainCamera;
     private CharacterController characterController;
@@ -103,6 +104,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = Camera.main;
 
         cameraShake = GetComponent<CameraShakeMovement>();
+        climbing = GetComponent<Climbing>();    
 
         Cursor.lockState= CursorLockMode.Locked;
         Cursor.visible = false;
@@ -130,11 +132,17 @@ public class PlayerController : MonoBehaviour
 
         GroundCheck();
         //Debug.Log(isMoving);
-        ApplyGravity();
+        if (climbing == null || !climbing.isClimbing)
+        {
+            ApplyGravity();
+        }
+        else
+        {
+            velocity.y = 0f;
+        }
         SmoothCameraHeight();
-        
-        Debug.Log("moveInput:" + moveInput);
-        currentState.UpdateState(this);
+       
+        currentState.UpdateState(this,climbing);
         //cameraShake.SprintSway(moveInput); 
         cameraShake.SprintFovBoost(isSprinting,moveInput);
         stateText.text = currentState.StateName;

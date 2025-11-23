@@ -13,7 +13,7 @@ public class IdleState : IState
         Debug.Log("Exited Idle State");
     }
 
-    public void UpdateState(PlayerController player)
+    public void UpdateState(PlayerController player, Climbing climbing)
     {
         player.CalculateMoveDirection();
         player.Movement();

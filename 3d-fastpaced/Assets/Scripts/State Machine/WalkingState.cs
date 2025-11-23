@@ -14,7 +14,7 @@ public class WalkingState : IState
         Debug.Log("Exited Walking State");
     }
 
-    public void UpdateState(PlayerController player)
+    public void UpdateState(PlayerController player, Climbing climbing)
     {
         Debug.Log("Updating Walking State");
 

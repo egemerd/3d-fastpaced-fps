@@ -13,7 +13,7 @@ public class JumpingState : IState
         Debug.Log("Exited Jumping State");
     }
 
-    public void UpdateState(PlayerController player)
+    public void UpdateState(PlayerController player, Climbing climbing)
     {
         player.CalculateMoveDirection();
         player.Movement();
@@ -32,6 +32,10 @@ public class JumpingState : IState
             {
                 player.ChangeState(new IdleState());
             }
+        }
+        if (climbing.isWallHit && !player.isGrounded && climbing.IsMovingForward())
+        {
+            player.ChangeState(new ClimbingState());
         }
 
     }

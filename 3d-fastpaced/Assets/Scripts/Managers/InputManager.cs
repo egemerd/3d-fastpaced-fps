@@ -18,6 +18,8 @@ public class InputManager : MonoBehaviour
     public InputAction aimAction;
     public InputAction reloadAction;
 
+    public bool IsMovingForward => moveInput.y > 0.1f; // w tusu
+
     [Header("Current Input Values")]
     public Vector2 moveInput { get; private set; }
     public Vector2 lookInput { get; private set; }

@@ -22,7 +22,7 @@ public class SlidingState : IState
         }   
     }
 
-    public void UpdateState(PlayerController player)
+    public void UpdateState(PlayerController player, Climbing climbing)
     {
         Debug.Log("Updating Sliding State");
 

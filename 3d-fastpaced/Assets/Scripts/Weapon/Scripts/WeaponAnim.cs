@@ -28,10 +28,8 @@ public class WeaponAnim : MonoBehaviour
 
     private void WeaponSway()
     {
-        Debug.Log("Weapon Swaying");
         lookInput = input.lookInput;
         lookInput = Vector2.ClampMagnitude(lookInput, maxSway);
-        Debug.Log("look input" + lookInput);
         Vector3 targetSwayPos = initialSwayPos + new Vector3(lookInput.x, lookInput.y, 0) * swayAmount;
         transform.localPosition = Vector3.Lerp(transform.localPosition, 
             targetSwayPos, 
