@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class JumpingState : IState
 {
@@ -17,8 +18,16 @@ public class JumpingState : IState
     {
         player.CalculateMoveDirection();
         player.Movement();
-
-        if (player.isGrounded && player.GetVelocityY()<0)
+        InputManager input = InputManager.Instance;
+        LedgeClimbing ledgeClimb = player.GetComponent<LedgeClimbing>();
+        if (ledgeClimb != null &&
+            ledgeClimb.isLedgeDetected &&
+         
+            !player.isGrounded)
+        {
+            player.ChangeState(new LedgeClimbingState());
+        }
+            if (player.isGrounded && player.GetVelocityY()<0)
         {
             if (player.GetCrouchAction().ReadValue<float>() > 0 && player.canSlide)
             {

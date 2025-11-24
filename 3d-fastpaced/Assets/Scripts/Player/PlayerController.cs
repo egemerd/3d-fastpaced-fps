@@ -171,7 +171,10 @@ public class PlayerController : MonoBehaviour
         currentState.EnterState(this);
     }
 
-
+    public void ResetVerticalVelocity()
+    {
+        velocity.y = 0f;
+    }
     public void Movement()
     {
         float speedMultiplier = isSprinting  ? sprintMultiplier : 1f;
