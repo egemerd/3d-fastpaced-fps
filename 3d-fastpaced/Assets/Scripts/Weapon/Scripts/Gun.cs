@@ -11,6 +11,7 @@ public abstract class Gun : MonoBehaviour
     private int currentAmmo = 0;    
     private float nextTimeToFire = 0f;   
     private bool isReloading = false;
+    
 
     private void Start()
     {
@@ -25,10 +26,20 @@ public abstract class Gun : MonoBehaviour
 
     public void HandleReload()
     {
-        if (!isReloading && currentAmmo <= gunData.magazineSize)
-        {
-            StartCoroutine(Reload());
-        }
+        if (isReloading) return;
+        if (currentAmmo >= gunData.magazineSize) return;
+
+        
+            if (gunData.reloadAoutomatic && currentAmmo <= 0)
+            {
+                StartCoroutine(Reload());
+                return;
+            }
+            if(InputManager.Instance.reloadAction.IsPressed() && !gunData.reloadAoutomatic)
+            {
+                StartCoroutine(Reload());
+            }
+        
     }
 
     private IEnumerator Reload()

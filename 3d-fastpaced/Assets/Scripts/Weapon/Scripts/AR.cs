@@ -10,10 +10,7 @@ public class AR : Gun
         {
             TryShoot();
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            HandleReload();
-        }
+        HandleReload();
     }
 
     
