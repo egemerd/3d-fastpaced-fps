@@ -9,7 +9,6 @@ public class DoorController : MonoBehaviour
 
 
     private bool isDoorOpen = false;    
-    private bool canDoorSlide = false;
     private Vector3 openPosition;
 
 
@@ -19,25 +18,36 @@ public class DoorController : MonoBehaviour
     }
     private void Update()
     {
-        if(canDoorSlide && Input.GetKeyDown(KeyCode.E))
-        {
-            isDoorOpen = !isDoorOpen;
-        }
+        DoorMovement(); 
+    }
 
+    private void OnEnable()
+    {
+        if (GameEvents.current != null)
+        {
+            GameEvents.current.onEnemyDeath += OpenDoor;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (GameEvents.current != null)
+        {
+            GameEvents.current.onEnemyDeath -= OpenDoor;
+        }
+    }
+
+    private void DoorMovement()
+    {
         Vector3 targetPosition = isDoorOpen ? openPosition : closedPosition.position;
         doorSlider.transform.position = Vector3.MoveTowards
-            (doorSlider.transform.position, targetPosition, 
+            (doorSlider.transform.position, targetPosition,
             sliderSpeed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OpenDoor()
     {
-        canDoorSlide = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        canDoorSlide = false;
+        doorSlider.transform.position = openPosition;
     }
 
     
