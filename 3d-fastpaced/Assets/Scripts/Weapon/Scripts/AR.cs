@@ -13,10 +13,6 @@ public class AR : Gun
         HandleReload();
     }
 
-    
-
-    
-
     public override void Shoot()
     {
         RaycastHit hit;
@@ -29,7 +25,7 @@ public class AR : Gun
             if (hit.collider.CompareTag("Enemy"))
             {
                 Debug.Log("AR hit enemy: " + hit.collider.name);
-                Destroy(hit.collider.gameObject);
+                GameEvents.current.TriggerEnemyHit(base.gunData.gunDamage);
             }
             
         }

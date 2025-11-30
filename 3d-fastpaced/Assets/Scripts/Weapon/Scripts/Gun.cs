@@ -111,6 +111,16 @@ public abstract class Gun : MonoBehaviour
         Destroy(bulletMark, 3f);
     }
 
+    protected void ApplyDamage(RaycastHit hit)
+    {
+        IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(gunData.gunDamage);    
+            Debug.Log("Hit " + hit.collider.name + " for " + gunData.gunDamage + " damage.");
+        }
+    }
+
     public abstract void Shoot();
     
 }
