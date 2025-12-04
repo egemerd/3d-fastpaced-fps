@@ -32,7 +32,7 @@ public class EnemyHealth : MonoBehaviour , IDamageable
     private void Die()
     {
         GameEvents.current.TriggerEnemyDeath();
-        Destroy(gameObject);
+        Destroy(gameObject, 0.1f);
         Debug.Log("Enemy Died");
     }
     public void TakeDamage(float damage)

@@ -90,10 +90,15 @@ public abstract class Gun : MonoBehaviour
         }
 
         Destroy(bulletTrail);
-
-        if(hit.collider != null)
+        
+        if (hit.collider != null)
         {
             BulletHitFX(hit);
+        }
+
+        if(hit.collider.CompareTag("Enemy"))
+        {
+            ApplyDamage(hit);
         }
     }
 

@@ -7,7 +7,14 @@ public class GameEvents : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton güvenliði
+        if (current != null && current != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         current = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public event Action<float> onEnemyHit;
@@ -17,7 +24,7 @@ public class GameEvents : MonoBehaviour
 
     public void TriggerEnemyHit(float damage)
     {
-        onEnemyHit?.Invoke(damage);
+        onEnemyHit?.Invoke(damage);      
     }
     public void TriggerPlayerDeath()
     {
@@ -25,6 +32,7 @@ public class GameEvents : MonoBehaviour
     }
     public void TriggerEnemyDeath()
     {
+        Debug.Log("enemy death trigger");
         onEnemyDeath?.Invoke();
     }
     public void TriggerDoorClosed()
