@@ -119,6 +119,10 @@ public abstract class Gun : MonoBehaviour
             damageable.TakeDamage(gunData.gunDamage);    
             Debug.Log("Hit " + hit.collider.name + " for " + gunData.gunDamage + " damage.");
         }
+        else
+        {
+            Debug.Log("Hit " + hit.collider.name + " but it is not damageable.");
+        }
     }
 
     public abstract void Shoot();

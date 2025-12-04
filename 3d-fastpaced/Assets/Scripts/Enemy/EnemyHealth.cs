@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour , IDamageable
     {
         if (GameEvents.current != null)
         {
+            Debug.Log("EnemyHealth subscribed to onEnemyHit");
             GameEvents.current.onEnemyHit += TakeDamage;
         }
     }
@@ -22,6 +23,7 @@ public class EnemyHealth : MonoBehaviour , IDamageable
     {
         if (GameEvents.current != null)
         {
+            Debug.Log("EnemyHealth unsubscribed from onEnemyHit");
             GameEvents.current.onEnemyHit -= TakeDamage;
         }
     }

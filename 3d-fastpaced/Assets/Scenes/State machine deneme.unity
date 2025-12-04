@@ -8156,7 +8156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   doorSlider: {fileID: 1350987527}
-  sliderSpeed: 20
+  sliderSpeed: 1
   slideDistance: 4
   closedPosition: {fileID: 901409012}
 --- !u!4 &1091856175
@@ -8397,7 +8397,7 @@ Transform:
   m_GameObject: {fileID: 1223081065}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.1708198, y: 0.75684005, z: 22.12177}
+  m_LocalPosition: {x: -6.1708198, y: 0.59, z: 22.12177}
   m_LocalScale: {x: 2.9948735, y: 2.9948735, z: 2.9948735}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9820,10 +9820,6 @@ PrefabInstance:
     - target: {fileID: 5000275063918204368, guid: 29b1309ec59d69348a4d09e3998ac4fe, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5000275063918204368, guid: 29b1309ec59d69348a4d09e3998ac4fe, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7507154370961660097, guid: 29b1309ec59d69348a4d09e3998ac4fe, type: 3}
       propertyPath: m_LocalPosition.x
