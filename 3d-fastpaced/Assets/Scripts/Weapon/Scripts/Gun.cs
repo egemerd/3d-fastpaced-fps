@@ -11,7 +11,7 @@ public abstract class Gun : MonoBehaviour
     private int currentAmmo = 0;    
     private float nextTimeToFire = 0f;   
     private bool isReloading = false;
-    
+    private Coroutine reloadRoutine;
 
     private void Start()
     {
@@ -22,6 +22,22 @@ public abstract class Gun : MonoBehaviour
     public virtual void Update()
     {
 
+    }
+    private void OnEnable()
+    {
+        // Aktifleþirken cooldown sýfýrla, reload durumunu kapat
+        nextTimeToFire = 0f;
+        isReloading = false;
+    }
+
+    private void OnDisable()
+    {
+        if (reloadRoutine != null)
+        {
+            StopCoroutine(reloadRoutine);
+            reloadRoutine = null;
+        }
+        isReloading = false;
     }
 
     public void HandleReload()
@@ -51,6 +67,8 @@ public abstract class Gun : MonoBehaviour
         Debug.Log("Reloaded");
 
         isReloading = false;
+        reloadRoutine = null;
+        nextTimeToFire = 0f;
     }
 
 
@@ -89,7 +107,7 @@ public abstract class Gun : MonoBehaviour
             yield return null;
         }
 
-        Destroy(bulletTrail);
+        Destroy(bulletTrail, 1f);
         
         if (hit.collider != null)
         {

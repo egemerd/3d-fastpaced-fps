@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour
         currentState.UpdateState(this,climbing);
         //cameraShake.SprintSway(moveInput); 
         cameraShake.SprintFovBoost(isSprinting,moveInput);
+        cameraShake.SprintFovBoostWeapon(isSprinting,moveInput);
         stateText.text = currentState.StateName;
         if (speedText != null)
         {

@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraShakeMovement : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private Camera weaponCamera;
     private float originalCameraRotationZ;
     [SerializeField] private float targetCameraRotationZ;
 
@@ -14,6 +15,9 @@ public class CameraShakeMovement : MonoBehaviour
     [Header("FOV Settings")]
     [SerializeField] private float targetFov = 82f;
     [SerializeField] private float fovTransitionSpeed = 4f;
+    [SerializeField] private float targetFovWeapon = 82f;
+    [SerializeField] private float fovTransitionSpeedWeapon = 4f;
+
     private float initialFov;
     private void Start()
     {
@@ -60,5 +64,18 @@ public class CameraShakeMovement : MonoBehaviour
         }
     }
 
-    
+    public void SprintFovBoostWeapon(bool isSprinting, Vector2 moveInput)
+    {
+        if (isSprinting && moveInput.y > 0.01f)
+        {
+            weaponCamera.fieldOfView = Mathf.Lerp(weaponCamera.fieldOfView, targetFov,
+                fovTransitionSpeedWeapon * Time.deltaTime);
+        }
+        else
+        {
+            weaponCamera.fieldOfView = Mathf.Lerp(weaponCamera.fieldOfView, initialFov,
+                fovTransitionSpeedWeapon * Time.deltaTime);
+        }
+    }
+
 }
