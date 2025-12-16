@@ -28,3 +28,6 @@ MonoBehaviour:
   bulletSpeed: 100
   bulletMarkPrefab: {fileID: 2312379900193495804, guid: 4fd6914becf3961409bac973d1a1fad7, type: 3}
   hitParticlePrefab: {fileID: 0}
+  shootAnimDuration: 0.05
+  returnShootAnimDuration: 0.3
+  movementDistance: 0.5

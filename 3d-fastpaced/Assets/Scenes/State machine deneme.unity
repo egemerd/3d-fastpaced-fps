@@ -9455,6 +9455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81c6255665ba71459022e5bacacf2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSwitching
+  selectedWeapon: 0
 --- !u!1 &1708291244
 GameObject:
   m_ObjectHideFlags: 0
