@@ -149,5 +149,6 @@ public abstract class Gun : MonoBehaviour
     }
 
     public abstract void Shoot();
-    
+    public abstract void WeaponShootAnimation();    
+
 }

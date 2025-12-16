@@ -29,5 +29,10 @@ public class Pistol : Gun
             
         }
     }
-    
+
+    public override void WeaponShootAnimation()
+    {
+
+    }
+
 }

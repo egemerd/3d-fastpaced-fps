@@ -37,5 +37,10 @@ public class AR : Gun
         
     }
 
-    
+    public override void WeaponShootAnimation()
+    {
+
+    }
+
+
 }

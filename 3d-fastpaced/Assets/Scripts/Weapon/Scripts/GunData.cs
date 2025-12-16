@@ -28,4 +28,9 @@ public class GunData : ScriptableObject
     public float bulletSpeed;
     [SerializeField] public GameObject bulletMarkPrefab;
     [SerializeField] public GameObject hitParticlePrefab;
+
+    [Header("Weapon Shoot Animation")]
+    public float shootAnimDuration;
+    public float returnShootAnimDuration;
+    public float movementDistance;
 }
