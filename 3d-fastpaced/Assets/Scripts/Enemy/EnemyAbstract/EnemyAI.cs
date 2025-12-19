@@ -6,6 +6,10 @@ public abstract class EnemyAI : MonoBehaviour
     protected Transform player;
     [SerializeField] private LayerMask whatIsGround, whatIsPlayer;
     protected NavMeshAgent agent;
+    [SerializeField] protected EnemyDataSO enemyData;
+
+    //Enemy Stats
+    protected float damage;
 
     //Patroling
     [SerializeField] private Vector3 walkPoint;
@@ -22,6 +26,7 @@ public abstract class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player").transform;   
+        damage = enemyData.enemyDamage;
     }
 
     private void Update()

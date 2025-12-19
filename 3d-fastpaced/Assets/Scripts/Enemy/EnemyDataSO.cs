@@ -6,4 +6,6 @@ public class EnemyDataSO : ScriptableObject
     [Header("Enemy Attributes")]
     public string enemyName;
     public float health;
+    public float enemyDamage;
+
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   whatToHit:
     serializedVersion: 2
     m_Bits: 192
-  spreadAngle: 15
+  spreadAngle: 10
   bulletsPerShot: 8
   fireRate: 3
   fireRange: 10

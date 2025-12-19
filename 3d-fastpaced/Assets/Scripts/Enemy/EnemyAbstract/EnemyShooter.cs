@@ -7,6 +7,7 @@ public class EnemyShooter : EnemyAI
 
     private float nextShootTime = 0f;
 
+    
     protected override void EnemyAttack()
     {
         EnemyShoot();
@@ -37,6 +38,7 @@ public class EnemyShooter : EnemyAI
         if (enemyProjectile != null)
         {
             enemyProjectile.SetDirection(dir);
+            enemyProjectile.SetDamage(damage);
         }
         else
         {

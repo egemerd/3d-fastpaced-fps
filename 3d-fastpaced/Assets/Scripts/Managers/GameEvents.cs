@@ -21,7 +21,13 @@ public class GameEvents : MonoBehaviour
     public event Action onPlayerDeath;
     public event Action onEnemyDeath;
     public event Action onDoorClosed;
+    public event Action<float> onProjectileHitsEnemy;
 
+    public void TriggerProjectileHitsEnemy(float enemyDamage)
+    {
+        Debug.Log("TriggerEnemyHit called with damage: " + enemyDamage);
+        onProjectileHitsEnemy?.Invoke(enemyDamage);
+    }
     public void TriggerEnemyHit(float damage)
     {
         onEnemyHit?.Invoke(damage);      
