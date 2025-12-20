@@ -22,11 +22,17 @@ public class GameEvents : MonoBehaviour
     public event Action onEnemyDeath;
     public event Action onDoorClosed;
     public event Action<float> onProjectileHitsEnemy;
+    public event Action<float> onPlayerHit;
 
     public void TriggerProjectileHitsEnemy(float enemyDamage)
     {
         Debug.Log("TriggerEnemyHit called with damage: " + enemyDamage);
         onProjectileHitsEnemy?.Invoke(enemyDamage);
+    }
+    public void TriggerPlayerHit(float damage)
+    {
+        Debug.Log("TriggerPlayerHit called with damage: " + damage);
+        onPlayerHit?.Invoke(damage);
     }
     public void TriggerEnemyHit(float damage)
     {

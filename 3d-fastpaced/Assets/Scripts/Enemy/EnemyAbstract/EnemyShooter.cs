@@ -3,9 +3,7 @@ using UnityEngine;
 public class EnemyShooter : EnemyAI
 {
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float timeBetweenShot;
-
-    private float nextShootTime = 0f;
+    
 
     
     protected override void EnemyAttack()

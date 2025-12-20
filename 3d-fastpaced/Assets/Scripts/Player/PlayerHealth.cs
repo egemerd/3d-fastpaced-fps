@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         GameEvents.current.onProjectileHitsEnemy += Damage;
+        GameEvents.current.onPlayerHit += Damage;
     }
 
     public void Damage(float damage)

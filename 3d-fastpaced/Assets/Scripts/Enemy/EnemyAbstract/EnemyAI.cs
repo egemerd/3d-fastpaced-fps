@@ -15,8 +15,10 @@ public abstract class EnemyAI : MonoBehaviour
     [SerializeField] private Vector3 walkPoint;
 
     //Attacking
-    [SerializeField] private float timeBetweenAttacks;
-    private bool alreadyAttacked;
+    private bool alreadyAttacked; 
+    [SerializeField] protected float timeBetweenShot;
+
+    protected float nextShootTime = 0f;
 
     //States
     [SerializeField] private float sightRange, attackRange;

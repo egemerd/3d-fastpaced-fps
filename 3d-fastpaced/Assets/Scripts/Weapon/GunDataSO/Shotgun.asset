@@ -17,11 +17,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   spreadAngle: 10
-  bulletsPerShot: 8
+  bulletsPerShot: 12
   fireRate: 3
-  fireRange: 10
+  fireRange: 15
   reloadTime: 1
-  magazineSize: 1
+  magazineSize: 2
   reloadAoutomatic: 1
   gunDamage: 25
   gunTrailPrefab: {fileID: 3339241507942766886, guid: f83007fd0b124474eb70045bfeeaa392, type: 3}
