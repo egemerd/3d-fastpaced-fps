@@ -4921,6 +4921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CrosshairHandle
   maxScale: 4
   jumpMaxScale: 6
+  jumpMultiplier: 1
   scaleMultipler: 0.3
   animSpeed: 10
 --- !u!114 &1667111015
