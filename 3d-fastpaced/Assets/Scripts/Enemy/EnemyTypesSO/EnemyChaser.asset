@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c742056cba59834f9f4d59ece0c83c6, type: 3}
-  m_Name: BasicEnemy
+  m_Name: EnemyChaser
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
-  enemyName: Basic Enemy
+  enemyName: Enemy Chaser
   health: 100
   enemyDamage: 15

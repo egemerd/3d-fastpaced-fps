@@ -12,6 +12,16 @@ public class PlayerHealth : MonoBehaviour
     public void Damage(float damage)
     {
         health = Mathf.Clamp(health-damage,0,100);
+        PlayerDie();
         Debug.Log("Taken damage. New Health: " + health);
+    }
+
+    private void PlayerDie()
+    {
+        if (health <= 0)
+        {
+            Debug.Log("Player Died");
+            GameEvents.current.TriggerPlayerDeath();
+        }
     }
 }
