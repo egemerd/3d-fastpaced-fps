@@ -38,7 +38,7 @@ public abstract class EnemyAI : MonoBehaviour
         if (isSightRange && !isAttackRange) ChasePlayer();
         if (isSightRange && isAttackRange) Attack();
 
-        Debug.Log($"Sight: {isSightRange} | Attack: {isAttackRange}");
+        //Debug.Log($"Sight: {isSightRange} | Attack: {isAttackRange}");
     }
 
     protected virtual void Patrolling()
@@ -55,6 +55,11 @@ public abstract class EnemyAI : MonoBehaviour
     private void Attack()
     {
         EnemyAttack();
+    }
+
+    protected void SetMovementSpeed()
+    {
+        agent.speed = enemyData.moveSpeed;
     }
 
     protected abstract void EnemyAttack();

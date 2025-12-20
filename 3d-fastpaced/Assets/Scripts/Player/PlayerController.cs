@@ -358,6 +358,11 @@ public class PlayerController : MonoBehaviour
         return velocity.y;
     }
 
+    public float GetVelocity()
+    {
+        return horizontalVelocity.magnitude;
+    }
+
     public bool MinSlideSpeedReached()
     {
         return horizontalVelocity.magnitude >= minSlideInitialSpeed;

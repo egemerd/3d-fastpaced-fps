@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class EnemyChaser : EnemyAI
 {
+    private void Start()
+    {
+        SetMovementSpeed();
+    }
     protected override void EnemyAttack()
     {
         ChaserAttack();
