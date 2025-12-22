@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpRayOffset = 0.5f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundCheckDistance;
+    [SerializeField] private float coyoteTime = 0.15f;
 
     [Header("Sliding")]
     [SerializeField] private float slideSpeed = 15f;
@@ -82,8 +83,10 @@ public class PlayerController : MonoBehaviour
     public bool canSlide = true;
     private Vector3 slideDirection;
     private float currentSlideSpeed;
-    public bool slideEnded; 
+    public bool slideEnded;
 
+    //Jumping
+    private float lastGroundedTime;
 
     //camera height
     private float originalCameraHeight;
@@ -239,12 +242,22 @@ public class PlayerController : MonoBehaviour
     private void GroundCheck()
     {
         Vector3 bodyPosition = bodyTransform.position;
-        isGrounded = Physics.Raycast(bodyPosition , 
+        bool physicsGrounded = Physics.Raycast(bodyPosition , 
             Vector3.down , 
             (characterController.height/2 + jumpRayOffset),
             groundMask);
+        if(physicsGrounded)
+        {
+            lastGroundedTime = Time.time;
+            isGrounded = true;
+        }
+        else
+        {
+            float timeSinceGrounded = Time.time - lastGroundedTime;
 
-        if(isGrounded && velocity.y < 0)
+            isGrounded = timeSinceGrounded <= coyoteTime;
+        }
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
