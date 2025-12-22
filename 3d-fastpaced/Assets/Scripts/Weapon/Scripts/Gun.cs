@@ -7,6 +7,7 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] public Transform mainCamera;
     [SerializeField] public Transform gunMuzzle;
     public PlayerController playerController;
+    private CameraShootEffect cameraShootEffect;
 
     private int currentAmmo = 0;    
     private float nextTimeToFire = 0f;   
@@ -16,7 +17,8 @@ public abstract class Gun : MonoBehaviour
     private void Start()
     {
         currentAmmo = gunData.magazineSize;
-            
+        cameraShootEffect = mainCamera.GetComponent<CameraShootEffect>();
+
     }
 
     public virtual void Update()
@@ -88,6 +90,10 @@ public abstract class Gun : MonoBehaviour
     private void HandleShoot()
     {
         currentAmmo--;
+        if (cameraShootEffect != null)
+        {
+            cameraShootEffect.ApplyShootImpact();
+        }
         Shoot();
     }
 
