@@ -4,10 +4,19 @@ public class EnemyHealth : MonoBehaviour , IDamageable
 {
     [SerializeField] private EnemyDataSO enemyData;
     public float currentHealth;
+    bool isEnemyDied =false;
 
     private void Awake()
     {
         currentHealth = enemyData.health;
+    }
+
+    private void Update()
+    {
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     private void OnEnable()
@@ -31,19 +40,22 @@ public class EnemyHealth : MonoBehaviour , IDamageable
 
     private void Die()
     {
+        if(isEnemyDied) return; 
         GameEvents.current.TriggerEnemyDeath();
         Destroy(gameObject, 0.1f);
         Debug.Log("Enemy Died");
+
+        isEnemyDied = true;
     }
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         Debug.Log($"{gameObject.name} HP: {currentHealth}");
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        //if (currentHealth <= 0)
+        //{
+        //    Die();
+        //}
     }
 
 }
