@@ -3,9 +3,12 @@ using UnityEngine;
 public class EnemyShooter : EnemyAI
 {
     [SerializeField] private GameObject projectilePrefab;
-    
+    [SerializeField] private float projectileSpeed;
 
-    
+    private void Start()
+    {
+        projectilePrefab.GetComponent<EnemyProjectile>().SetSpeed(projectileSpeed);
+    }
     protected override void EnemyAttack()
     {
         EnemyShoot();

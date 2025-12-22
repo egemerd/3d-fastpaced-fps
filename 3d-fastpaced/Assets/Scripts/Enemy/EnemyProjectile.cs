@@ -17,6 +17,11 @@ public class EnemyProjectile : MonoBehaviour
         ProjectileMove(projectileDirection);
     }
 
+    public void SetSpeed(float speedAmount)
+    {
+        speed = speedAmount;
+    }
+
     public void SetDirection(Vector3 direction)
     {
         projectileDirection = direction;
