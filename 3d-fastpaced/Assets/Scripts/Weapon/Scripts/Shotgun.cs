@@ -6,9 +6,11 @@ public class Shotgun : Gun
 
     private Vector3 initialLocalPos;
     private Coroutine recoilRoutine;
+    private CameraShootEffect cameraShootEffect;
 
     private void Awake()
     {
+        cameraShootEffect = mainCamera.GetComponent<CameraShootEffect>();
         initialLocalPos = transform.localPosition;
     }
     public override void Update()
@@ -26,6 +28,10 @@ public class Shotgun : Gun
     public override void Shoot()
     {
         RaycastHit hit;
+        if (cameraShootEffect != null)
+        {
+            cameraShootEffect.ApplyShootImpact();
+        }
         WeaponShootAnimation();
         for (int i = 0; i < gunData.bulletsPerShot; i++)
         {
