@@ -4695,7 +4695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimeStopEffect
   timeStopDatas:
   - presetName: EnemyDeath
-    delay: 0.3
+    delay: 0.1
     timeStopDuration: 0.2
     timeScaleDuringStop: 0
 --- !u!1001 &1245550524
