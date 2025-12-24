@@ -23,6 +23,7 @@ public class EnemyHealth : MonoBehaviour , IDamageable
     {
         if (GameEvents.current != null)
         {
+            isEnemyDied = false;
             Debug.Log("EnemyHealth subscribed to onEnemyHit");
             GameEvents.current.onEnemyHit += TakeDamage;
         }
@@ -37,20 +38,50 @@ public class EnemyHealth : MonoBehaviour , IDamageable
         }
     }
 
+    private void EnemyDeathParticle()
+    {
+        Debug.Log("enemy death particle");
+        GameObject deathParticle = ObjectPoolManager.Instance.GetPooledObject("EnemyDeathParticle");
+        if (deathParticle != null)
+        {
+            deathParticle.transform.position = transform.position;
+            deathParticle.transform.rotation = Quaternion.identity;
+            ParticleSystem ps = deathParticle.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                ps.Play();
+                ObjectPoolManager.Instance.ReturnToPoolAfterDelay(deathParticle, ps.main.duration);
+            }
+        }
+    }
 
     private void Die()
     {
-        if(isEnemyDied) return; 
-        GameEvents.current.TriggerEnemyDeath();
-        Destroy(gameObject, 0.1f);
-        Debug.Log("Enemy Died");
-
+        if (isEnemyDied) return;
         isEnemyDied = true;
+
+        Debug.Log("[EnemyHealth] Die() called - Starting death sequence");
+
+        EnemyDeathParticle();
+        TimeStopEffect.Instance.TimeStopPreset("EnemyDeath");
+        if (GameEvents.current != null)
+        {
+            Debug.Log("[EnemyHealth] Calling TriggerEnemyDeath()...");
+            GameEvents.current.TriggerEnemyDeath();
+            Debug.Log("[EnemyHealth] TriggerEnemyDeath() completed");
+        }
+        else
+        {
+            Debug.LogError("[EnemyHealth] GameEvents.current is NULL! Cannot trigger death event!");
+        }
+
+       
+        Destroy(gameObject, 0.15f); 
     }
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        Debug.Log($"{gameObject.name} HP: {currentHealth}");
+        //Debug.Log($"{gameObject.name} HP: {currentHealth}");
 
         //if (currentHealth <= 0)
         //{

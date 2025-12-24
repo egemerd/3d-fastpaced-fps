@@ -33,7 +33,7 @@ public class CrosshairHandle : MonoBehaviour
         Vector2 targetSize = playerController.GetVelocity() * scaleMultipler * Vector2.one;
         targetSize.x = Mathf.Clamp(targetSize.x, minScale.x, maxScale);
         targetSize.y = Mathf.Clamp(targetSize.y, minScale.y, maxScale);
-        Debug.Log("Target Size:" + targetSize); 
+        //Debug.Log("Target Size:" + targetSize); 
         crosshairRect.localScale = Vector3.Lerp(crosshairRect.localScale, 
             targetSize + jumpOffset, Time.deltaTime * animSpeed);
     }
