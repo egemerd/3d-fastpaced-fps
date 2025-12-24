@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/State machine deneme.unity
+    guid: 909e057020fb5aa499e279123569d056
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: b7061fb16f6b5484bb5fd0d07e3424bc
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

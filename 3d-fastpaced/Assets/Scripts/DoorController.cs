@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorController : MonoBehaviour
 {
@@ -6,6 +8,8 @@ public class DoorController : MonoBehaviour
     [SerializeField] private float sliderSpeed;
     [SerializeField] private float slideDistance;
     [SerializeField] private Transform closedPosition;
+
+    [SerializeField] private float loadSceneDuration = 2f;
 
 
     private bool isDoorOpen = false;    
@@ -77,5 +81,19 @@ public class DoorController : MonoBehaviour
         doorSlider.transform.position = openPosition;
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+
+        Debug.Log("Player entered door trigger");
+        if (!other.CompareTag("Player")) return;
+        StartCoroutine(LoadNextLevel());
+    }
+
+    private IEnumerator LoadNextLevel()
+    {
+        yield return new WaitForSeconds(loadSceneDuration);
+        SceneManager.LoadScene("Level 2");
+    }
+
+
 }

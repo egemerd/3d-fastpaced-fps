@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Pistol : Gun
 {
+    
     public override void Update()
     {
         base.Update();
@@ -16,8 +17,7 @@ public class Pistol : Gun
     }
     public override void Shoot()
     {
-        RaycastHit hit;
-    
+        RaycastHit hit;  
         if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange))
         {
             Debug.Log("Pistol hit: " + hit.collider.name);

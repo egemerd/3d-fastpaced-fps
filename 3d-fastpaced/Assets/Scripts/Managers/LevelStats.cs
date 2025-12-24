@@ -7,6 +7,7 @@ public class LevelStats : MonoBehaviour
     private float gameTime;
 
     [SerializeField] private TextMeshProUGUI killedEnemiesText;
+    [SerializeField] private TextMeshProUGUI gameTimeText;
 
     void Start()
     {
@@ -17,6 +18,11 @@ public class LevelStats : MonoBehaviour
     void Update()
     {
         gameTime += Time.deltaTime; 
+        gameTimeText.text = "Game Time: " + gameTime + "s";   
+    }
+    public void ResetGameTimer()
+    {
+        gameTime = 0f;
     }
 
     void CountKilledEnemies()

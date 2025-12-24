@@ -6,6 +6,7 @@ public abstract class Gun : MonoBehaviour
     public GunData gunData;
     [SerializeField] public Transform mainCamera;
     [SerializeField] public Transform gunMuzzle;
+    [SerializeField] public ParticleSystem gunShootParticle;
     public PlayerController playerController;
     
 
@@ -102,6 +103,7 @@ public abstract class Gun : MonoBehaviour
     private IEnumerator BulletFire(Vector3 target , RaycastHit hit)
     {
         GameObject bulletTrail = Instantiate(gunData.gunTrailPrefab, gunMuzzle.position, Quaternion.identity);
+        gunShootParticle.Play();
         while (bulletTrail != null && Vector3.Distance(bulletTrail.transform.position , target) > 0.1f)
         {
             Debug.Log("Moving bullet trail");

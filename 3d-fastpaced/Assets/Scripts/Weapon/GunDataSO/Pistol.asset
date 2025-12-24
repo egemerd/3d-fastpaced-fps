@@ -16,7 +16,18 @@ MonoBehaviour:
   whatToHit:
     serializedVersion: 2
     m_Bits: 192
+  spreadAngle: 0
+  bulletsPerShot: 0
   fireRate: 10
   fireRange: 20
   reloadTime: 1
   magazineSize: 15
+  reloadAoutomatic: 0
+  gunDamage: 30
+  gunTrailPrefab: {fileID: 0}
+  bulletSpeed: 0
+  bulletMarkPrefab: {fileID: 0}
+  hitParticlePrefab: {fileID: 0}
+  shootAnimDuration: 0.08
+  returnShootAnimDuration: 0.3
+  movementDistance: 1
