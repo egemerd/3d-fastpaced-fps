@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/State machine deneme.unity
+    path: Assets/Scenes/LevelDesignDeneme.unity
     guid: 909e057020fb5aa499e279123569d056
   - enabled: 1
     path: Assets/Scenes/Level 2.unity
