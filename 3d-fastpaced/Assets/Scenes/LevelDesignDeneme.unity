@@ -926,7 +926,7 @@ MonoBehaviour:
   shakeIntensity: 0.02
   angularFrequency: 20
   dampingRatio: 0.3
-  useFovKick: 1
+  useFovKick: 0
   fovKickAmount: 20
   targetCamera: {fileID: 330585545}
 --- !u!1 &355344425
@@ -2401,6 +2401,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1878339891737184903, guid: 260ff1508afea5241b6511d8fbe92201, type: 3}
   m_PrefabInstance: {fileID: 691273941}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &704241962
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.049358
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.20000005
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.2946844
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
+      propertyPath: m_Name
+      value: baton_Sucuk
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 66eb3ad1606291749977d40191f0e5a3, type: 3}
 --- !u!1 &726929674
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,7 +5199,7 @@ Transform:
   m_GameObject: {fileID: 1502712309}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.21, y: 10.25, z: 2.12055}
+  m_LocalPosition: {x: -11.21, y: 12.43684, z: 2.12055}
   m_LocalScale: {x: 4.6328, y: 27.302721, z: 4.6328}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6980,3 +7037,4 @@ SceneRoots:
   - {fileID: 786494404}
   - {fileID: 498021801}
   - {fileID: 805134442}
+  - {fileID: 704241962}
