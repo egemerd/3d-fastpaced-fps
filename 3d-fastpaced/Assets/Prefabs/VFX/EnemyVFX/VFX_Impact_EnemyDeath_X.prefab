@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3277598332365532908}
   - component: {fileID: 8539677137146063566}
   m_Layer: 0
-  m_Name: VFX_Impact_EnemyHurt_X
+  m_Name: VFX_Impact_EnemyDeath_X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

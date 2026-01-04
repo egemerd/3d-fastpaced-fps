@@ -1,10 +1,15 @@
 using UnityEngine;
+using System.Collections;
+using static UnityEngine.ParticleSystem;
 
 public class EnemyHealth : MonoBehaviour , IDamageable
 {
     [SerializeField] private EnemyDataSO enemyData;
     public float currentHealth;
     bool isEnemyDied =false;
+
+    private bool isPlayingHurtParticle = false;
+    private float hurtParticleCooldown = 0.1f;
 
     private void Awake()
     {
@@ -38,20 +43,37 @@ public class EnemyHealth : MonoBehaviour , IDamageable
         }
     }
 
-    private void EnemyDeathParticle()
+    private void EnemyParticle(string particleName, float minimumDuration = -1f)
     {
-        Debug.Log("enemy death particle");
-        GameObject deathParticle = ObjectPoolManager.Instance.GetPooledObject("EnemyDeathParticle");
-        if (deathParticle != null)
+        GameObject particle = ObjectPoolManager.Instance.GetPooledObject(particleName);
+        if (particle != null)
         {
-            deathParticle.transform.position = transform.position;
-            deathParticle.transform.rotation = Quaternion.identity;
-            ParticleSystem ps = deathParticle.GetComponent<ParticleSystem>();
+            Debug.Log($"Playing particle: {particleName}");
+            particle.transform.position = transform.position;
+            particle.transform.rotation = Quaternion.identity;
+
+            ParticleSystem ps = particle.GetComponent<ParticleSystem>();
             if (ps != null)
             {
+                // Önce stop - temiz baþlangýç
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                 ps.Play();
-                ObjectPoolManager.Instance.ReturnToPoolAfterDelay(deathParticle, ps.main.duration);
+
+                // Partikül süresini hesapla
+                float particleDuration = ps.main.duration;
+
+                // Eðer minimum süre belirtilmiþse ve partikül süresi bundan kýsaysa, minimum süreyi kullan
+                if (minimumDuration > 0 && particleDuration < minimumDuration)
+                {
+                    particleDuration = minimumDuration;
+                }
+
+                ObjectPoolManager.Instance.ReturnToPoolAfterDelay(particle, particleDuration);
             }
+        }
+        else
+        {
+            Debug.LogWarning($"[EnemyHealth] Could not get particle from pool: {particleName}");
         }
     }
 
@@ -62,7 +84,7 @@ public class EnemyHealth : MonoBehaviour , IDamageable
 
         Debug.Log("[EnemyHealth] Die() called - Starting death sequence");
 
-        EnemyDeathParticle();
+        EnemyParticle("EnemyDeathParticle");
         TimeStopEffect.Instance.TimeStopPreset("EnemyDeath");
         if (GameEvents.current != null)
         {
@@ -78,9 +100,25 @@ public class EnemyHealth : MonoBehaviour , IDamageable
        
         Destroy(gameObject, 0.15f); 
     }
+    private IEnumerator PlayHurtParticleWithCooldown()
+    {
+        isPlayingHurtParticle = true;
+
+        // Partikülü oynat - minimum 0.5 saniye görünsün
+        EnemyParticle("EnemyHurtParticle", 0.5f);
+
+        // Cooldown süresi kadar bekle
+        yield return new WaitForSeconds(hurtParticleCooldown);
+
+        isPlayingHurtParticle = false;
+    }
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        if (!isPlayingHurtParticle)
+        {
+            StartCoroutine(PlayHurtParticleWithCooldown());
+        }
         //Debug.Log($"{gameObject.name} HP: {currentHealth}");
 
         //if (currentHealth <= 0)
@@ -89,4 +127,5 @@ public class EnemyHealth : MonoBehaviour , IDamageable
         //}
     }
 
+    
 }
