@@ -3401,49 +3401,81 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1686897794}
     m_Modifications:
-    - target: {fileID: 137678530859997941, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
-      propertyPath: m_Layer
-      value: 8
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 330585546}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: recoilPositionY
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: recoilRotationX
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: shootAnimDuration
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: animCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: animCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: animCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: animCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: animCurve.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: animCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054056178492654565, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
+      propertyPath: animCurve.m_Curve.Array.data[1].outSlope
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
-    - target: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25399986
+      value: 0.48861688
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.20100014
+      value: -0.2943
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.35599998
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6512156
+      value: 0.6750401
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000044024475
+      value: 0.00000004563498
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7588927
+      value: 0.73778105
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000051303825
+      value: 0.00000004987641
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3451,23 +3483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 98.733
+      value: 95.085
       objectReference: {fileID: 0}
     - target: {fileID: 5738456080911321149, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6650470630134122455, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8502960412684221905, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9051692995052618235, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3475,7 +3495,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 903984866}
+      addedObject: {fileID: 903984867}
   m_SourcePrefab: {fileID: 100100000, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
 --- !u!4 &903984864 stripped
 Transform:
@@ -3487,7 +3507,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4965438261709640327, guid: a35b8c32acba1334b9b31dfe8cdbc9be, type: 3}
   m_PrefabInstance: {fileID: 903984863}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &903984866
+--- !u!114 &903984867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3496,14 +3516,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 903984865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee75c18d93ec72346ae6c4131efaeb79, type: 3}
+  m_Script: {fileID: 11500000, guid: 584fbb5d95213a942a027b9b27211ca3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pistol
-  gunData: {fileID: 11400000, guid: fe7963a17cf8a614cb1ff310c846736c, type: 2}
-  mainCamera: {fileID: 330585546}
-  gunMuzzle: {fileID: 0}
-  gunShootParticle: {fileID: 0}
-  playerController: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponAnim
+  swaySpeed: 1.5
+  swayAmount: 0.04
+  maxSway: 3
 --- !u!1001 &919660625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91521,6 +91539,10 @@ PrefabInstance:
     - target: {fileID: 2924587109105951398, guid: 9bea1a3b250bab14b9d0ff05f12cca78, type: 3}
       propertyPath: m_Name
       value: ShotgunMilk
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924587109105951398, guid: 9bea1a3b250bab14b9d0ff05f12cca78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3798541335083882310, guid: 9bea1a3b250bab14b9d0ff05f12cca78, type: 3}
       propertyPath: mainCamera
