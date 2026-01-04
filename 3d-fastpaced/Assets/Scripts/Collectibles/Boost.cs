@@ -8,6 +8,7 @@ public class Boost : MonoBehaviour , ICollectibles
     public void ApplyEffect()
     {
         CollectibleManager.Instance.ApplySpeedBoost(effectDuration, effectAmount);
+        PlayerEffects.Instance.ColorHueShift(effectDuration);
         Debug.Log("Boost");
     }
 
