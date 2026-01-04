@@ -124,3 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c57484e907e6e5448b130afddde1dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boost
+  effectDuration: 2
+  effectAmount: 10
