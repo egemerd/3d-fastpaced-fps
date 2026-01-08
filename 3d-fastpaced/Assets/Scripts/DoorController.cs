@@ -86,14 +86,10 @@ public class DoorController : MonoBehaviour
 
         Debug.Log("Player entered door trigger");
         if (!other.CompareTag("Player")) return;
-        StartCoroutine(LoadNextLevel());
+        LevelManager.Instance.ActivateLevelEndCanvas();
     }
 
-    private IEnumerator LoadNextLevel()
-    {
-        yield return new WaitForSeconds(loadSceneDuration);
-        SceneManager.LoadScene("Level 2");
-    }
+    
 
 
 }

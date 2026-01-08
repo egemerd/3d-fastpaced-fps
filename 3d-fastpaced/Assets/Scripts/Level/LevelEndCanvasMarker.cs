@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LevelDataSO : MonoBehaviour
+public class LevelEndCanvasMarker : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
