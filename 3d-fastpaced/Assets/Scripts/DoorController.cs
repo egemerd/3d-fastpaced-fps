@@ -18,6 +18,7 @@ public class DoorController : MonoBehaviour
 
     private void Start()
     {
+        sliderSpeed = LevelManager.Instance.GetSliderSpeed();
         openPosition = doorSlider.transform.position;
         Debug.Log("DoorController OnEnable çalýþtý.");
 

@@ -8,6 +8,8 @@ public class MaterialApplier : EditorWindow
     private Material materialToApply;
 
     [MenuItem("Tools/Apply Material to Children")]
+
+    
     public static void ShowWindow()
     {
         GetWindow<MaterialApplier>("Material Applier");

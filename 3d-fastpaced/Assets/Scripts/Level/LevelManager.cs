@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +11,11 @@ public class LevelManager : MonoBehaviour
 
     private GameObject levelEndCanvas;
 
+    [SerializeField] private List<LevelDataSO> levelDatas;
+
+    [SerializeField] Material wallMaterial;
+    [SerializeField] Material floorMaterial;
+
     private void Awake()
     {
         Instance = this;
@@ -18,9 +25,15 @@ public class LevelManager : MonoBehaviour
     {
         currentLevelIndex = SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex).buildIndex;
         FindLevelEndCanvas();
+
+        wallMaterial.color = levelDatas[currentLevelIndex].wallColor;
+        floorMaterial.color = levelDatas[currentLevelIndex].floorColor;
     }
 
-
+    public float GetSliderSpeed()
+    {
+        return levelDatas[currentLevelIndex].sliderSpeed;   
+    }
 
     public void LoadNextLevel()
     {

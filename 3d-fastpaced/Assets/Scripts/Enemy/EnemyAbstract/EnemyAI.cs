@@ -56,6 +56,7 @@ public abstract class EnemyAI : MonoBehaviour
 
     private void Attack()
     {
+        LookPlayerYAxis();
         EnemyAttack();
     }
 
@@ -67,7 +68,11 @@ public abstract class EnemyAI : MonoBehaviour
     protected abstract void EnemyAttack();
     
 
-    
+    private void LookPlayerYAxis()
+    {
+        Vector3 playerPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.LookAt(playerPos);
+    }
 
     // Scene view'da seçiliyken gizmo çizimleri
     private void OnDrawGizmosSelected()

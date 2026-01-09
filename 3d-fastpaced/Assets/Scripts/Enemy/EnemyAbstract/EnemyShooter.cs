@@ -5,12 +5,22 @@ public class EnemyShooter : EnemyAI
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileSpeed;
 
+    bool isReadyToShoot;
+
+
+    public Animator myAnimator;
+
+
     private void Start()
     {
         projectilePrefab.GetComponent<EnemyProjectile>().SetSpeed(projectileSpeed);
+        myAnimator= GetComponentInChildren<Animator>();
     }
+
+    
     protected override void EnemyAttack()
     {
+        Debug.Log("[EnemyShooter] EnemyAttack called.");
         EnemyShoot();
     }
     protected override void ChasePlayer()
@@ -18,9 +28,9 @@ public class EnemyShooter : EnemyAI
         base.agent.SetDestination(transform.position); // Düþman hareket etmesin
     }
     private void EnemyShoot()
-    {
+    {  
         if (Time.time < nextShootTime) return;
-
+        myAnimator.SetTrigger("Throwing");
         // Atýþ anýndaki player pozisyonunu yakala
         Vector3 targetPos = player.position;
 
@@ -48,5 +58,13 @@ public class EnemyShooter : EnemyAI
 
         // Cooldown ayarla
         nextShootTime = Time.time + timeBetweenShot;
+        
+    }
+
+    
+
+    void OnThrowProjectile()
+    {
+        Debug.Log("[EnemyShooter] onThrowProjectile called from animation event.");
     }
 }
