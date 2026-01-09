@@ -5,11 +5,11 @@ public class EnemyShooter : EnemyAI
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileSpeed;
 
-    bool isReadyToShoot;
-
-
+    bool isReadyToShoot = false;
+    
     public Animator myAnimator;
-
+    private Vector3 cachedSpawnPos;
+    private Vector3 cachedDirection;
 
     private void Start()
     {
@@ -30,41 +30,48 @@ public class EnemyShooter : EnemyAI
     private void EnemyShoot()
     {  
         if (Time.time < nextShootTime) return;
-        myAnimator.SetTrigger("Throwing");
-        // Atýþ anýndaki player pozisyonunu yakala
+
         Vector3 targetPos = player.position;
-
-        // Direction'ý spawn noktasýndan hedefe hesapla
-        Vector3 spawnPos = transform.position + transform.forward * 0.5f; // düþmanýn önünden spawn
-        Vector3 dir = (targetPos - spawnPos).normalized;
-
-        // Projectile rotasyonunu direction'a göre ayarla
-        Quaternion projectileRot = Quaternion.LookRotation(dir);
-
-        // Instantiate
-        GameObject projectile = Instantiate(projectilePrefab, spawnPos, projectileRot);
-
-        // Direction'ý hemen set et (Update çaðrýlmadan önce)
-        var enemyProjectile = projectile.GetComponent<EnemyProjectile>();
-        if (enemyProjectile != null)
-        {
-            enemyProjectile.SetDirection(dir);
-            enemyProjectile.SetDamage(damage);
-        }
-        else
-        {
-            Debug.LogError("[EnemyShooter] EnemyProjectile component not found on projectile instance.");
-        }
+        cachedSpawnPos = transform.position + transform.up * 1.5f + transform.forward * 0.5f;  // düþmanýn önünden spawn
+        cachedDirection = (targetPos - cachedSpawnPos).normalized;
+        
+        isReadyToShoot = true;
+        
+        myAnimator.SetTrigger("Throwing");
 
         // Cooldown ayarla
         nextShootTime = Time.time + timeBetweenShot;
         
     }
 
-    
-
-    void OnThrowProjectile()
+    void InstantiateProjectile()
     {
-        Debug.Log("[EnemyShooter] onThrowProjectile called from animation event.");
+        // Atýþ anýndaki player pozisyonunu yakala
+        Quaternion projectileRot = Quaternion.LookRotation(cachedDirection);
+        GameObject projectile = Instantiate(projectilePrefab, cachedSpawnPos, projectileRot);
+
+        var enemyProjectile = projectile.GetComponent<EnemyProjectile>();
+        if (enemyProjectile != null)
+        {
+            enemyProjectile.SetDirection(cachedDirection);
+            enemyProjectile.SetDamage(damage);
+        }
+        else
+        {
+            Debug.LogError("[EnemyShooter] EnemyProjectile component yok!");
+        }
     }
+
+    public void OnThrowProjectile()
+    {
+        if (!isReadyToShoot) { return; } 
+        
+        
+        InstantiateProjectile();
+        
+        isReadyToShoot = false;
+
+    }
+
+    
 }
