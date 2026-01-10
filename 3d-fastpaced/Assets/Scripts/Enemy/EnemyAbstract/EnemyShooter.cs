@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyShooter : EnemyAI
 {
@@ -11,6 +12,7 @@ public class EnemyShooter : EnemyAI
     private Vector3 cachedSpawnPos;
     private Vector3 cachedDirection;
 
+    
     private void Start()
     {
         projectilePrefab.GetComponent<EnemyProjectile>().SetSpeed(projectileSpeed);

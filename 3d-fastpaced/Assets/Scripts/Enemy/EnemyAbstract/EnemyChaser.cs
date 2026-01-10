@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class EnemyChaser : EnemyAI
 {
     private bool canAtack = true;
