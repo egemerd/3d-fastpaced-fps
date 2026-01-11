@@ -49,14 +49,13 @@ public class Pistol : Gun
         UpdateSway();
 
         // Input handling
-        if (Input.GetButtonDown("Fire1"))
+        if (InputManager.Instance.fireAction.WasPressedThisFrame())
         {
             TryShoot();
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            HandleReload();
-        }
+        
+        HandleReload();
+        
     }
     private void OnDisable()
     {

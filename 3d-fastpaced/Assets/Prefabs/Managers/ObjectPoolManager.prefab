@@ -57,3 +57,9 @@ MonoBehaviour:
     canGrow: 1
     parentTransform: {fileID: 0}
     pooledObjects: []
+  - poolName: EnemyDeathParticlePistol
+    prefab: {fileID: 4535461222689963928, guid: fc536c2835a646d44be1056b4934c587, type: 3}
+    initialSize: 6
+    canGrow: 1
+    parentTransform: {fileID: 0}
+    pooledObjects: []

@@ -119,7 +119,7 @@ public abstract class Gun : MonoBehaviour
             BulletHitFX(hit);
         }
 
-        if(hit.collider.CompareTag("Enemy"))
+        if(hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Body") || hit.collider.CompareTag("Head"))
         {
             ApplyDamage(hit);
         }
@@ -141,10 +141,18 @@ public abstract class Gun : MonoBehaviour
 
     protected void ApplyDamage(RaycastHit hit)
     {
-        IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+        IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(gunData.gunDamage);    
+            if (hit.collider.CompareTag("Body"))
+            {
+                Debug.Log("[Gun] Applying body damage");
+                damageable.TakeDamage(gunData.gunDamage);
+            }
+            else if (hit.collider.CompareTag("Head"))
+            {
+                damageable.TakeDamage(gunData.gunDamage * gunData.headshotMultiplier);
+            }
             Debug.Log("Hit " + hit.collider.name + " for " + gunData.gunDamage + " damage.");
         }
         else
