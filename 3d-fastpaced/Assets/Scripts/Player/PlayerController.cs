@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     CameraShakeMovement cameraShake;
     Climbing climbing;
 
-
     private Camera mainCamera;
     private CharacterController characterController;
     
@@ -123,6 +122,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        
     }
     private void Update()
     {
@@ -156,6 +156,8 @@ public class PlayerController : MonoBehaviour
             
             speedText.text = $"Speed: {currentSpeed:F1} m/s";
         }
+
+        
         //if (jumpAction.triggered && isGrounded)
         //{
         //    Jump();

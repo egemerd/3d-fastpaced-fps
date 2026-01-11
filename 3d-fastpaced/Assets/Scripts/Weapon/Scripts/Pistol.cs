@@ -15,18 +15,34 @@ public class Pistol : Gun
     [SerializeField] private AnimationCurve returnCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
 
+    [Header("Sway Settings")]
+    [Tooltip("Maksimum sway mesafesi (units)")]
+    [SerializeField] private float maxSwayOffset = 0.1f;
+    [Tooltip("Sway yumuşatma hızı")]
+    [SerializeField] private float swaySmoothing = 10f;
+
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Coroutine shootAnimationCoroutine;
+
+    // Sway için
+    private Vector3 currentSwayOffset = Vector3.zero;
+    private Vector3 targetSwayOffset = Vector3.zero;
 
     private void Start()
     {
         originalPosition = transform.localPosition;
         originalRotation = transform.localRotation;
     }
+
     public override void Update()
     {
         base.Update();
+
+        // Sway her frame güncellenir
+        UpdateSway();
+
+        // Input handling
         if (Input.GetButtonDown("Fire1"))
         {
             TryShoot();
@@ -36,21 +52,44 @@ public class Pistol : Gun
             HandleReload();
         }
     }
-    public override void Shoot()
+    private void OnDisable()
     {
-        RaycastHit hit;  
-        if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange))
+        //  Silah deaktif olduğunda tüm animasyonları durdur ve orijinal konuma dön
+        if (shootAnimationCoroutine != null)
         {
-            Debug.Log("Pistol hit: " + hit.collider.name);
-            if(hit.collider.CompareTag("Enemy"))
-            {
-                Debug.Log("Pistol hit enemy: " + hit.collider.name);
-                Destroy(hit.collider.gameObject);
-            }   
-            
+            StopCoroutine(shootAnimationCoroutine);
+            shootAnimationCoroutine = null;
         }
 
-        WeaponShootAnimation();
+        // Sway offset'lerini sıfırla
+        currentSwayOffset = Vector3.zero;
+        targetSwayOffset = Vector3.zero;
+
+        // Orijinal pozisyon ve rotasyona dön
+        transform.localPosition = originalPosition;
+        transform.localRotation = originalRotation;
+    }
+    public override void Shoot()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange))
+        {
+            StartBulletFire(hit.point, hit);
+            Debug.Log("Pistol hit: " + hit.collider.name);
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                Debug.Log("Pistol hit enemy: " + hit.collider.name);
+                
+                Destroy(hit.collider.gameObject);
+            }
+        }
+        else
+        {
+            StartBulletFire(hit.point, hit);
+        }
+
+            WeaponShootAnimation();
     }
 
     public override void WeaponShootAnimation()
@@ -61,87 +100,112 @@ public class Pistol : Gun
         }
 
         shootAnimationCoroutine = StartCoroutine(ShootAnimationCoroutine());
+    }
 
+    /// <summary>
+    /// Her frame sway offset'ini günceller
+    /// </summary>
+    private void UpdateSway()
+    {
+        // Input al
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        // Hedef sway offset (TERS yön)
+        if (horizontal < 0f) // A (sola hareket)
+        {
+            targetSwayOffset = new Vector3(maxSwayOffset, 0f, 0f); // Silah sağa kayar
+        }
+        else if (horizontal > 0f) // D (sağa hareket)
+        {
+            targetSwayOffset = new Vector3(-maxSwayOffset, 0f, 0f); // Silah sola kayar
+        }
+        else
+        {
+            targetSwayOffset = Vector3.zero;
+        }
+
+        // Smooth geçiş
+        currentSwayOffset = Vector3.Lerp(currentSwayOffset, targetSwayOffset, Time.deltaTime * swaySmoothing);
+
+        // ✅ Shoot animasyonu yokken pozisyonu güncelle
+        if (shootAnimationCoroutine == null)
+        {
+            transform.localPosition = originalPosition + currentSwayOffset;
+        }
     }
 
     private IEnumerator ShootAnimationCoroutine()
     {
+        // ===== RECOIL PHASE =====
         float recoilDuration = shootAnimDuration;
         float elapsed = 0f;
 
-        //  DAHA DRAMATIK hedef değerler
-        Vector3 recoilPosition = originalPosition + new Vector3(
-            Random.Range(-0.02f, 0.02f),  // Hafif rastgele yan hareket (YENİ)
-            recoilPositionY,               // Yukarı (0.05 → 0.08)
-            recoilPositionZ                // Geriye (0.15 → 0.2)
+        // ✅ Shoot başladığında mevcut sway offset'i kaydet
+        Vector3 shootStartSwayOffset = currentSwayOffset;
+
+        // Recoil hedef pozisyonu (sway DAHIL)
+        Vector3 recoilPosition = originalPosition + shootStartSwayOffset + new Vector3(
+            Random.Range(-0.02f, 0.02f),
+            recoilPositionY,
+            recoilPositionZ
         );
 
-        // DAHA FAZLA rotasyon + hafif roll
         Quaternion recoilRotation = originalRotation * Quaternion.Euler(
-            recoilRotationX,               // Yukarı ()
-            Random.Range(-1f, 1f),         // Hafif rastgele yön (YENİ)
-            recoilRotationZ                // Yan yatış (YENİ)
+            recoilRotationX,
+            Random.Range(-1f, 1f),
+            recoilRotationZ
         );
 
-        // Başlangıç değerleri
+        // Başlangıç pozisyonu (sway dahil mevcut pozisyon)
         Vector3 startPos = transform.localPosition;
         Quaternion startRot = transform.localRotation;
 
-        //  Recoil animasyonu - Custom curve ile
+        // Recoil animasyonu
         while (elapsed < recoilDuration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / recoilDuration;
-
-            // AnimationCurve kullan (Inspector'dan özelleştirilebilir)
             float curveT = recoilCurve.Evaluate(t);
 
-            // Pozisyon interpolasyonu
             transform.localPosition = Vector3.Lerp(startPos, recoilPosition, curveT);
-
-            // Rotasyon interpolasyonu
             transform.localRotation = Quaternion.Slerp(startRot, recoilRotation, curveT);
 
             yield return null;
         }
 
-        // Kesin değerlere ayarla
         transform.localPosition = recoilPosition;
         transform.localRotation = recoilRotation;
 
-        // ===== RETURN PHASE (Geri dönüş) - SMOOTH =====
+        // ===== RETURN PHASE =====
         float returnDuration = returnShootAnimDuration;
         elapsed = 0f;
 
         startPos = transform.localPosition;
         startRot = transform.localRotation;
 
-        // Return animasyonu - Custom curve ile
+        // Return animasyonu - orijinal + GÜNCEL sway offset'e dön
         while (elapsed < returnDuration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / returnDuration;
-
-            // AnimationCurve kullan
             float curveT = returnCurve.Evaluate(t);
 
-            // Pozisyon interpolasyonu - orijinale dön
-            transform.localPosition = Vector3.Lerp(startPos, originalPosition, curveT);
+            // ✅ Return sırasında güncel sway offset'i kullan (A/D hala basılı olabilir)
+            Vector3 targetReturnPos = originalPosition + currentSwayOffset;
 
-            // Rotasyon interpolasyonu - orijinale dön
+            transform.localPosition = Vector3.Lerp(startPos, targetReturnPos, curveT);
             transform.localRotation = Quaternion.Slerp(startRot, originalRotation, curveT);
 
             yield return null;
         }
 
-        // Kesin orijinal değerlere dön
-        transform.localPosition = originalPosition;
+        // ✅ Final pozisyon: original + güncel sway
+        transform.localPosition = originalPosition + currentSwayOffset;
         transform.localRotation = originalRotation;
 
         shootAnimationCoroutine = null;
     }
 
-    // Reset fonksiyonu - gerekirse manuel reset için
     public void ResetWeaponPosition()
     {
         if (shootAnimationCoroutine != null)
@@ -150,9 +214,10 @@ public class Pistol : Gun
             shootAnimationCoroutine = null;
         }
 
+        currentSwayOffset = Vector3.zero;
+        targetSwayOffset = Vector3.zero;
         transform.localPosition = originalPosition;
         transform.localRotation = originalRotation;
     }
-
 
 }

@@ -54,7 +54,7 @@ public abstract class Gun : MonoBehaviour
                 StartCoroutine(Reload());
                 return;
             }
-            if(InputManager.Instance.reloadAction.IsPressed() && !gunData.reloadAoutomatic)
+            if(InputManager.Instance.reloadAction.IsPressed() && !gunData.reloadAoutomatic && currentAmmo <= 0)
             {
                 StartCoroutine(Reload());
             }
