@@ -14,6 +14,7 @@ public class CameraShakeMovement : MonoBehaviour
 
     [Header("FOV Settings")]
     [SerializeField] private float targetFov = 82f;
+    [SerializeField] private float targetFovSliding = 90f;
     [SerializeField] private float fovTransitionSpeed = 4f;
     [SerializeField] private float targetFovWeapon = 82f;
     [SerializeField] private float fovTransitionSpeedWeapon = 4f;
@@ -50,12 +51,18 @@ public class CameraShakeMovement : MonoBehaviour
             
     }
 
-    public void SprintFovBoost(bool isSprinting , Vector2 moveInput)
+    public void SprintFovBoost(bool isSprinting , bool isSliding, Vector2 moveInput)
     {
         if (isSprinting && moveInput.y > 0.01f)
         {
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFov,
                 fovTransitionSpeed * Time.deltaTime);
+        }
+        else if(isSliding && isSprinting)
+        {
+            Debug.Log(" [CameraShakeMovement] Sliding FOV Boost"); 
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFovSliding,
+               fovTransitionSpeed * Time.deltaTime);
         }
         else
         {
@@ -64,12 +71,17 @@ public class CameraShakeMovement : MonoBehaviour
         }
     }
 
-    public void SprintFovBoostWeapon(bool isSprinting, Vector2 moveInput)
+    public void SprintFovBoostWeapon(bool isSprinting , bool isSliding, Vector2 moveInput)
     {
         if (isSprinting && moveInput.y > 0.01f)
         {
             weaponCamera.fieldOfView = Mathf.Lerp(weaponCamera.fieldOfView, targetFov,
                 fovTransitionSpeedWeapon * Time.deltaTime);
+        }
+        else if (isSliding)
+        {
+            playerCamera.fieldOfView = Mathf.Lerp(weaponCamera.fieldOfView, targetFovSliding,
+               fovTransitionSpeed * Time.deltaTime);
         }
         else
         {

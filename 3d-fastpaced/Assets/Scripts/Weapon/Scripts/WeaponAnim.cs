@@ -20,13 +20,14 @@ public class WeaponAnim : MonoBehaviour
         input = InputManager.Instance;
         initialSwayPos = transform.localPosition;
     }
+
     private void Update()
     {
-        
         WeaponSway();
     }
 
-    private void WeaponSway()
+
+    public void WeaponSway()
     {
         lookInput = input.lookInput;
         lookInput = Vector2.ClampMagnitude(lookInput, maxSway);

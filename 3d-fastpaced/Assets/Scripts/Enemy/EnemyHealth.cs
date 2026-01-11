@@ -11,9 +11,12 @@ public class EnemyHealth : MonoBehaviour , IDamageable
     private bool isPlayingHurtParticle = false;
     private float hurtParticleCooldown = 0.1f;
 
+    private WeaponSwitching weaponSwitching;
+
     private void Awake()
     {
         currentHealth = enemyData.health;
+        weaponSwitching = FindObjectOfType<WeaponSwitching>();
     }
 
     private void Update()
@@ -83,8 +86,14 @@ public class EnemyHealth : MonoBehaviour , IDamageable
         isEnemyDied = true;
 
         Debug.Log("[EnemyHealth] Die() called - Starting death sequence");
-
-        EnemyParticle("EnemyDeathParticle");
+        if (weaponSwitching.selectedWeapon == 0)
+        {
+            EnemyParticle("EnemyDeathParticle");
+        }
+        else if (weaponSwitching.selectedWeapon == 1)
+        {
+            EnemyParticle("EnemyDeathParticlePistol");
+        }
         TimeStopEffect.Instance.TimeStopPreset("EnemyDeath");
         if (GameEvents.current != null)
         {

@@ -144,11 +144,11 @@ public class PlayerController : MonoBehaviour
             velocity.y = 0f;
         }
         SmoothCameraHeight();
-       
+        Debug.Log("[PlayerController] isSliding" + isSliding);
         currentState.UpdateState(this,climbing);
         //cameraShake.SprintSway(moveInput); 
-        cameraShake.SprintFovBoost(isSprinting,moveInput);
-        cameraShake.SprintFovBoostWeapon(isSprinting,moveInput);
+        //cameraShake.SprintFovBoost(isSprinting,isSliding,moveInput);
+        //cameraShake.SprintFovBoostWeapon(isSprinting,isSliding,moveInput);
         stateText.text = currentState.StateName;
         if (speedText != null)
         {

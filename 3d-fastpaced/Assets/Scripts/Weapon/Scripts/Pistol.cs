@@ -29,6 +29,12 @@ public class Pistol : Gun
     private Vector3 currentSwayOffset = Vector3.zero;
     private Vector3 targetSwayOffset = Vector3.zero;
 
+    private WeaponAnim weaponAnim;
+
+    private void Awake()
+    {
+        weaponAnim = GetComponent<WeaponAnim>();
+    }
     private void Start()
     {
         originalPosition = transform.localPosition;
@@ -81,7 +87,7 @@ public class Pistol : Gun
             {
                 Debug.Log("Pistol hit enemy: " + hit.collider.name);
                 
-                Destroy(hit.collider.gameObject);
+                
             }
         }
         else
@@ -121,7 +127,7 @@ public class Pistol : Gun
         }
         else
         {
-            targetSwayOffset = Vector3.zero;
+            targetSwayOffset = Vector3.zero; // Orijinal pozisyona dön
         }
 
         // Smooth geçiş
