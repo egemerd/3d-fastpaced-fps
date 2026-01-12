@@ -20,7 +20,7 @@ MonoBehaviour:
   bulletsPerShot: 12
   fireRate: 3
   fireRange: 15
-  reloadTime: 3
+  reloadTime: 2
   magazineSize: 5
   reloadAoutomatic: 1
   gunDamage: 25

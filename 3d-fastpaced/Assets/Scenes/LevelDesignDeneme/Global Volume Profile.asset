@@ -44,6 +44,53 @@ MonoBehaviour:
   intensity:
     m_OverrideState: 1
     m_Value: 0.811
+--- !u!114 &-2263953720065590607
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
+  m_Name: Bloom
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.Bloom
+  active: 1
+  skipIterations:
+    m_OverrideState: 0
+    m_Value: 1
+  threshold:
+    m_OverrideState: 1
+    m_Value: 1.47
+  intensity:
+    m_OverrideState: 1
+    m_Value: 2.31
+  scatter:
+    m_OverrideState: 1
+    m_Value: 1
+  clamp:
+    m_OverrideState: 0
+    m_Value: 65475.38
+  tint:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  highQualityFiltering:
+    m_OverrideState: 0
+    m_Value: 0
+  downscale:
+    m_OverrideState: 0
+    m_Value: 0
+  maxIterations:
+    m_OverrideState: 0
+    m_Value: 6
+  dirtTexture:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 27299babd05b46749a2916177e50a628, type: 3}
+    dimension: 1
+  dirtIntensity:
+    m_OverrideState: 1
+    m_Value: 22.29
 --- !u!114 &-798752176874444043
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -84,6 +131,7 @@ MonoBehaviour:
   - {fileID: 7503319786641229626}
   - {fileID: -798752176874444043}
   - {fileID: 401133648540305057}
+  - {fileID: -2263953720065590607}
 --- !u!114 &401133648540305057
 MonoBehaviour:
   m_ObjectHideFlags: 3

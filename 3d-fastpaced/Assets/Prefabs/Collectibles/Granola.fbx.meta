@@ -3,7 +3,22 @@ guid: f30589d63ec03b042a5d8548b7f2d7dd
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GRANOLA
+    second: {fileID: 2100000, guid: 3c62fbbd9779c9940b874bb69c8f8f04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: granolapaket
+    second: {fileID: 2100000, guid: d04961bb2ff36344fa74e9bc1fd634af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: granolapaket2
+    second: {fileID: 2100000, guid: 795227b852f3f214a92267a1c8019287, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

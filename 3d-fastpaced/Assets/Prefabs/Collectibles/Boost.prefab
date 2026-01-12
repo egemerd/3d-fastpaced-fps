@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6787669601810071927}
   - component: {fileID: 3656689185178362996}
   - component: {fileID: 7729403027655901183}
-  - component: {fileID: 3921913498064576305}
   - component: {fileID: 5919933081459270585}
+  - component: {fileID: 686501197336283473}
+  - component: {fileID: 3423166774665812423}
   m_Layer: 0
   m_Name: Boost
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.93, y: 1.12, z: 1.8}
-  m_LocalScale: {x: 1.0010546, y: 1.0010546, z: 1.0010546}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4960523318757623142}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 876284495246706033, guid: 2307050fb72f9ec43b674c19e189a4a6, type: 3}
 --- !u!23 &7729403027655901183
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68,7 +69,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdf7cbc06c858154ca14388638434be4, type: 2}
+  - {fileID: -5170238406336568929, guid: 2307050fb72f9ec43b674c19e189a4a6, type: 3}
+  - {fileID: 1418013859760622373, guid: 2307050fb72f9ec43b674c19e189a4a6, type: 3}
+  - {fileID: -876546973899608171, guid: 2307050fb72f9ec43b674c19e189a4a6, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,8 +94,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3921913498064576305
-SphereCollider:
+--- !u!114 &5919933081459270585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960523318757623142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c57484e907e6e5448b130afddde1dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Boost
+  effectDuration: 2
+  effectAmount: 10
+--- !u!136 &686501197336283473
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,10 +126,12 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5919933081459270585
+  serializedVersion: 2
+  m_Radius: 0.019215405
+  m_Height: 0.038430814
+  m_Direction: 1
+  m_Center: {x: 0.00001115799, y: 1.680328e-13, z: 0.00921538}
+--- !u!114 &3423166774665812423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,8 +140,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4960523318757623142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c57484e907e6e5448b130afddde1dbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bc915a975903764585d2fa800069dff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Boost
-  effectDuration: 2
-  effectAmount: 10
+  m_EditorClassIdentifier: Assembly-CSharp::CollectibleAnimation
+  floatSpeed: 5
+  floatAmplitude: 0.2
+  rotationSpeed: 50
+  randomStartOffset: 1
+  animationType: 0
