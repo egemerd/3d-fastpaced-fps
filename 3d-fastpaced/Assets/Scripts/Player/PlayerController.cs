@@ -302,6 +302,7 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
+        AudioManager.Instance.PlaySFX("PlayerJump" , 0.4f);
         if (isSliding)
         {
             SlideJumpBoost();

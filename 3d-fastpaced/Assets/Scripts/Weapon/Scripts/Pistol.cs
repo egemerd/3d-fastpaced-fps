@@ -78,7 +78,7 @@ public class Pistol : Gun
     public override void Shoot()
     {
         RaycastHit hit;
-
+        AudioManager.Instance.PlaySFX("LaserShot" , 1.4f);
         if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange))
         {
             StartBulletFire(hit.point, hit);
