@@ -37,6 +37,7 @@ public class Pistol : Gun
     }
     private void Start()
     {
+        base.Start();
         originalPosition = transform.localPosition;
         originalRotation = transform.localRotation;
     }

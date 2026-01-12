@@ -7,6 +7,7 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] public Transform mainCamera;
     [SerializeField] public Transform gunMuzzle;
     [SerializeField] public ParticleSystem gunShootParticle;
+    [SerializeField] Animator myAnim;
     public PlayerController playerController;
     
 
@@ -14,12 +15,13 @@ public abstract class Gun : MonoBehaviour
     private float nextTimeToFire = 0f;   
     private bool isReloading = false;
     private Coroutine reloadRoutine;
+    
 
-    private void Start()
+    
+    protected virtual void Start()
     {
         currentAmmo = gunData.magazineSize;
-        
-
+        myAnim = GetComponent<Animator>();
     }
 
     public virtual void Update()
@@ -48,24 +50,27 @@ public abstract class Gun : MonoBehaviour
         if (isReloading) return;
         if (currentAmmo >= gunData.magazineSize) return;
 
-        
-            if (gunData.reloadAoutomatic && currentAmmo <= 0)
-            {
-                StartCoroutine(Reload());
-                return;
-            }
-            if(InputManager.Instance.reloadAction.IsPressed() && !gunData.reloadAoutomatic && currentAmmo <= 0)
-            {
-                StartCoroutine(Reload());
-            }
-        
+        // Otomatik reload sadece mermi bitince
+        if (gunData.reloadAoutomatic && currentAmmo <= 0)
+        {
+            reloadRoutine = StartCoroutine(Reload());
+            return;
+        }
+
+        // Manuel reload - R tuþuna basýlý tutmaya gerek yok, bir kez bastý mý yeterli
+        if (InputManager.Instance.reloadAction.WasPressedThisFrame())
+        {
+            reloadRoutine = StartCoroutine(Reload());
+        }
+
     }
 
     private IEnumerator Reload()
     {
         isReloading = true;
+        myAnim.SetTrigger("Reload");
         Debug.Log("Reloading");
-        yield return new WaitForSeconds(gunData.reloadTime);
+        yield return new WaitForSeconds(gunData.reloadTime);    
         currentAmmo = gunData.magazineSize;
         Debug.Log("Reloaded");
 
@@ -74,6 +79,7 @@ public abstract class Gun : MonoBehaviour
         nextTimeToFire = 0f;
     }
 
+    
 
     public void TryShoot()
     {

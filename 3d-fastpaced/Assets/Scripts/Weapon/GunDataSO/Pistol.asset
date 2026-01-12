@@ -19,10 +19,10 @@ MonoBehaviour:
   spreadAngle: 0
   bulletsPerShot: 0
   fireRate: 10
-  fireRange: 20
+  fireRange: 150
   reloadTime: 1
-  magazineSize: 10000
-  reloadAoutomatic: 0
+  magazineSize: 100
+  reloadAoutomatic: 1
   gunDamage: 30
   headshotMultiplier: 4
   gunTrailPrefab: {fileID: 3339241507942766886, guid: f83007fd0b124474eb70045bfeeaa392, type: 3}
