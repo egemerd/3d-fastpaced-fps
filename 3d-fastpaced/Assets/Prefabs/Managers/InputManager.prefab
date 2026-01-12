@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   sprintAction:
-    m_Name: 
+    m_Name: Sprint
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 2bd70d17-f7a6-4881-b899-f04786c5ada0
@@ -130,7 +130,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   switchWeaponAction1:
-    m_Name: 
+    m_Name: Switch Weapon Action 1
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: f8bcb0bd-0ec7-4fb2-a974-6f9479c0969f
@@ -139,7 +139,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   switchWeaponAction2:
-    m_Name: 
+    m_Name: Switch Weapon Action 2
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: b0472694-25ca-4a4a-b382-84bac3a84da4
@@ -148,7 +148,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   switchWeaponAction3:
-    m_Name: 
+    m_Name: Switch Weapon Action 3
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 3e83a2cd-9586-45a1-a4bc-ebbe9c6750f9
