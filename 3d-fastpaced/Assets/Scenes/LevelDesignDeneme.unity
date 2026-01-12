@@ -88938,7 +88938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3739116572088386936, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4221854253020993370, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: speedText
@@ -88950,7 +88950,7 @@ PrefabInstance:
       objectReference: {fileID: 1968850857}
     - target: {fileID: 4903775830737494620, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -88998,7 +88998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5733981180324322934, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7012192975913041333, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: pistolCrosshair
@@ -89010,7 +89010,7 @@ PrefabInstance:
       objectReference: {fileID: 119030398}
     - target: {fileID: 7946061268665849946, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8565858273101721074, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: globalVolume
@@ -89021,7 +89021,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8567505210435915018, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
