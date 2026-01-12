@@ -88882,6 +88882,11 @@ Transform:
   - {fileID: 757529307}
   m_Father: {fileID: 498021801}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &2077056037 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1248626739576258884, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
+  m_PrefabInstance: {fileID: 105629842203945710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2099053201
 GameObject:
   m_ObjectHideFlags: 0
@@ -89182,6 +89187,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1248626739576258884, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 63.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248626739576258884, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1564014224480752894, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: healthText
       value: 
@@ -89189,14 +89202,6 @@ PrefabInstance:
     - target: {fileID: 2879433018228206340, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2885796797333771409, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3739116572088386936, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4221854253020993370, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: speedText
@@ -89206,10 +89211,6 @@ PrefabInstance:
       propertyPath: stateText
       value: 
       objectReference: {fileID: 1968850857}
-    - target: {fileID: 4903775830737494620, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.2871794
@@ -89250,14 +89251,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5558498195479116005, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5733981180324322934, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7012192975913041333, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: pistolCrosshair
       value: 
@@ -89266,24 +89259,37 @@ PrefabInstance:
       propertyPath: shotgunCrosshair
       value: 
       objectReference: {fileID: 119030398}
-    - target: {fileID: 7946061268665849946, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8565858273101721074, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: globalVolume
       value: 
       objectReference: {fileID: 1809531442}
-    - target: {fileID: 8652456647747813794, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8567505210435915018, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 278707364190692297, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 105629842203945712}
   m_SourcePrefab: {fileID: 100100000, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
+--- !u!1 &105629842203945711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 278707364190692297, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
+  m_PrefabInstance: {fileID: 105629842203945710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &105629842203945712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105629842203945711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5073aff91b5aaa44bb19101c8d4a5120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpeedLinesController
+  speedlinesParticle: {fileID: 2077056037}
+  playerController: {fileID: 0}
 --- !u!1001 &384891412559516167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89522,7 +89528,7 @@ MonoBehaviour:
   - soundName: LaserShot
     clip: {fileID: 8300000, guid: d2f5215b5d6c2d949bbc649853451bd5, type: 3}
   - soundName: PlayerJump
-    clip: {fileID: 8300000, guid: d4872323b8caaf34caed147da045e0f7, type: 3}
+    clip: {fileID: 8300000, guid: babce2ec6356056478c0d06d2dc50b55, type: 3}
   - soundName: PlayerLand
     clip: {fileID: 8300000, guid: bb4f5f3f0f582a04c8535a1cb5edb6e4, type: 3}
   - soundName: PlayerGranola
@@ -90357,6 +90363,14 @@ PrefabInstance:
     - target: {fileID: 7126726105962757652, guid: 19afb0c1acfaa9d48b55fc7308da9d23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973502632592115351, guid: 19afb0c1acfaa9d48b55fc7308da9d23, type: 3}
+      propertyPath: timeStopDatas.Array.data[0].timeStopDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973502632592115351, guid: 19afb0c1acfaa9d48b55fc7308da9d23, type: 3}
+      propertyPath: timeStopDatas.Array.data[0].timeScaleDuringStop
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
