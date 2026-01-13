@@ -108,8 +108,7 @@ public class PlayerController : MonoBehaviour
         cameraShake = GetComponent<CameraShakeMovement>();
         climbing = GetComponent<Climbing>();    
 
-        Cursor.lockState= CursorLockMode.Locked;
-        Cursor.visible = false;
+        
 
         originalCameraHeight = cameraHead.localPosition.y;
         targetCameraHeight = originalCameraHeight;
@@ -126,6 +125,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+
         lookInput = input.lookInput;
         moveInput =input.moveInput;
 

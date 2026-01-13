@@ -49,3 +49,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25e9a4126e5c3b94d9cd38e9e3f31f13, type: 2}
   wallMaterial: {fileID: 2100000, guid: 4c5134993cbd9c64cb999ccc9749b845, type: 2}
   floorMaterial: {fileID: 2100000, guid: 232b576be9c9255439cc06d2726b695c, type: 2}
+  animationDuration: 1
+  animationEase: 27

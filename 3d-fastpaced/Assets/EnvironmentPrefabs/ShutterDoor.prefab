@@ -18,26 +18,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1975240071885017041
-RectTransform:
+--- !u!4 &1975240071885017041
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307997158648593472}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -14.632704}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.07500131, y: 0.92172945, z: -0.22556028, w: 0.30645108}
+  m_LocalPosition: {x: 121.42349, y: 2.2294927, z: -19.67197}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6558606315758333750}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -955.03546, y: -539.9999}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_LocalEulerAnglesHint: {x: 27.502, y: 143.219, z: 0.001}
 --- !u!114 &5416693173542725528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2951218582895927745}
   - component: {fileID: 6490728030449877845}
+  - component: {fileID: 1153634610630290758}
   m_Layer: 0
   m_Name: DoorClosingTrigger
   m_TagString: Untagged
@@ -241,6 +238,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.6926384, z: 7.7554417}
   m_Center: {x: 0, y: 2.12435, z: 0.32544613}
+--- !u!114 &1153634610630290758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046991289097209291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6277b3bebc6bb3b478d934e20292151d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorClosingTrigger
 --- !u!1001 &6669374529734035677
 PrefabInstance:
   m_ObjectHideFlags: 0

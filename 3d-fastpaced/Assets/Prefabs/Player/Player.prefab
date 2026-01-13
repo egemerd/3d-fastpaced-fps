@@ -5360,7 +5360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cameraHolder: {fileID: 169625427181026813}
-  mouseSensitivity: 0.3
+  mouseSensitivity: 0.15
   verticalLookLimit: 70
   tiltAngle: 1
   tiltSpeed: 10

@@ -50,6 +50,8 @@ public class PlayerCameraController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if(PauseMenu.isPaused)
+            return;
         RotateCharacter();
         LeftRightMovement();
     }

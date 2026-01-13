@@ -58,6 +58,7 @@ public class Pistol : Gun
         HandleReload();
         
     }
+
     private void OnDisable()
     {
         //  Silah deaktif olduğunda tüm animasyonları durdur ve orijinal konuma dön
