@@ -23,6 +23,7 @@ public class GameEvents : MonoBehaviour
     public event Action onDoorClosed;
     public event Action<float> onProjectileHitsEnemy;
     public event Action<float> onPlayerHit;
+    
 
     public void TriggerProjectileHitsEnemy(float enemyDamage)
     {
@@ -49,6 +50,7 @@ public class GameEvents : MonoBehaviour
     }
     public void TriggerDoorClosed()
     {
+        Debug.Log("[Game Events] trigger door closed.");
         onDoorClosed?.Invoke();
     }
 }

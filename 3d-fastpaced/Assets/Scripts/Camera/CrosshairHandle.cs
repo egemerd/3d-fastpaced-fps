@@ -96,6 +96,20 @@ public class CrosshairHandle : MonoBehaviour
     private void CrosshairAnim()
     {
         if(isPistol) return;
+
+        bool isSprint = playerController.isSprinting;
+        bool isSlide = playerController.isSliding;
+
+        if (!isSprint && !isSlide && playerController.isGrounded)
+        {
+            crosshairRect.localScale = Vector3.Lerp(
+                crosshairRect.localScale,
+                minScale,
+                Time.deltaTime * animSpeed * 1.5f // Biraz daha hýzlý dönüþ
+            );
+            return;
+        }
+
         float jump = playerController.isGrounded ? 0 : jumpMultiplier;
         Vector2 jumpOffset = Vector2.one * jump;
         Vector2 targetSize = playerController.GetVelocity() * scaleMultipler * Vector2.one;
