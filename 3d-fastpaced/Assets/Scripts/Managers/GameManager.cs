@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("[Game Manager] Game Over! The door has closed.");
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
     
     }
 
