@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,23 +18,35 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }   
+        SubscribeToEvents();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        GameEvents.current.onDoorClosed += HandleDoorClosed;
+        SubscribeToEvents();    
     }
     private void OnDisable()
     {
         GameEvents.current.onDoorClosed -= HandleDoorClosed;
+        GameEvents.current.onPlayerDeath -= GameOver;
+    }
+
+    private void SubscribeToEvents()
+    {
+        GameEvents.current.onDoorClosed += HandleDoorClosed;
+        GameEvents.current.onPlayerDeath += GameOver;
     }
     private void HandleDoorClosed()
     {
-        GameOver();
+        //GameOver();
     }
 
     private void GameOver()
     {
         Debug.Log("[Game Manager] Game Over! The door has closed.");
+        SceneManager.LoadScene(0);
+    
     }
+
+
 }

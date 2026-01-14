@@ -13,8 +13,15 @@ public class MainMenuManager : MonoBehaviour
     
 
      
-    bool isGameStarting;    
+    bool isGameStarting;
 
+    private void Awake()
+    {
+        if (GameManager.isGameStarted)
+        {
+            gameObject.SetActive(false);
+        }
+    }
     private void Start()
     {
         Cursor.visible = true;
