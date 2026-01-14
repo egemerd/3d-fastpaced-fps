@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class LevelManager : MonoBehaviour
 
     private GameObject levelEndCanvas;
     private RectTransform canvasRectTransform;
+    [SerializeField] private TextMeshProUGUI levelEndTimeText;
+    [SerializeField] private TextMeshProUGUI levelEndkilledEnemiesText;
 
     [SerializeField] private List<LevelDataSO> levelDatas;
 
@@ -24,9 +27,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Ease openEase = Ease.OutBack; // Açýlýþ animasyonu
     [SerializeField] private Ease closeEase = Ease.InBack;
 
+    LevelStats levelStats;
     private void Awake()
     {
         Instance = this;
+        levelStats = FindObjectOfType<LevelStats>();
     }
 
     private void Start()
@@ -49,14 +54,22 @@ public class LevelManager : MonoBehaviour
     }
     private IEnumerator LoadNextLevelCoroutine()
     {
-        canvasRectTransform.DOScale(Vector3.zero, animationDuration)
-            .SetEase(closeEase) // InBack - içeri çekilip küçülür
-            .SetUpdate(true);
+        EnableAnimation(levelEndCanvas);
+        EnableAnimation(levelEndkilledEnemiesText.gameObject);
+        EnableAnimation(levelEndTimeText.gameObject);
+
         yield return new WaitForSecondsRealtime(2f);
         levelEndCanvas.SetActive(false);
         
         Time.timeScale = 1f;
         SceneManager.LoadScene(currentLevelIndex + 1);
+    }
+
+    private void EnableAnimation(GameObject obj)
+    {
+        obj.transform.DOScale(Vector3.zero, animationDuration)
+            .SetEase(closeEase) // InBack - içeri çekilip küçülür
+            .SetUpdate(true);
     }
     
     public void ActivateLevelEndCanvas()
@@ -65,6 +78,10 @@ public class LevelManager : MonoBehaviour
 
         levelEndCanvas.transform.parent.gameObject.SetActive(true);
         levelEndCanvas.SetActive(true);
+        
+        levelEndTimeText.text = levelStats.gameTime.ToString();
+        levelEndkilledEnemiesText.text = levelStats.killedEnemies.ToString();
+
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

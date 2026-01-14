@@ -83,6 +83,8 @@ public abstract class Gun : MonoBehaviour
 
     public void TryShoot()
     {
+        if(!GameManager.isGameStarted)
+            return;
         if (isReloading || currentAmmo <= 0)
             return;
  

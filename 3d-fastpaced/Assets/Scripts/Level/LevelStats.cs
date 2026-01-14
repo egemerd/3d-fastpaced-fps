@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class LevelStats : MonoBehaviour
 {
-    private float killedEnemies;
-    private float gameTime;
+    public float killedEnemies;
+    public float gameTime;
 
     [SerializeField] private TextMeshProUGUI killedEnemiesText;
     [SerializeField] private TextMeshProUGUI gameTimeText;

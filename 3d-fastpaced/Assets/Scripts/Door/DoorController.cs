@@ -18,7 +18,7 @@ public class DoorController : MonoBehaviour
 
     private void Start()
     {
-        sliderSpeed = LevelManager.Instance.GetSliderSpeed();
+        
         openPosition = doorSlider.transform.position;
         Debug.Log("DoorController OnEnable çalýþtý.");
 
@@ -84,6 +84,16 @@ public class DoorController : MonoBehaviour
     }
     private void DoorMovement()
     {
+        if (GameManager.isGameStarted)
+        {
+            sliderSpeed = LevelManager.Instance.GetSliderSpeed();
+        }
+        else
+        {
+            sliderSpeed = 0f;
+        }
+
+
         Vector3 targetPosition = isDoorOpen ? openPosition : closedPosition.position;
         doorSlider.transform.position += sliderSpeed * Vector3.down * Time.deltaTime;
     }

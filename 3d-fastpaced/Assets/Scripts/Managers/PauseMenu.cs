@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class PauseMenu : MonoBehaviour
     public static bool isPauseManualy;
 
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject buttons;
 
 
     private void Start()
@@ -45,6 +48,21 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+    }
+
+    public void SettingsMenu()
+    {
+        buttons.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+    public void GoBackPauseMenu()
+    {
+        settingsPanel.SetActive(false);
+        buttons.SetActive(true);
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
 }
