@@ -47,6 +47,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private float coyoteTime = 0.15f;
 
+    [Header("Bunny Hop")]
+    [SerializeField] private float bunnyHopSpeedBoost = 3f; // Hýz artýþý miktarý
+    [SerializeField] private float bunnyHopBoostDuration = 0.3f; // Boost süresi
+    [SerializeField] private float bunnyHopWindow = 0.2f;
+    private float lastLandTime;
+    private bool canBunnyHop;
+    private Coroutine bunnyHopCoroutine;
+    public bool bunnyHopActivated;
+
     [Header("Sliding")]
     [SerializeField] private float slideSpeed = 15f;
     [SerializeField] private float slideSpeedDecay = 5f;
@@ -86,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     //Jumping
     private float lastGroundedTime;
+    private bool wasGrounded;
 
     //camera height
     private float originalCameraHeight;
@@ -125,6 +135,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        if (!GameManager.isGameStarted) return;
         lookInput = input.lookInput;
         moveInput =input.moveInput;
 
@@ -133,6 +144,9 @@ public class PlayerController : MonoBehaviour
 
 
         GroundCheck();
+
+        CheckBunnyHopWindow();
+
         //Debug.Log(isMoving);
         if (climbing == null || !climbing.isClimbing)
         {
@@ -247,7 +261,11 @@ public class PlayerController : MonoBehaviour
             Vector3.down , 
             (characterController.height/2 + jumpRayOffset),
             groundMask);
-        if(physicsGrounded)
+        if (physicsGrounded && !wasGrounded)
+        {
+            OnLanded();
+        }
+        if (physicsGrounded)
         {
             lastGroundedTime = Time.time;
             isGrounded = true;
@@ -263,8 +281,45 @@ public class PlayerController : MonoBehaviour
             velocity.y = -2f;
         }
     }
+    private void OnLanded()
+    {
+        lastLandTime = Time.time;
+        canBunnyHop = true;
+        Debug.Log("[BunnyHop] Landed! Bunny hop window baþladý");
+    }
 
-    
+    private void CheckBunnyHopWindow()
+    {
+        if (canBunnyHop && Time.time - lastLandTime > bunnyHopWindow)
+        {
+            canBunnyHop = false;
+        }
+    }
+
+    private void ActivateBunnyHop()
+    {
+        if (bunnyHopCoroutine != null)
+        {
+            StopCoroutine(bunnyHopCoroutine);
+        }
+
+        bunnyHopCoroutine = StartCoroutine(BunnyHopBoost());
+        Debug.Log("[BunnyHop] Boost aktif! Hýz artýþý: " + bunnyHopSpeedBoost);
+    }
+
+
+
+    private IEnumerator BunnyHopBoost()
+    {
+        float baseSpeed = moveSpeed;
+        moveSpeed += bunnyHopSpeedBoost;
+
+        yield return new WaitForSeconds(bunnyHopBoostDuration);
+
+        moveSpeed = baseSpeed;
+        bunnyHopCoroutine = null;
+    }
+
     private void NormalJump()
     {
        
@@ -302,6 +357,11 @@ public class PlayerController : MonoBehaviour
     public void Jump()
     {
         AudioManager.Instance.PlaySFX("PlayerJump" , 0.4f);
+        if (canBunnyHop && !isSliding && bunnyHopActivated)
+        {
+            ActivateBunnyHop();
+            canBunnyHop = false; // Bir kere kullanýlsýn
+        }
         if (isSliding)
         {
             SlideJumpBoost();

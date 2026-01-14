@@ -5311,6 +5311,10 @@ MonoBehaviour:
     m_Bits: 4288
   groundCheckDistance: 1
   coyoteTime: 0.15
+  bunnyHopSpeedBoost: 2.4
+  bunnyHopBoostDuration: 1.8
+  bunnyHopWindow: 0.2
+  bunnyHopActivated: 0
   slideSpeed: 18
   slideSpeedDecay: 4
   minSlideSpeed: 1

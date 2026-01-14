@@ -9,23 +9,24 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject buttonsPanel;
+    [SerializeField] private GameObject crosshairCanvas;
+    
 
-
+     
     bool isGameStarting;    
 
-    void Start()
+    private void Start()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        crosshairCanvas.SetActive(false);
+            
     }
-
-
 
     public void StartGame()
     {
-        Debug.Log("[MainMenuManager] Start Game button pressed.");
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Debug.Log("[MainMenuManager] Start Game button pressed.");        
         StartCoroutine(GameStartCoroutine());
     }
 
@@ -44,10 +45,20 @@ public class MainMenuManager : MonoBehaviour
     {
         isGameStarting = true;
         buttonsPanel.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
-        shutterSlider.transform.DOMove(shutterSlider.transform.position + Vector3.up * 2000f , 2).SetEase(Ease.InOutSine);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        shutterSlider.transform.DOMove(
+            shutterSlider.transform.position + Vector3.up * 3000f,
+            1f
+        ).SetUpdate(true).SetEase(Ease.InOutQuad);
+        yield return new WaitForSecondsRealtime(1f);
         slidersPanel.SetActive(false);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
         isGameStarting = false;
+        crosshairCanvas.SetActive(true);
+
+        GameManager.isGameStarted = true;
     }
 }

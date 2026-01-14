@@ -48,8 +48,6 @@ public class InputManager : MonoBehaviour
 
     private void InitializeActions()
     {
-        if(PauseMenu.isPaused)
-            return; 
         // Movement
         moveAction = playerInput.actions.FindAction("Move");
         lookAction = playerInput.actions.FindAction("Look");

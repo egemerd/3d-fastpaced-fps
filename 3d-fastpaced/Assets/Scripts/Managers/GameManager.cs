@@ -4,6 +4,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public static bool isGameStarted = false;
+
     private void Awake()
     {
         if (Instance == null)

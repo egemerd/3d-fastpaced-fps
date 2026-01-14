@@ -94,9 +94,9 @@ MonoBehaviour:
     m_Bits: 64
   decalMaterial: {fileID: 2100000, guid: 253d5b5d16ddd254db779da2a4c75836, type: 2}
   paintColor: {r: 1, g: 1, b: 1, a: 1}
-  decalSize: 2
-  decalLifetime: 5
+  decalSize: 8.4
+  decalLifetime: 12
   decalOffset: 0.001
   randomRotation: 1
   useFade: 1
-  fadeStartTime: 4
+  fadeStartTime: 11

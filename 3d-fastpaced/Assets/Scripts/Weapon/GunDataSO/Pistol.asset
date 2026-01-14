@@ -20,8 +20,8 @@ MonoBehaviour:
   bulletsPerShot: 0
   fireRate: 10
   fireRange: 150
-  reloadTime: 1
-  magazineSize: 100
+  reloadTime: 2.3
+  magazineSize: 12
   reloadAoutomatic: 1
   gunDamage: 30
   headshotMultiplier: 4

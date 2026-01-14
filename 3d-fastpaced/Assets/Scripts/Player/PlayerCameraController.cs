@@ -33,8 +33,11 @@ public class PlayerCameraController : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (GameManager.isGameStarted)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
         yRotation = transform.eulerAngles.y;
         xRotation = cameraHolder.localEulerAngles.x;
@@ -52,6 +55,7 @@ public class PlayerCameraController : MonoBehaviour
     {
         if(PauseMenu.isPaused)
             return;
+        if(!GameManager.isGameStarted) return;
         RotateCharacter();
         LeftRightMovement();
     }

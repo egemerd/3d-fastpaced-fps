@@ -33,6 +33,7 @@ public abstract class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.isGameStarted) return;
         isSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         isAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
