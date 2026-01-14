@@ -125,7 +125,6 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-
         lookInput = input.lookInput;
         moveInput =input.moveInput;
 
