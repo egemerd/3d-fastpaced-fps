@@ -68,18 +68,40 @@ public class DoorController : MonoBehaviour
         }
     }
 
+    public float DistanceBetweenTarget()
+    {
+        float distance = Vector3.Distance(doorSlider.transform.position, closedPosition.position);
+        return distance;
+    }
+
+    public float GetSliderSpeed()
+    {
+        return sliderSpeed;
+    }
+    public float GetScaleY()
+    {
+        return doorSlider.transform.localScale.y;
+    }
     private void DoorMovement()
     {
         Vector3 targetPosition = isDoorOpen ? openPosition : closedPosition.position;
-        doorSlider.transform.position = Vector3.MoveTowards
-            (doorSlider.transform.position, targetPosition,
-            sliderSpeed * Time.deltaTime);
+        doorSlider.transform.position += sliderSpeed * Vector3.down * Time.deltaTime;
     }
 
     private void OpenDoor()
     {
         Debug.Log("Door Opening");
         doorSlider.transform.position = openPosition;
+    }
+    public float GetDoorProgress()
+    {
+        float currentDistance = Vector3.Distance(doorSlider.transform.position, closedPosition.position);
+        float totalDistance = Vector3.Distance(openPosition, closedPosition.position);
+
+        // Ýlerleme = (Toplam mesafe - Kalan mesafe) / Toplam mesafe
+        float progress = 1f - (currentDistance / totalDistance);
+
+        return Mathf.Clamp01(progress);
     }
 
     private void OnTriggerEnter(Collider other)
