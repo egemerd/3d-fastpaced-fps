@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
         CollectibleManager.Instance.RegisterPlayer(GetComponent<PlayerController>() , GetComponent<PlayerHealth>());
     }

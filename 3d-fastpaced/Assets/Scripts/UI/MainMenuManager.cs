@@ -10,9 +10,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject buttonsPanel;
     [SerializeField] private GameObject crosshairCanvas;
-    
 
-     
+
+
     bool isGameStarting;
 
     private void Awake()
@@ -40,7 +40,17 @@ public class MainMenuManager : MonoBehaviour
     public void Settings()
     {
         if (isGameStarting) return;
+        settingsPanel.SetActive(true);
+        buttonsPanel.SetActive(false); 
+        
     }
+
+    public void BackToMainMenu()
+    {
+        if (isGameStarting) return;
+        settingsPanel.SetActive(false);
+        buttonsPanel.SetActive(true);
+    }       
 
     public void QuitGame()
     {
