@@ -44,5 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a644e8111578a74c9f81827625c298d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelStats
+  killedEnemies: 0
+  gameTime: 0
   killedEnemiesText: {fileID: 0}
   gameTimeText: {fileID: 0}
+  sRankKillRate: 50
+  aRankKillRate: 40
+  bRankKillRate: 30
+  cRankKillRate: 20
+  dRankKillRate: 10
+  sRankColor: {r: 1, g: 0.84705883, b: 0, a: 1}
+  aRankColor: {r: 1, g: 0, b: 0, a: 1}
+  bRankColor: {r: 1, g: 0.41568628, b: 0, a: 1}
+  cRankColor: {r: 1, g: 0.84705883, b: 0, a: 1}
+  dRankColor: {r: 0.49803922, g: 1, b: 0.49803922, a: 1}
+  fRankColor: {r: 0.49803922, g: 0.7490196, b: 1, a: 1}

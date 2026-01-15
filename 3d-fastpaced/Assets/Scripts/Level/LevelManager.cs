@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     private RectTransform canvasRectTransform;
     [SerializeField] private TextMeshProUGUI levelEndTimeText;
     [SerializeField] private TextMeshProUGUI levelEndkilledEnemiesText;
+    [SerializeField] private TextMeshProUGUI levelEndRankText;
 
     [SerializeField] private List<LevelDataSO> levelDatas;
 
@@ -81,6 +82,8 @@ public class LevelManager : MonoBehaviour
         
         levelEndTimeText.text = levelStats.gameTime.ToString();
         levelEndkilledEnemiesText.text = levelStats.killedEnemies.ToString();
+        levelEndRankText.text = levelStats.GetCurrentRankString();
+        levelEndRankText.color = levelStats.GetCurrentRankColor();
 
         Time.timeScale = 0f;
         Cursor.visible = true;
