@@ -173,8 +173,15 @@ public class CrosshairHandle : MonoBehaviour
         bool isSlide = playerController.isSliding;
         bool inAir = !playerController.isGrounded;
 
+        
+
         // Base spread
         float spread = 0f;
+
+        if (!isMoving && !isSprint && !isSlide && inAir == false)
+        {
+            return 0f; // Hiçbir input yoksa spread = 0
+        }
 
         // Hareket spread'i
         if (isMoving)

@@ -7,6 +7,12 @@ public class WeaponSwitching : MonoBehaviour
     [SerializeField] GameObject shotgunCrosshair;
     [SerializeField] GameObject pistolCrosshair;
 
+    [SerializeField] GameObject shotgunBig;
+    [SerializeField] GameObject pistolBig;
+
+    [SerializeField] GameObject shotgunSmall;
+    [SerializeField] GameObject pistolSmall;
+    
     void Start()
     {
         SelectWeapon();
@@ -26,16 +32,15 @@ public class WeaponSwitching : MonoBehaviour
             selectedWeapon = 0;
             shotgunCrosshair.SetActive(true);
             pistolCrosshair.SetActive(false);
+            ShotgunEquip();
+
         }
         else if (InputManager.Instance.switchWeaponAction2.IsPressed())
         {
             selectedWeapon = 1;
             shotgunCrosshair.SetActive(false);
             pistolCrosshair.SetActive(true);
-        }
-        else if (InputManager.Instance.switchWeaponAction3.IsPressed())
-        {
-            selectedWeapon = 2;
+            PistolEquip();
         }
     }
 
@@ -50,5 +55,21 @@ public class WeaponSwitching : MonoBehaviour
                 weapon.gameObject.SetActive(false);
             i++;
         }
+    }
+
+    private void ShotgunEquip()
+    {
+        shotgunBig.SetActive(true);
+        pistolBig.SetActive(false);
+        shotgunSmall.SetActive(false);
+        pistolSmall.SetActive(true);
+    }
+
+    private void PistolEquip()
+    {
+        pistolBig.SetActive(true);
+        shotgunBig.SetActive(false);
+        pistolSmall.SetActive(false);
+        shotgunSmall.SetActive(true);
     }
 }
