@@ -64,11 +64,15 @@ public class MainMenuManager : MonoBehaviour
         buttonsPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(0.1f);
         shutterSlider.transform.DOMove(
-            shutterSlider.transform.position + Vector3.up * 3000f,
-            1f
+            shutterSlider.transform.position + Vector3.up * 1500f,
+            2f
         ).SetUpdate(true).SetEase(Ease.InOutQuad);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(2f);
+        CanvasGroup sliders = slidersPanel.GetComponent<CanvasGroup>();
+        sliders.DOFade(0f, 0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
         slidersPanel.SetActive(false);
+
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

@@ -160,6 +160,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 324f8e7580a11404680b527fe0da02e3, type: 3}
   - soundName: LaserSpin
     clip: {fileID: 8300000, guid: cccc533f074e49f4c9d706088f1536da, type: 3}
+  - soundName: PlayerDeath
+    clip: {fileID: 8300000, guid: 8db43c94f0381aa43bdc601872ad90b1, type: 3}
+  - soundName: Shotgun
+    clip: {fileID: 8300000, guid: bfd13d32dbc9a5741a61dc85b4568ab0, type: 3}
   musicSource: {fileID: 3407769836140556102}
   sfxSource: {fileID: 1596463009609002014}
 --- !u!1 &7209287902620367606

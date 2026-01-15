@@ -28,6 +28,7 @@ public class Shotgun : Gun
     public override void Shoot()
     {
         RaycastHit hit;
+        AudioManager.Instance.PlaySFX("Shotgun", 0.7f);
         if (cameraShootEffect != null)
         {
             cameraShootEffect.ApplyShootImpact();

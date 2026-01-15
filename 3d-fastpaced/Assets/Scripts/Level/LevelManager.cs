@@ -1,10 +1,14 @@
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
+using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -19,30 +23,62 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelEndRankText;
 
     [SerializeField] private List<LevelDataSO> levelDatas;
+    
 
     [SerializeField] Material wallMaterial;
     [SerializeField] Material floorMaterial;
+    
+    [SerializeField] Volume globalVolume;
 
     [Header("Level End Animation")]
     [SerializeField] private float animationDuration = 0.5f;
     [SerializeField] private Ease openEase = Ease.OutBack; // Açýlýþ animasyonu
     [SerializeField] private Ease closeEase = Ease.InBack;
 
+    [Header("Game Over Settings")]
+    [SerializeField] private float exposureFadeDuration = 1.5f;
+    [SerializeField] private float targetExposure = 8f; // Beyaz için pozitif deðer
+    [SerializeField] private AnimationCurve exposureCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField] private GameObject gameOverCanvas;
+
+    private ColorAdjustments colorAdjustments;
+    private float originalExposure = 0f;
+
     LevelStats levelStats;
     private void Awake()
     {
         Instance = this;
         levelStats = FindObjectOfType<LevelStats>();
+
+        if (globalVolume != null && globalVolume.profile.TryGet(out colorAdjustments))
+        {
+            originalExposure = colorAdjustments.postExposure.value;
+        }
+        else
+        {
+            Debug.LogWarning("[LevelManager] ColorAdjustments not found in Volume profile!");
+        }
+
     }
 
     private void Start()
     {
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         FindLevelEndCanvas();
-
+        
         wallMaterial.color = levelDatas[currentLevelIndex].wallColor;
         floorMaterial.color = levelDatas[currentLevelIndex].floorColor;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            StartCoroutine(GameOverCoroutine());
+        }
+    }
+
+    
 
     public float GetSliderSpeed()
     {
@@ -117,4 +153,45 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("[LevelManager] LevelEndCanvas with LevelEndCanvasMarker not found!");
         }
     }
+
+    public void GameOverCanvas()
+    {
+        StartCoroutine(GameOverCoroutine());
+    }
+
+    private IEnumerator GameOverCoroutine()
+    {
+        AudioManager.Instance.PlaySFX("PlayerDeath" ,0.8f);
+        Time.timeScale = 0f;
+        float elapsed = 0f;
+        float startExposure = colorAdjustments.postExposure.value;
+
+        while (elapsed < exposureFadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime; // Time.timeScale'den baðýmsýz
+            float t = elapsed / exposureFadeDuration;
+            float curveValue = exposureCurve.Evaluate(t);
+
+            // Exposure deðerini güncelle
+            colorAdjustments.postExposure.value = Mathf.Lerp(startExposure, targetExposure, curveValue);
+
+            yield return null;
+        }
+        yield return new WaitForSecondsRealtime(2f);
+        
+        // Final deðeri garantile
+        colorAdjustments.postExposure.value = targetExposure;
+        
+        gameOverCanvas.SetActive(true);
+        RectTransform gameOverRect = gameOverCanvas.GetComponent<RectTransform>();
+        gameOverRect.localScale = Vector3.zero;
+        gameOverRect.DOScale(Vector3.one, animationDuration)
+            .SetEase(openEase) // OutBack - pop efekti
+            .SetUpdate(true);
+
+        yield return new WaitForSecondsRealtime(2f);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+    
 }

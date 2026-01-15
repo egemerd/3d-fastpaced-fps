@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public static bool isGameStarted = false;
+
+    LevelManager levelManager;
 
     private void Awake()
     {
@@ -18,7 +21,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }   
+
         SubscribeToEvents();
+        levelManager = FindObjectOfType<LevelManager>();
+
     }
 
     private void Start()
@@ -38,15 +44,16 @@ public class GameManager : MonoBehaviour
     }
     private void HandleDoorClosed()
     {
-        //GameOver();
+        GameOver();
     }
 
     private void GameOver()
     {
         Debug.Log("[Game Manager] Game Over! The door has closed.");
-        //SceneManager.LoadScene(0);
-    
+        levelManager.GameOverCanvas();
     }
+
+    
 
 
 }

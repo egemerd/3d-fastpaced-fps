@@ -123,6 +123,7 @@ public class EnemyHealth : MonoBehaviour , IDamageable
     }
     public void TakeDamage(float damage)
     {
+        AudioManager.Instance.PlaySFX("EnemyDamage", 0.6f);
         currentHealth -= damage;
         if (!isPlayingHurtParticle)
         {
