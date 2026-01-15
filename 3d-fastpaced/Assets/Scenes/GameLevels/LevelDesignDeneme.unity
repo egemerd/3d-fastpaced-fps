@@ -88877,7 +88877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5455509406333573888, guid: ab7d37a9454b7d9499e8635183f45522, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7490806196122357687, guid: ab7d37a9454b7d9499e8635183f45522, type: 3}
       propertyPath: crosshairCanvas
@@ -89024,7 +89024,7 @@ PrefabInstance:
     - target: {fileID: 8641661482754764677, guid: 688af12633cec49489c61601d4b35da3, type: 3}
       propertyPath: sfxSounds.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 269bccf2c7f00b447b4638facbdff0d0, type: 3}
+      objectReference: {fileID: 8300000, guid: 87b0f862d79742543be039b5ef118539, type: 3}
     - target: {fileID: 8641661482754764677, guid: 688af12633cec49489c61601d4b35da3, type: 3}
       propertyPath: sfxSounds.Array.data[8].clip
       value: 
