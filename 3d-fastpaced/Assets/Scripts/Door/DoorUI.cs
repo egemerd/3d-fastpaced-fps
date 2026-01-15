@@ -56,7 +56,7 @@ public class DoorUI : MonoBehaviour
         float uiSpeed = realSliderSpeed * scaleRatio;
 
 
-        Debug.Log("UI Distance: " + totalDistance + " | Real Distance: " + realDistance + " | Speed: "  + " | sliderSpeed: " + doorController.GetSliderSpeed());
+        Debug.Log("[DoorUI] ScaleRatio:" + scaleRatio + " | Speed: " + uiSpeed  + " | sliderSpeed: " + realSliderSpeed);
         doorSlider.transform.position += uiSpeed * Vector3.down * Time.deltaTime;
     }
 

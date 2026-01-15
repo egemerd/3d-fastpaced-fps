@@ -71,7 +71,7 @@ public class LevelStats : MonoBehaviour
         if (gameTime > 0)
         {
             currentKillRate = (killedEnemies / gameTime) * 60f;
-            Debug.Log("Current Kill Rate: " + currentKillRate + " kills/min");
+            
         }
         else
         {

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class DoorController : MonoBehaviour
 {
     [SerializeField] private GameObject doorSlider;
-    [SerializeField] private float sliderSpeed;
+    private float sliderSpeed;
     [SerializeField] private float slideDistance;
     [SerializeField] private Transform closedPosition;
 
@@ -20,6 +20,14 @@ public class DoorController : MonoBehaviour
     {
         
         openPosition = doorSlider.transform.position;
+        if (GameManager.isGameStarted)
+        {
+            sliderSpeed = LevelManager.Instance.GetSliderSpeed();
+        }
+        else
+        {
+            sliderSpeed = 0f;
+        }
         Debug.Log("DoorController OnEnable çalýþtý.");
 
         if (GameEvents.current != null)
@@ -37,6 +45,7 @@ public class DoorController : MonoBehaviour
     private void Update()
     {
         DoorMovement();
+        Debug.Log("[DoorController] sliderSpeed: " + sliderSpeed);
         if (Input.GetKeyDown(KeyCode.E))
         {
             
