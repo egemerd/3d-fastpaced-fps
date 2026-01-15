@@ -50,7 +50,7 @@ public class LevelStats : MonoBehaviour
     {
         if (!GameManager.isGameStarted) return;
         gameTime += Time.deltaTime; 
-        gameTimeText.text = "Game Time: " + gameTime + "s";   
+        gameTimeText.text = "TIMER: " + gameTime.ToString("F2") + "s";   
         
         CalculateRank();
     }

@@ -1,18 +1,25 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float health = 100;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private float healAmount = 10f;
+    [SerializeField] private Image healthBar;
 
     private void Start()
     {
         GameEvents.current.onProjectileHitsEnemy += Damage;
         GameEvents.current.onPlayerHit += Damage;
         GameEvents.current.onEnemyDeath += Heal;
-        healthText.text = "Health: " + health.ToString("0");
+        healthText.text = "100";
+    }
+    private void Update()
+    {
+        healthBar.fillAmount = health / 100f;
+        healthText.text = health.ToString("0");
     }
 
     public void Damage(float damage)
@@ -37,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
         if(health < 100)
         {
             health = Mathf.Clamp(health + healAmount, 0, 100);
-            healthText.text = "Health: " + health.ToString("0");
+            
             Debug.Log("Player Healed. health amount : " + healAmount);
         }
     }

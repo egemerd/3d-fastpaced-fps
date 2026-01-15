@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
         {
             float currentSpeed = horizontalVelocity.magnitude;
             
-            speedText.text = $"Speed: {currentSpeed:F1} m/s";
+            speedText.text = $"SPEED: {currentSpeed:F1} m/s";
         }
 
         

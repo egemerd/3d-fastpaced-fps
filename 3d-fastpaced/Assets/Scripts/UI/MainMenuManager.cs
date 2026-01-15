@@ -61,6 +61,7 @@ public class MainMenuManager : MonoBehaviour
     private IEnumerator GameStartCoroutine()
     {
         isGameStarting = true;
+        AudioManager.Instance.PlaySFX("Shutter", 0.3f);
         buttonsPanel.SetActive(false);
         yield return new WaitForSecondsRealtime(0.1f);
         shutterSlider.transform.DOMove(
