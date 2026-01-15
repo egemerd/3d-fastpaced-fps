@@ -319,7 +319,10 @@ public class PlayerController : MonoBehaviour
         moveSpeed = baseSpeed;
         bunnyHopCoroutine = null;
     }
-
+    public void ToggleBunny()
+    {
+        bunnyHopActivated = !bunnyHopActivated;
+    }
     private void NormalJump()
     {
        
