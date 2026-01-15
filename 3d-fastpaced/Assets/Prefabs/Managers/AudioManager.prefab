@@ -151,7 +151,7 @@ MonoBehaviour:
   - soundName: LaserShot
     clip: {fileID: 8300000, guid: d2f5215b5d6c2d949bbc649853451bd5, type: 3}
   - soundName: PlayerJump
-    clip: {fileID: 8300000, guid: babce2ec6356056478c0d06d2dc50b55, type: 3}
+    clip: {fileID: 8300000, guid: 87b0f862d79742543be039b5ef118539, type: 3}
   - soundName: PlayerLand
     clip: {fileID: 8300000, guid: bb4f5f3f0f582a04c8535a1cb5edb6e4, type: 3}
   - soundName: PlayerGranola
@@ -164,6 +164,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8db43c94f0381aa43bdc601872ad90b1, type: 3}
   - soundName: Shotgun
     clip: {fileID: 8300000, guid: bfd13d32dbc9a5741a61dc85b4568ab0, type: 3}
+  - soundName: PlayerDeath
+    clip: {fileID: 8300000, guid: 8db43c94f0381aa43bdc601872ad90b1, type: 3}
   musicSource: {fileID: 3407769836140556102}
   sfxSource: {fileID: 1596463009609002014}
 --- !u!1 &7209287902620367606

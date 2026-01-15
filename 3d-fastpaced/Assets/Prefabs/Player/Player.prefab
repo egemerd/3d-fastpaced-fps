@@ -133,6 +133,10 @@ MonoBehaviour:
   selectedWeapon: 0
   shotgunCrosshair: {fileID: 0}
   pistolCrosshair: {fileID: 0}
+  shotgunBig: {fileID: 0}
+  pistolBig: {fileID: 0}
+  shotgunSmall: {fileID: 0}
+  pistolSmall: {fileID: 0}
 --- !u!1 &962544221475309221
 GameObject:
   m_ObjectHideFlags: 0

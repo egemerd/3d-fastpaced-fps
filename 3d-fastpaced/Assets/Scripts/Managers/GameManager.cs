@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
         levelManager.GameOverCanvas();
     }
 
+    private void RestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     
 
 

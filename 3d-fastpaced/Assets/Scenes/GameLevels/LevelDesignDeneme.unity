@@ -3062,7 +3062,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2312905480620804838, guid: 935d47379bdfeb84aabcb5dd7aeda30a, type: 3}
   m_PrefabInstance: {fileID: 7068287573521951373}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7068287573521951374}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27fdf33cd3100cb47b6c955af7208d8a, type: 3}
@@ -88620,18 +88620,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3305763243493150736, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_ClearDepth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305763243493150736, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_RenderShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305763243493150736, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4221854253020993370, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: speedText
       value: 
@@ -88640,6 +88628,10 @@ PrefabInstance:
       propertyPath: stateText
       value: 
       objectReference: {fileID: 1968850857}
+    - target: {fileID: 4544481795647498304, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 53.56
+      objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.2871794
@@ -89016,22 +89008,6 @@ PrefabInstance:
     - target: {fileID: 5784660407454447116, guid: 688af12633cec49489c61601d4b35da3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8641661482754764677, guid: 688af12633cec49489c61601d4b35da3, type: 3}
-      propertyPath: sfxSounds.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8641661482754764677, guid: 688af12633cec49489c61601d4b35da3, type: 3}
-      propertyPath: sfxSounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 87b0f862d79742543be039b5ef118539, type: 3}
-    - target: {fileID: 8641661482754764677, guid: 688af12633cec49489c61601d4b35da3, type: 3}
-      propertyPath: sfxSounds.Array.data[8].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 8db43c94f0381aa43bdc601872ad90b1, type: 3}
-    - target: {fileID: 8641661482754764677, guid: 688af12633cec49489c61601d4b35da3, type: 3}
-      propertyPath: sfxSounds.Array.data[8].soundName
-      value: PlayerDeath
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -90213,6 +90189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3340043199909347506, guid: c3cf87ecc33e4744e885d6772b6adb58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3559288241062180186, guid: c3cf87ecc33e4744e885d6772b6adb58, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -90221,6 +90201,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1337460115}
+    - target: {fileID: 6276114758503302197, guid: c3cf87ecc33e4744e885d6772b6adb58, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7068287573521951374}
     - target: {fileID: 9003041923523866272, guid: c3cf87ecc33e4744e885d6772b6adb58, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -90379,6 +90363,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 935d47379bdfeb84aabcb5dd7aeda30a, type: 3}
+--- !u!1 &7068287573521951374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3085510076222550403, guid: 935d47379bdfeb84aabcb5dd7aeda30a, type: 3}
+  m_PrefabInstance: {fileID: 7068287573521951373}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7089254767053292223
 PrefabInstance:
   m_ObjectHideFlags: 0
