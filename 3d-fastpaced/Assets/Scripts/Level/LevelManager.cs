@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour
     private float originalExposure = 0f;
 
     LevelStats levelStats;
+    
     private void Awake()
     {
         Instance = this;
@@ -191,6 +192,7 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 1f;
+        GameEvents.current.TriggerGameOver();
         SceneManager.LoadScene(0);
     }
     

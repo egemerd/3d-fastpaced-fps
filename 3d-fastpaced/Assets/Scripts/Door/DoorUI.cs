@@ -10,6 +10,8 @@ public class DoorUI : MonoBehaviour
     float totalDistance;
     float realDistance;
     float scaleRatio;
+    float uiHeight;
+    float realHeight;
 
     private bool isDoorOpen = false;
     private Vector3 openPosition;
@@ -22,17 +24,18 @@ public class DoorUI : MonoBehaviour
     {
         sliderSpeed = LevelManager.Instance.GetSliderSpeed();
         openPosition = doorSlider.transform.position;
-        float uiHeight = Vector3.Distance(openPosition, closedPosition.position);
-        float realHeight = doorController.DistanceBetweenTarget();
+        uiHeight = Vector3.Distance(openPosition, closedPosition.position);
+        realHeight = doorController.DistanceBetweenTarget();
 
         scaleRatio = uiHeight / realHeight;
 
-              
+        Debug.Log("[DoorUI] UI Height: " + uiHeight + " | Real Height: " + realHeight + " | Scale Ratio: " + scaleRatio);
     }
 
     private void Update()
     {
         DoorMovement();
+        Debug.Log("[DoorUI] UI Height: " + uiHeight + " | Real Height: " + realHeight + " | Scale Ratio: " + scaleRatio);
     }
 
     private void SyncDoorMovement()

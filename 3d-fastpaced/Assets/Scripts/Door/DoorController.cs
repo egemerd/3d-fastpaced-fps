@@ -15,11 +15,8 @@ public class DoorController : MonoBehaviour
     private bool isDoorOpen = false;    
     private Vector3 openPosition;
 
-
-    private void Start()
+    private void Awake()
     {
-        
-        openPosition = doorSlider.transform.position;
         if (GameManager.isGameStarted)
         {
             sliderSpeed = LevelManager.Instance.GetSliderSpeed();
@@ -28,6 +25,12 @@ public class DoorController : MonoBehaviour
         {
             sliderSpeed = 0f;
         }
+    }
+    private void Start()
+    {
+        
+        openPosition = doorSlider.transform.position;
+        
         Debug.Log("DoorController OnEnable çalýþtý.");
 
         if (GameEvents.current != null)
