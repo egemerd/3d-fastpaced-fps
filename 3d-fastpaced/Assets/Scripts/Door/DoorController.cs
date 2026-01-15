@@ -15,21 +15,11 @@ public class DoorController : MonoBehaviour
     private bool isDoorOpen = false;    
     private Vector3 openPosition;
 
-    private void Awake()
-    {
-        if (GameManager.isGameStarted)
-        {
-            sliderSpeed = LevelManager.Instance.GetSliderSpeed();
-        }
-        else
-        {
-            sliderSpeed = 0f;
-        }
-    }
+    
     private void Start()
     {
-        
         openPosition = doorSlider.transform.position;
+
         
         Debug.Log("DoorController OnEnable çalýþtý.");
 
@@ -82,7 +72,7 @@ public class DoorController : MonoBehaviour
 
     public float DistanceBetweenTarget()
     {
-        float distance = Vector3.Distance(doorSlider.transform.position, closedPosition.position);
+        float distance = Vector3.Distance(openPosition, closedPosition.position);
         return distance;
     }
 

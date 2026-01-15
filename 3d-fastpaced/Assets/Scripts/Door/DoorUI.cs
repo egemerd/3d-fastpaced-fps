@@ -1,10 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class DoorUI : MonoBehaviour
 {
     [SerializeField] private GameObject doorSlider;
     [SerializeField] private float sliderSpeed;
     [SerializeField] private Transform closedPosition;
+    [SerializeField] private Transform baseOpenPosition;
+
+    private Vector3 enemyDeathPosition;
 
     DoorController doorController;
     float totalDistance;
@@ -12,10 +15,11 @@ public class DoorUI : MonoBehaviour
     float scaleRatio;
     float uiHeight;
     float realHeight;
+    
 
     private bool isDoorOpen = false;
     private Vector3 openPosition;
-
+    private float openPositionY;    
     private void Awake()
     {
         doorController = FindObjectOfType<DoorController>();
@@ -27,40 +31,56 @@ public class DoorUI : MonoBehaviour
         uiHeight = Vector3.Distance(openPosition, closedPosition.position);
         realHeight = doorController.DistanceBetweenTarget();
 
-        scaleRatio = uiHeight / realHeight;
+        //scaleRatio = uiHeight / realHeight;
+        scaleRatio = 0.0145f;
 
         Debug.Log("[DoorUI] UI Height: " + uiHeight + " | Real Height: " + realHeight + " | Scale Ratio: " + scaleRatio);
     }
+    private void OnEnable()
+    {
+        GameEvents.current.onEnemyDeath += OpenDoor;
+    }
 
+    private void OnDisable()
+    {
+        GameEvents.current.onEnemyDeath -= OpenDoor;
+    }
     private void Update()
     {
         DoorMovement();
+        //enemyDeathPosition = baseOpenPosition.position;
         Debug.Log("[DoorUI] UI Height: " + uiHeight + " | Real Height: " + realHeight + " | Scale Ratio: " + scaleRatio);
     }
 
     private void SyncDoorMovement()
     {
-        // Gerçek kapýnýn progress'ini al (0 = açýk, 1 = kapalý)
+        // GerÃ§ek kapÄ±nÄ±n progress'ini al (0 = aÃ§Ä±k, 1 = kapalÄ±)
         float doorProgress = doorController.GetDoorProgress();
 
-        // UI kapýsýnýn hedef pozisyonunu hesapla
+        // UI kapÄ±sÄ±nÄ±n hedef pozisyonunu hesapla
         Vector3 targetPosition = Vector3.Lerp(openPosition, closedPosition.position, doorProgress);
 
         //  Direkt atama yerine smooth hareket
         doorSlider.transform.position = Vector3.MoveTowards(
             doorSlider.transform.position,
             targetPosition,
-            doorController.GetSliderSpeed() * Time.deltaTime
+            0.3f * Time.deltaTime
         );
     }
     private void DoorMovement()
     {
-        float realSliderSpeed = doorController.GetSliderSpeed();
+        if(!GameManager.isGameStarted) return;
+        float realSliderSpeed = LevelManager.Instance.GetSliderSpeed();
         float uiSpeed = realSliderSpeed * scaleRatio;
 
 
         Debug.Log("[DoorUI] ScaleRatio:" + scaleRatio + " | Speed: " + uiSpeed  + " | sliderSpeed: " + realSliderSpeed);
         doorSlider.transform.position += uiSpeed * Vector3.down * Time.deltaTime;
+    }
+
+    private void OpenDoor()
+    {
+        doorSlider.transform.position = baseOpenPosition.position;
     }
 
 
