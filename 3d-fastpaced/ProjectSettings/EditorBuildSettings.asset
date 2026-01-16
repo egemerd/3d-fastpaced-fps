@@ -10,21 +10,12 @@ EditorBuildSettings:
     guid: 909e057020fb5aa499e279123569d056
   - enabled: 1
     path: Assets/Scenes/GameLevels/Level1.unity
-    guid: e8f0b594b19e5034caab598805edc672
+    guid: b85bb64227f713841a1b2855c138597b
+  - enabled: 1
+    path: Assets/Scenes/GameLevels/LevelDesignDeneme 1.unity
+    guid: e8d442701a623ce468541e827e6709f9
   - enabled: 1
     path: Assets/Scenes/GameLevels/Level2.unity
     guid: 94183161ea9e28f4bbc00e94e0dacf32
-  - enabled: 0
-    path: Assets/Scenes/GameLevels/Level1bbbb.unity
-    guid: 0e29f30416153a24fab18b5bfa24dde6
-  - enabled: 0
-    path: Assets/Scenes/GameLevels/Level1Deneme.unity
-    guid: b3ebb0e3192bd3e4f8593b4be7681e2e
-  - enabled: 0
-    path: Assets/Scenes/Level2.unity
-    guid: 2066123833851114fb66497c9d3235e1
-  - enabled: 0
-    path: Assets/Scenes/Deneme/Deneme.unity
-    guid: b7061fb16f6b5484bb5fd0d07e3424bc
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
