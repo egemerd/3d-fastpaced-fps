@@ -44,10 +44,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a640de7d7870545b59b3dae9371b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  levelEndTimeText: {fileID: 0}
+  levelEndkilledEnemiesText: {fileID: 0}
+  levelEndRankText: {fileID: 0}
   levelDatas:
   - {fileID: 11400000, guid: 6d93785fd9fcc17419643af872779772, type: 2}
   - {fileID: 11400000, guid: 25e9a4126e5c3b94d9cd38e9e3f31f13, type: 2}
+  - {fileID: 11400000, guid: ea3c4a27d36191f41ab8a1a7830f9a19, type: 2}
+  - {fileID: 11400000, guid: a3c1ad5443007a14e9a1f3276466a51a, type: 2}
+  - {fileID: 11400000, guid: 750411687ae3f9d408e40ce05431ddb6, type: 2}
   wallMaterial: {fileID: 2100000, guid: 4c5134993cbd9c64cb999ccc9749b845, type: 2}
   floorMaterial: {fileID: 2100000, guid: 232b576be9c9255439cc06d2726b695c, type: 2}
+  globalVolume: {fileID: 0}
   animationDuration: 1
-  animationEase: 27
+  openEase: 27
+  closeEase: 26
+  exposureFadeDuration: 1.5
+  targetExposure: 8
+  exposureCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  gameOverCanvas: {fileID: 0}

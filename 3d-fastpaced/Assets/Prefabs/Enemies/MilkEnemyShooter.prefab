@@ -185,13 +185,13 @@ MonoBehaviour:
     m_Bits: 512
   enemyData: {fileID: 11400000, guid: 6da4946088ba3b54680102541ea9e7df, type: 2}
   walkPoint: {x: 0, y: 0, z: 0}
-  timeBetweenShot: 3
+  timeBetweenShot: 2.5
   sightRange: 40
   attackRange: 20
   isSightRange: 0
   isAttackRange: 0
   projectilePrefab: {fileID: 9180264268078904404, guid: f383ec4de5bfd7049bebb0bbb0e48215, type: 3}
-  projectileSpeed: 25
+  projectileSpeed: 35
   myAnimator: {fileID: 0}
 --- !u!114 &2771671784404525696
 MonoBehaviour:

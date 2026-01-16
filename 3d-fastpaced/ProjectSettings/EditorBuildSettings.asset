@@ -12,10 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/GameLevels/Level1.unity
     guid: b85bb64227f713841a1b2855c138597b
   - enabled: 1
-    path: Assets/Scenes/GameLevels/LevelDesignDeneme 1.unity
-    guid: e8d442701a623ce468541e827e6709f9
-  - enabled: 1
     path: Assets/Scenes/GameLevels/Level2.unity
-    guid: 94183161ea9e28f4bbc00e94e0dacf32
+    guid: e7b5c9867431c7245b1085141d0546dc
+  - enabled: 1
+    path: Assets/Scenes/GameLevels/Level3.unity
+    guid: c242d611907d2e14c905e02de1517df1
+  - enabled: 1
+    path: Assets/Scenes/GameLevels/Level4.unity
+    guid: da4ae1fb5d1db454f938a252490e7612
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

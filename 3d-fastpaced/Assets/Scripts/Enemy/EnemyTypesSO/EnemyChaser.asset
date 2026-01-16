@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
   enemyName: Enemy Chaser
   health: 100
-  enemyDamage: 15
-  moveSpeed: 4
+  enemyDamage: 20
+  moveSpeed: 5
