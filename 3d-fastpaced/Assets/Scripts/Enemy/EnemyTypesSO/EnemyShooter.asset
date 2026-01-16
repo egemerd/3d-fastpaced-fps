@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
   enemyName: Enemy Shooter
   health: 100
-  enemyDamage: 30
+  enemyDamage: 20
   moveSpeed: 0

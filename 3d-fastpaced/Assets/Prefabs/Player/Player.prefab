@@ -5573,7 +5573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   health: 100
   healthText: {fileID: 0}
-  healAmount: 5
+  healAmount: 10
   healthBar: {fileID: 0}
 --- !u!114 &1373619077599819130
 MonoBehaviour:

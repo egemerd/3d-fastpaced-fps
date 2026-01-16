@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea3c4a27d36191f41ab8a1a7830f9a19, type: 2}
   - {fileID: 11400000, guid: a3c1ad5443007a14e9a1f3276466a51a, type: 2}
   - {fileID: 11400000, guid: 750411687ae3f9d408e40ce05431ddb6, type: 2}
+  - {fileID: 11400000, guid: 9e90815c18beedc49a90570a9c0fbbb5, type: 2}
   wallMaterial: {fileID: 2100000, guid: 4c5134993cbd9c64cb999ccc9749b845, type: 2}
   floorMaterial: {fileID: 2100000, guid: 232b576be9c9255439cc06d2726b695c, type: 2}
   globalVolume: {fileID: 0}
