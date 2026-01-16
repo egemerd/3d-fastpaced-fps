@@ -295,12 +295,12 @@ MonoBehaviour:
     m_Bits: 512
   enemyData: {fileID: 11400000, guid: 1d7fdbad8bf8cbe44a8659d1dd85a9e4, type: 2}
   walkPoint: {x: 0, y: 0, z: 0}
-  timeBetweenShot: 4
+  timeBetweenShot: 3.5
   sightRange: 20
   attackRange: 3
   isSightRange: 0
   isAttackRange: 0
-  firstTouchAttackCooldown: 1.5
+  firstTouchAttackCooldown: 1
 --- !u!1 &8037161773185450627
 GameObject:
   m_ObjectHideFlags: 0

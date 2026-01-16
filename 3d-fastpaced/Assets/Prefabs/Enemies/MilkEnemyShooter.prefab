@@ -185,7 +185,7 @@ MonoBehaviour:
     m_Bits: 512
   enemyData: {fileID: 11400000, guid: 6da4946088ba3b54680102541ea9e7df, type: 2}
   walkPoint: {x: 0, y: 0, z: 0}
-  timeBetweenShot: 2.5
+  timeBetweenShot: 2
   sightRange: 40
   attackRange: 20
   isSightRange: 0
