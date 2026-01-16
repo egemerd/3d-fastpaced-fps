@@ -42,7 +42,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2881908004481349206}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -166,6 +166,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: bfd13d32dbc9a5741a61dc85b4568ab0, type: 3}
   - soundName: PlayerDeath
     clip: {fileID: 8300000, guid: 8db43c94f0381aa43bdc601872ad90b1, type: 3}
+  - soundName: Shutter
+    clip: {fileID: 8300000, guid: b79a139a6becc24408cd727df9caf6eb, type: 3}
   musicSource: {fileID: 3407769836140556102}
   sfxSource: {fileID: 1596463009609002014}
 --- !u!1 &7209287902620367606
@@ -342,7 +344,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.231
+  m_Volume: 0.693
   m_Pitch: 1
   Loop: 1
   Mute: 0
