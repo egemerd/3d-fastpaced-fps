@@ -86,14 +86,9 @@ public class DoorController : MonoBehaviour
     }
     private void DoorMovement()
     {
-        if (GameManager.isGameStarted)
-        {
-            sliderSpeed = LevelManager.Instance.GetSliderSpeed();
-        }
-        else
-        {
-            sliderSpeed = 0f;
-        }
+        
+        sliderSpeed = LevelManager.Instance.GetSliderSpeed();
+        
 
 
         Vector3 targetPosition = isDoorOpen ? openPosition : closedPosition.position;

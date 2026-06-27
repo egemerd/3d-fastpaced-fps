@@ -17,10 +17,9 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
-        if (GameManager.isGameStarted)
-        {
-            gameObject.SetActive(false);
-        }
+        
+        gameObject.SetActive(false);
+        
     }
     private void Start()
     {

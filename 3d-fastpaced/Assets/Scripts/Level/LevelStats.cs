@@ -48,7 +48,6 @@ public class LevelStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.isGameStarted) return;
         gameTime += Time.deltaTime; 
         gameTimeText.text = "TIMER: " + gameTime.ToString("F2") + "s";   
         

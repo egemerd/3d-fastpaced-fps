@@ -69,7 +69,6 @@ public class DoorUI : MonoBehaviour
     }
     private void DoorMovement()
     {
-        if(!GameManager.isGameStarted) return;
         float realSliderSpeed = LevelManager.Instance.GetSliderSpeed();
         float uiSpeed = realSliderSpeed * scaleRatio;
 

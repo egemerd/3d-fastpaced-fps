@@ -135,7 +135,6 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (!GameManager.isGameStarted) return;
         lookInput = input.lookInput;
         moveInput =input.moveInput;
 
