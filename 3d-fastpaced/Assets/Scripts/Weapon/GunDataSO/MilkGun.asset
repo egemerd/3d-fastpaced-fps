@@ -21,9 +21,9 @@ MonoBehaviour:
   fireRate: 1
   fireRange: 30
   reloadTime: 0
-  magazineSize: 0
+  magazineSize: 50
   reloadAoutomatic: 0
-  gunDamage: 4
+  gunDamage: 10
   headshotMultiplier: 7
   gunTrailPrefab: {fileID: 0}
   bulletSpeed: 0

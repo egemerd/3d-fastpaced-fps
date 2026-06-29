@@ -15,7 +15,6 @@ public class EnemyShooter : EnemyAI
     
     private void Start()
     {
-        projectilePrefab.GetComponent<EnemyProjectile>().SetSpeed(projectileSpeed);
         myAnimator= GetComponentInChildren<Animator>();
     }
 
@@ -31,8 +30,6 @@ public class EnemyShooter : EnemyAI
     }
     private void EnemyShoot()
     {  
-        if (Time.time < nextShootTime) return;
-
         Vector3 targetPos = player.position;
         cachedSpawnPos = transform.position + transform.up * 1.5f + transform.forward * 0.5f;  // düþmanýn önünden spawn
         cachedDirection = (targetPos - cachedSpawnPos).normalized;
@@ -42,8 +39,7 @@ public class EnemyShooter : EnemyAI
         myAnimator.SetTrigger("Throwing");
 
         // Cooldown ayarla
-        nextShootTime = Time.time + timeBetweenShot;
-        
+        nextShootTime = Time.time + timeBetweenShot;   
     }
 
     void InstantiateProjectile()

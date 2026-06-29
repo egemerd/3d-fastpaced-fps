@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 18910986632207995}
   - component: {fileID: 3817488138177261874}
   - component: {fileID: 4860269856272156925}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Face (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7759705316745899923}
   - component: {fileID: 888887314232236918}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Body
   m_TagString: Body
   m_Icon: {fileID: 0}
@@ -157,7 +157,8 @@ GameObject:
   - component: {fileID: 4864862060497594588}
   - component: {fileID: 6147475306622304199}
   - component: {fileID: 2656093826299143692}
-  m_Layer: 0
+  - component: {fileID: 1730789556433794666}
+  m_Layer: 23
   m_Name: ButonEnemyChaser
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -278,6 +279,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 1d7fdbad8bf8cbe44a8659d1dd85a9e4, type: 2}
   weaponStateSO: {fileID: 11400000, guid: 069b1965905e3214391f0ab8430fd34e, type: 2}
   currentHealth: 0
+  _IsBurning: 0
 --- !u!114 &2656093826299143692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +306,29 @@ MonoBehaviour:
   isSightRange: 0
   isAttackRange: 0
   firstTouchAttackCooldown: 1
+--- !u!136 &1730789556433794666
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3374410719544233734}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 3.519235
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75961614, z: 0}
 --- !u!1 &8037161773185450627
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064712609547684462}
   - component: {fileID: 8473423009264563262}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Head
   m_TagString: Head
   m_Icon: {fileID: 0}
@@ -369,6 +394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Double Slash
       objectReference: {fileID: 0}
+    - target: {fileID: 3600389243222657682, guid: 3fee2e03e4bdc854bb38f7bcbca7c75d, type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 4238138844443951365, guid: 3fee2e03e4bdc854bb38f7bcbca7c75d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.39207935
@@ -408,6 +437,14 @@ PrefabInstance:
     - target: {fileID: 4238138844443951365, guid: 3fee2e03e4bdc854bb38f7bcbca7c75d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936908092126958425, guid: 3fee2e03e4bdc854bb38f7bcbca7c75d, type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529673643228393185, guid: 3fee2e03e4bdc854bb38f7bcbca7c75d, type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -482,6 +519,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 08b8279f67265194f9ea28f486c24349, type: 3}
       propertyPath: m_Name
       value: Buton_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08b8279f67265194f9ea28f486c24349, type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
