@@ -11,9 +11,9 @@ public abstract class Gun : MonoBehaviour
     public PlayerController playerController;
     
 
-    private int currentAmmo = 0;    
+    protected int currentAmmo = 0;    
     private float nextTimeToFire = 0f;   
-    private bool isReloading = false;
+    protected bool isReloading = false;
     private Coroutine reloadRoutine;
     
 
