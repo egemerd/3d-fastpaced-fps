@@ -2,74 +2,80 @@ using UnityEngine;
 
 public class WeaponSwitching : MonoBehaviour
 {
-    public int selectedWeapon = 0;
+    [SerializeField] private GunManagerData gunManagerDataSO;
+    [SerializeField] private WeaponStateSO weaponStateSO;
+    [SerializeField] private GunUIData[] gunUIDataList;
 
-    [SerializeField] GameObject shotgunCrosshair;
-    [SerializeField] GameObject pistolCrosshair;
-
-    [SerializeField] GameObject shotgunBig;
-    [SerializeField] GameObject pistolBig;
-
-    [SerializeField] GameObject shotgunSmall;
-    [SerializeField] GameObject pistolSmall;
-    
+    public int selectedWeapon = -1;
+    int currentIndex = -1;
+    private AllGunData[] guns;
     void Start()
     {
-        SelectWeapon();
+        guns = gunManagerDataSO.guns;
+        SwitchTo(0);
     }
 
-    
-    void Update()
+    private void Update()
     {
         SwitchInput();
-        SelectWeapon();
     }
 
-    void SwitchInput()
+    private void SwitchInput()
     {
         if (InputManager.Instance.switchWeaponAction1.IsPressed())
-        {
-            selectedWeapon = 0;
-            shotgunCrosshair.SetActive(true);
-            pistolCrosshair.SetActive(false);
-            ShotgunEquip();
-
-        }
+            SwitchTo(0);
         else if (InputManager.Instance.switchWeaponAction2.IsPressed())
-        {
-            selectedWeapon = 1;
-            shotgunCrosshair.SetActive(false);
-            pistolCrosshair.SetActive(true);
-            PistolEquip();
-        }
+            SwitchTo(1);
+        else if (InputManager.Instance.switchWeaponAction3.IsPressed())
+            SwitchTo(2);
     }
 
-    void SelectWeapon()
+    private void SwitchTo(int index)
     {
-        int i = 0;
-        foreach(Transform weapon in transform)
-        {
-            if (i == selectedWeapon)
-                weapon.gameObject.SetActive(true);
-            else
-                weapon.gameObject.SetActive(false);
-            i++;
-        }
+        if (index == selectedWeapon) return;
+
+
+        SetUI(selectedWeapon, false);
+
+        selectedWeapon = index;
+        weaponStateSO.selectedGunIndex = index;
+
+        SetUI(selectedWeapon, true);
+
+        EquipGun(index);
     }
 
-    private void ShotgunEquip()
+    private void SetUI(int index, bool isActive)
     {
-        shotgunBig.SetActive(true);
-        pistolBig.SetActive(false);
-        shotgunSmall.SetActive(false);
-        pistolSmall.SetActive(true);
+        if (index < 0 || index >= gunUIDataList.Length) return;
+
+        var ui = gunUIDataList[index];
+        if (ui.crosshair != null) ui.crosshair.SetActive(isActive);
+        if (ui.bigIcon != null) ui.bigIcon.SetActive(isActive);
+        if (ui.smallIcon != null) ui.smallIcon.SetActive(!isActive); // Small ters çalýþýyor
     }
 
-    private void PistolEquip()
+    private void UpdateWeaponObjects(int index)
     {
-        pistolBig.SetActive(true);
-        shotgunBig.SetActive(false);
-        pistolSmall.SetActive(false);
-        shotgunSmall.SetActive(true);
+        for (int i = 0; i < transform.childCount; i++)
+            transform.GetChild(i).gameObject.SetActive(i == index);
     }
+
+    public void EquipGun(int index)
+    {
+        if (index == currentIndex) return;
+        if (index < 0 || index >= guns.Length) return;
+
+        currentIndex = index;
+        UpdateWeaponObjects(index);
+    }
+}
+
+[System.Serializable]
+public struct GunUIData
+{
+    public string gunName; 
+    public GameObject crosshair;
+    public GameObject bigIcon;
+    public GameObject smallIcon;
 }

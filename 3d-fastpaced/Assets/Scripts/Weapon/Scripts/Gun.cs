@@ -81,7 +81,7 @@ public abstract class Gun : MonoBehaviour
 
     
 
-    public void TryShoot()
+    public virtual void TryShoot()
     {
         if (isReloading || currentAmmo <= 0)
             return;

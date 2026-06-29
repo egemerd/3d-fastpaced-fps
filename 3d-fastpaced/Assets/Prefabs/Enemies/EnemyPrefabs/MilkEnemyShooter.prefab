@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   enemyData: {fileID: 11400000, guid: 6da4946088ba3b54680102541ea9e7df, type: 2}
+  weaponStateSO: {fileID: 11400000, guid: 069b1965905e3214391f0ab8430fd34e, type: 2}
   currentHealth: 0
 --- !u!1001 &3996519341542350660
 PrefabInstance:

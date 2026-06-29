@@ -5,6 +5,7 @@ using static UnityEngine.ParticleSystem;
 public class EnemyHealth : MonoBehaviour , IDamageable
 {
     [SerializeField] private EnemyDataSO enemyData;
+    [SerializeField] private WeaponStateSO weaponStateSO;
     public float currentHealth;
     bool isEnemyDied =false;
 
@@ -16,7 +17,6 @@ public class EnemyHealth : MonoBehaviour , IDamageable
     private void Awake()
     {
         currentHealth = enemyData.health;
-        weaponSwitching = FindObjectOfType<WeaponSwitching>();
     }
 
     private void Update()
@@ -86,13 +86,15 @@ public class EnemyHealth : MonoBehaviour , IDamageable
         isEnemyDied = true;
 
         Debug.Log("[EnemyHealth] Die() called - Starting death sequence");
-        if (weaponSwitching.selectedWeapon == 0)
+        if (weaponStateSO.selectedGunIndex == 0)
         {
             EnemyParticle("EnemyDeathParticle");
+            Debug.Log("[EnemyHealth] EnemyDeathParticle played for selectedGunIndex 0");
         }
-        else if (weaponSwitching.selectedWeapon == 1)
+        else if (weaponStateSO.selectedGunIndex == 1)
         {
             EnemyParticle("EnemyDeathParticlePistol");
+            Debug.Log("[EnemyHealth] EnemyDeathParticlePistol played for selectedGunIndex 1");
         }
         TimeStopEffect.Instance.TimeStopPreset("EnemyDeath");
         if (GameEvents.current != null)
