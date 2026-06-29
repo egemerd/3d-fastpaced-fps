@@ -4,6 +4,7 @@ using UnityEngine;
 public class MilkGun : Gun
 {
     [SerializeField] private MilkGunAttackArea attackArea;
+    [SerializeField] private ParticleSystem milkGunParticle;
     private float damagePerSecond = 10;
 
     private bool isFiring = false;
@@ -44,6 +45,7 @@ public class MilkGun : Gun
         Debug.Log("MilkGun: StartFiring");
         isFiring = true;
         attackArea.gameObject.SetActive(true);
+        milkGunParticle.Play();
     }
 
     void StopFiring()
@@ -51,6 +53,7 @@ public class MilkGun : Gun
         Debug.Log("MilkGun: StopFiring");
         isFiring = false;
         attackArea.gameObject.SetActive(false);
+        milkGunParticle.Stop();
     }
 
 
