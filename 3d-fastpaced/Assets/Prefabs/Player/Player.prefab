@@ -206,13 +206,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81c6255665ba71459022e5bacacf2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSwitching
+  gunManagerDataSO: {fileID: 11400000, guid: 150f04193cdbe334cbccd0b7def890bc, type: 2}
+  weaponStateSO: {fileID: 11400000, guid: 069b1965905e3214391f0ab8430fd34e, type: 2}
+  gunUIDataList:
+  - gunName: MilkShotgun
+    crosshair: {fileID: 0}
+    bigIcon: {fileID: 0}
+    smallIcon: {fileID: 0}
+  - gunName: BarcodePistol
+    crosshair: {fileID: 0}
+    bigIcon: {fileID: 0}
+    smallIcon: {fileID: 0}
   selectedWeapon: 0
-  shotgunCrosshair: {fileID: 0}
-  pistolCrosshair: {fileID: 0}
-  shotgunBig: {fileID: 0}
-  pistolBig: {fileID: 0}
-  shotgunSmall: {fileID: 0}
-  pistolSmall: {fileID: 0}
 --- !u!1 &1357332047806931406
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +324,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4343
+    m_Bits: 8392951
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5473,7 +5478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa23ba3306f6f9a4295de064bde84da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  health: 100
+  health: 10000
   healthText: {fileID: 0}
   healAmount: 10
   healthBar: {fileID: 0}
@@ -6218,6 +6223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarcodeGun
       objectReference: {fileID: 0}
+    - target: {fileID: 557159613130670521, guid: 31da16152c1b17d409c4e73a2a694d39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1506598163713547802, guid: 31da16152c1b17d409c4e73a2a694d39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.69500023
@@ -6288,6 +6297,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1460451014398615997}
     m_Modifications:
+    - target: {fileID: 970888079921540663, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2460190810804693083, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.427
@@ -6336,14 +6349,146 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 4288
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.startSpeed.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[0].value
+      value: 0.0036621094
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[0].inSlope
+      value: 0.9963379
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[1].inSlope
+      value: 0.9963379
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[0].outSlope
+      value: 0.9963379
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[1].outSlope
+      value: 0.9963379
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: InitialModule.gravityModifier.maxCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170539224204940440, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3c732767913243844873c88136ec0209, type: 2}
+    - target: {fileID: 5236541299549486277, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: gunData
+      value: 
+      objectReference: {fileID: 11400000, guid: b0f8878b9c72d2441b70ca44fea3197a, type: 2}
+    - target: {fileID: 5236541299549486277, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: attackArea
+      value: 
+      objectReference: {fileID: 4774949531844743430}
+    - target: {fileID: 5236541299549486277, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 7359681642760019481}
+    - target: {fileID: 5236541299549486277, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: milkGunParticle
+      value: 
+      objectReference: {fileID: 7744022239963565214}
+    - target: {fileID: 5236541299549486277, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 4221854253020993370}
+    - target: {fileID: 6099368698471351582, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: m_Layer
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099368698471351582, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+--- !u!114 &4774949531844743430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 163756946490237612, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+  m_PrefabInstance: {fileID: 4612195503202612138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752ccc7e5626fbc4f8ad48c322e836ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MilkGunAttackArea
 --- !u!4 &7072223572025547761 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2460190810804693083, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
+  m_PrefabInstance: {fileID: 4612195503202612138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7744022239963565214 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3132680620351389492, guid: 60b63e8e49fa4964b81fe44846885fea, type: 3}
   m_PrefabInstance: {fileID: 4612195503202612138}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5496685564151555892

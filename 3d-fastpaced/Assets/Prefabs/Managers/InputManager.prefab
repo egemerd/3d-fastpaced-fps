@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd47420b8924154e8b733bc8c88d484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  gameSettings: {fileID: 11400000, guid: 22f41ede9a9870e4bb8bb28dc9022e09, type: 2}
   sprintAction:
     m_Name: Sprint
     m_Type: 0

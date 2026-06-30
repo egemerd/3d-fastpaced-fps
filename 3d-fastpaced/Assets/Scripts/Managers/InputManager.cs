@@ -5,10 +5,15 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
+    [SerializeField] GameSettingsSO gameSettings;
+
     [Header("Input System")]
     private PlayerInput playerInput;
 
-    
+    private bool sprintToggleMode = false;
+    private bool toggledSprint = false;
+
+
     private InputAction moveAction;
     private InputAction lookAction;
     public InputAction sprintAction;
@@ -44,6 +49,13 @@ public class InputManager : MonoBehaviour
         // Get PlayerInput
         playerInput = GetComponent<PlayerInput>();
         InitializeActions();
+
+        InitializeGameSettings();
+    }
+
+    void InitializeGameSettings()
+    {
+        sprintToggleMode = gameSettings.SprintToggleMode;
     }
 
     private void InitializeActions()
@@ -73,7 +85,22 @@ public class InputManager : MonoBehaviour
         lookInput = lookAction.ReadValue<Vector2>();
 
         isMoving = moveInput.magnitude > 0.1f;
-        isSprinting = sprintAction.ReadValue<float>() > 0;
+        //isSprinting = sprintAction.ReadValue<float>() > 0;
+
+        if (sprintToggleMode)
+        {
+            // Toggle: basýnca aç/kapat
+            if (sprintAction.WasPressedThisFrame())
+                toggledSprint = !toggledSprint;
+
+            isSprinting = toggledSprint && isMoving; // Hareket etmiyorsa sprint kapatýlabilir
+        }
+        else
+        {
+            // Hold: basýlý tuttuðun sürece
+            isSprinting = sprintAction.ReadValue<float>() > 0;
+        }
+
     }
 }
 

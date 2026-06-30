@@ -27,7 +27,7 @@ public class JumpingState : IState
         {
             player.ChangeState(new LedgeClimbingState());
         }
-            if (player.isGrounded && player.GetVelocityY()<0)
+        if (player.isGrounded && player.GetVelocityY()<0)
         {
             if (player.GetCrouchAction().ReadValue<float>() > 0 && player.canSlide)
             {
@@ -46,6 +46,7 @@ public class JumpingState : IState
         {
             player.ChangeState(new ClimbingState());
         }
+        
 
     }
 }
