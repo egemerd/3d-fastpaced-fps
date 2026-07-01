@@ -499,6 +499,8 @@ public class PlayerController : MonoBehaviour
 
         characterController.height = standingHeight;
         targetCameraHeight = originalCameraHeight;
+
+
         //cameraHead.localPosition = originalHeadTransform.localPosition;
         StartCoroutine(SlideCooldown());
         
