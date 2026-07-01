@@ -321,7 +321,7 @@ Camera:
   field of view: 63.193832
   orthographic: 0
   orthographic size: 5
-  m_Depth: 1
+  m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 8392951
@@ -5445,14 +5445,15 @@ MonoBehaviour:
   bunnyHopWindow: 0.2
   bunnyHopActivated: 0
   slideSpeed: 18
-  slideSpeedDecay: 4
+  slideSpeedDecay: 6
   minSlideSpeed: 1
   minSlideInitialSpeed: 1
   slideDuration: 2
   slideCooldown: 0.1
-  slideControlMultiplier: 0.3
+  slideControlMultiplier: 1
   crouchHeight: 1.4
   standingHeight: 2
+  slidingRotation: {x: 0, y: 0, z: 0}
   slideJumpHeightMultiplier: 2.6
   slideJumpForwardBoost: 15
   maintainSlideSpeedOnJump: 1
@@ -5993,6 +5994,7 @@ GameObject:
   - component: {fileID: 2267153238779234355}
   - component: {fileID: 419634533124990869}
   - component: {fileID: 6477744517799512270}
+  - component: {fileID: 2625730585697050383}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -6073,6 +6075,29 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &2625730585697050383
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8144086271348573118}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9031172874977726406
 GameObject:
   m_ObjectHideFlags: 0

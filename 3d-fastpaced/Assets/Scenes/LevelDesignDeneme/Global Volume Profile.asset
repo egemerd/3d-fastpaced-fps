@@ -78,6 +78,9 @@ MonoBehaviour:
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
+  filter:
+    m_OverrideState: 0
+    m_Value: 0
   downscale:
     m_OverrideState: 0
     m_Value: 0
@@ -186,8 +189,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   saturation:
-    m_OverrideState: 0
-    m_Value: 38
+    m_OverrideState: 1
+    m_Value: 33
 --- !u!114 &6395422715560576681
 MonoBehaviour:
   m_ObjectHideFlags: 3

@@ -825,6 +825,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8380569433076352597, guid: c3a781f05c7940045a1eac92718618fe, type: 3}
   m_PrefabInstance: {fileID: 1915540524958284887}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &356504575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 356504576}
+  - component: {fileID: 356504577}
+  m_Layer: 0
+  m_Name: Global Volume (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &356504576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356504575}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1575606752}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &356504577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356504575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 1
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: e61b08b2e69d43b4c8e5268f5a2d4a3b, type: 2}
 --- !u!1 &372103394 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a5fd4ff505f14a24cb2bbf6c55a2c23d, type: 3}
@@ -87296,6 +87345,8 @@ Transform:
   - {fileID: 410087041}
   - {fileID: 1809531443}
   - {fileID: 1882544865}
+  - {fileID: 1671787990}
+  - {fileID: 356504576}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1591835711
@@ -87586,6 +87637,77 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 549615315522366958, guid: 3b3f826586249a94daaf8a3036f4ada1, type: 3}
   m_PrefabInstance: {fileID: 37351315}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1671787989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1671787990}
+  - component: {fileID: 1671787992}
+  - component: {fileID: 1671787991}
+  m_Layer: 7
+  m_Name: Box Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1671787990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671787989}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.63, y: 0.31, z: -10.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1575606752}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1671787991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671787989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 0
+  priority: 0
+  blendDistance: 2
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: e61b08b2e69d43b4c8e5268f5a2d4a3b, type: 2}
+--- !u!65 &1671787992
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671787989}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1679355610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89033,12 +89155,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1968850857}
     - target: {fileID: 4221854253020993370, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: slideSpeedDecay
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4221854253020993370, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
-      propertyPath: slideControlMultiplier
-      value: 1
+      propertyPath: slidingRotation.x
+      value: -95
       objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -89046,7 +89164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.83
+      value: 0.91
       objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -90035,6 +90153,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1575606752}
     m_Modifications:
+    - target: {fileID: 3579908562398283916, guid: 43cbe00b833f9ef419f29e23827ae79b, type: 3}
+      propertyPath: weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579908562398283916, guid: 43cbe00b833f9ef419f29e23827ae79b, type: 3}
+      propertyPath: priority
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8696815684255997418, guid: 43cbe00b833f9ef419f29e23827ae79b, type: 3}
       propertyPath: m_Name
       value: Global Volume
