@@ -93,7 +93,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 slideDirection;
     private float currentSlideSpeed;
     public bool slideEnded;
-    private Vector3 originalRotation;
 
     //Jumping
     private float lastGroundedTime;
@@ -124,7 +123,6 @@ public class PlayerController : MonoBehaviour
 
         originalCameraHeight = cameraHead.localPosition.y;
         targetCameraHeight = originalCameraHeight;
-        originalRotation = bodyTransform.eulerAngles;
 
         characterController.height = standingHeight;
         originalHeadTransform = cameraHead;
@@ -491,7 +489,7 @@ public class PlayerController : MonoBehaviour
         //cameraHead.localPosition = new Vector3(0, -0.150000006f, -0.0160000008f);
         characterController.height = crouchHeight;
         targetCameraHeight = originalCameraHeight - (standingHeight - crouchHeight);
-        bodyTransform.eulerAngles = slidingRotation;
+        bodyTransform.localRotation = Quaternion.Euler(slidingRotation.x, 0f, 0f);
 
 
 
@@ -505,7 +503,7 @@ public class PlayerController : MonoBehaviour
         characterController.height = standingHeight;
         targetCameraHeight = originalCameraHeight;
 
-        bodyTransform.eulerAngles = originalRotation;
+        bodyTransform.localRotation = Quaternion.Euler(0f, bodyTransform.localRotation.y, bodyTransform.localRotation.z);
 
         //cameraHead.localPosition = originalHeadTransform.localPosition;
         StartCoroutine(SlideCooldown());
