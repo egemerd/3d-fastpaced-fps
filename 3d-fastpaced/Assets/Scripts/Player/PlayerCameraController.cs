@@ -6,7 +6,6 @@ public class PlayerCameraController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform cameraHolder;
-    [SerializeField] private Transform playerBody;
     private PlayerInputActions inputActions;
     Camera mainCamera;
 
@@ -80,7 +79,6 @@ public class PlayerCameraController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
         cameraHolder.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.localRotation = Quaternion.Euler(0f, yRotation, 0f);
     }
 
     private void LeftRightMovement()

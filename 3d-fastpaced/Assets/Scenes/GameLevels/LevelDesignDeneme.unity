@@ -87306,7 +87306,7 @@ PrefabInstance:
     - target: {fileID: 3647302785070002277, guid: c2787c4c5d372fc4f80f45509d9883c2, type: 3}
       propertyPath: slidingCamera
       value: 
-      objectReference: {fileID: 60369938342379277, guid: 25c395017c1d88945a2d346d77d448d1, type: 3}
+      objectReference: {fileID: 11400000, guid: 363f825b7da278e4ba519406a6db5918, type: 2}
     - target: {fileID: 3647302785070002277, guid: c2787c4c5d372fc4f80f45509d9883c2, type: 3}
       propertyPath: cameraOffset.y
       value: 7
@@ -87320,12 +87320,20 @@ PrefabInstance:
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3647302785070002277, guid: c2787c4c5d372fc4f80f45509d9883c2, type: 3}
+      propertyPath: slidingDownCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: f19cd5990375c9442ac3a893cdb451fd, type: 2}
+    - target: {fileID: 3647302785070002277, guid: c2787c4c5d372fc4f80f45509d9883c2, type: 3}
       propertyPath: timeScaleForSliding
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3647302785070002277, guid: c2787c4c5d372fc4f80f45509d9883c2, type: 3}
       propertyPath: cameraRotationOffset.x
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647302785070002277, guid: c2787c4c5d372fc4f80f45509d9883c2, type: 3}
+      propertyPath: waitBetweenCameraChange
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4034202601128736457, guid: c2787c4c5d372fc4f80f45509d9883c2, type: 3}
       propertyPath: m_Name
@@ -89204,7 +89212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2871794
+      value: 97.9
       objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -89212,7 +89220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.817993
+      value: -21.7
       objectReference: {fileID: 0}
     - target: {fileID: 5001150668276269585, guid: 21d388d28d9d9da46b7611f617e3ad9e, type: 3}
       propertyPath: m_LocalRotation.w
