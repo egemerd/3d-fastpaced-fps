@@ -58,7 +58,23 @@ public class WeaponSwitching : MonoBehaviour
     private void UpdateWeaponObjects(int index)
     {
         for (int i = 0; i < transform.childCount; i++)
-            transform.GetChild(i).gameObject.SetActive(i == index);
+        {
+            GameObject weaponObj = transform.GetChild(i).gameObject;
+            bool shouldBeActive = (i == index);
+
+            if (shouldBeActive)
+            {
+                weaponObj.SetActive(true); // YENÝ: sadece aktif et, animator'a dokunma - draw animasyonu kendi state machine akýþýnda normal oynasýn
+            }
+            else
+            {
+                if (weaponObj.activeSelf)
+                {
+                    ResetWeaponAnimator(weaponObj); // sadece KAPATMADAN önce temizle
+                    weaponObj.SetActive(false);
+                }
+            }
+        }
     }
 
     public void EquipGun(int index)
@@ -68,6 +84,19 @@ public class WeaponSwitching : MonoBehaviour
 
         currentIndex = index;
         UpdateWeaponObjects(index);
+    }
+
+    private void ResetWeaponAnimator(GameObject weaponObj)
+    {
+        Animator animator = weaponObj.GetComponent<Animator>();
+        if (animator != null)
+        {
+            // Idle yerine, Animator Controller'ýndaki GERÇEK state ismini yaz
+            // Örneðin "Idle", "WeaponIdle", "Rest" ne ise onu kullan
+            animator.Rebind();
+            animator.Play("Idle", 0, 0f);
+            animator.Update(0f);
+        }
     }
 }
 
