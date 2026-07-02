@@ -112,6 +112,7 @@ public class SlideAnimation : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            InputManager.Instance.LockInput();
             StartSlidingAnimation(other.transform);
         }
     }
@@ -120,6 +121,7 @@ public class SlideAnimation : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            InputManager.Instance.UnlockInput();
             StopSlidingAnimation();
         }
     }

@@ -47,6 +47,7 @@ public class PlayerCameraController : MonoBehaviour
 
     private void Update()
     {
+        if (InputManager.Instance.IsInputLocked) return;
         lookInput = inputActions.Gameplay.Look.ReadValue<Vector2>();
     }
 

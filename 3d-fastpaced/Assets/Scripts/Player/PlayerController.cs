@@ -396,6 +396,7 @@ public class PlayerController : MonoBehaviour
 
     public void CalculateMoveDirection()
     {
+        if (InputManager.Instance.IsInputLocked) return;
         Vector3 forward = transform.forward;
         Vector3 right = transform.right;
         forward.y = 0;
@@ -449,15 +450,18 @@ public class PlayerController : MonoBehaviour
 
     public void HandleSliding()
     {
-        if (!isSliding) return; 
+        if (!isSliding) return;
 
-        bool crouchReleased = input.crouchAction.ReadValue<float>() == 0f;
-        bool sprintReleased = !isSprinting;
-
-        if (crouchReleased || sprintReleased)
+        if (!InputManager.Instance.IsInputLocked) // YENÝ: sadece kilitli DEÐÝLKEN input kontrolü yap
         {
-            slideEnded = true;
-            return; 
+            bool crouchReleased = input.crouchAction.ReadValue<float>() == 0f;
+            bool sprintReleased = !isSprinting;
+
+            if (crouchReleased || sprintReleased)
+            {
+                slideEnded = true;
+                return;
+            }
         }
 
         slideTimer += Time.deltaTime;

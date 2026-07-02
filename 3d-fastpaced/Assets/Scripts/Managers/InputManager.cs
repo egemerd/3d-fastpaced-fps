@@ -35,6 +35,9 @@ public class InputManager : MonoBehaviour
     public bool isMoving { get; private set; }
     public bool isSprinting { get; private set; }
 
+
+    public bool IsInputLocked { get; private set; } = false;
+
     private void Awake()
     {
         // Singleton
@@ -79,8 +82,22 @@ public class InputManager : MonoBehaviour
         gamePauseAction = playerInput.actions.FindAction("Pause");
     }
 
+    public void LockInput()
+    {
+        IsInputLocked = true;
+        playerInput.actions.Disable(); // TÜM action map'i devre dýþý býrak
+    }
+
+    public void UnlockInput()
+    {
+        IsInputLocked = false;
+        playerInput.actions.Enable(); // geri aç
+    }
+
     private void Update()
     {
+        if (IsInputLocked) return;
+
         moveInput = moveAction.ReadValue<Vector2>();
         lookInput = lookAction.ReadValue<Vector2>();
 
