@@ -116,7 +116,7 @@ public class DoorController : MonoBehaviour
 
         Debug.Log("Player entered door trigger");
         if (!other.CompareTag("Player")) return;
-        //LevelManager.Instance.ActivateLevelEndCanvas();
+        LevelManager.Instance.ActivateLevelEndCanvas();
     }
 
     
