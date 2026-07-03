@@ -23,17 +23,10 @@ public class PlayerController : MonoBehaviour
     [Header("Input")]
     private Vector2 moveInput;
     private Vector2 lookInput;
-    private float verticalRotation;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float sprintMultiplier = 2f;
-    [SerializeField] private float airMovementController = 0.8f;
-
-
-    [Header("Look")]
-    [SerializeField] private float mouseSens;
-    [SerializeField] private float lookRange;
 
     [Header("Jumping")]
     [SerializeField] private float jumpHeight = 2f;
@@ -41,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = -15f;
     [SerializeField] private float fallGravity = 1.5f;
     [SerializeField] private float jumpGravity = 1.5f;
-    [SerializeField] private float airControlTime = -9.81f;
+    [SerializeField] private float airControlSpeed = -9.81f;
     [SerializeField] private float jumpRayOffset = 0.5f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundCheckDistance;
@@ -59,9 +52,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sliding")]
     [SerializeField] private float slideSpeed = 15f;
     [SerializeField] private float slideSpeedDecay = 5f;
-    [SerializeField] private float minSlideSpeed = 1f; // min to stay sliding
     [SerializeField] private float minSlideInitialSpeed = 1f; // min to start sliding
-    [SerializeField] private float slideDuration = 2f;
     [SerializeField] private float slideCooldown = 0.1f;
     [SerializeField] private float slideControlMultiplier = 0.5f;
     [SerializeField] private float crouchHeight = 1f;
@@ -157,7 +148,7 @@ public class PlayerController : MonoBehaviour
             velocity.y = 0f;
         }
         SmoothCameraHeight();
-        Debug.Log("[PlayerController] isSliding" + isSliding);
+
         currentState.UpdateState(this,climbing);
         //cameraShake.SprintSway(moveInput); 
         //cameraShake.SprintFovBoost(isSprinting,isSliding,moveInput);
@@ -211,40 +202,40 @@ public class PlayerController : MonoBehaviour
         {
             float currentSpeed = horizontalVelocity.magnitude;
             float desiredSpeed = desiredVelocity.magnitude;
-            if (!isMoving)
+            if (!isMoving)  //input yok 
             {
                 //hýzlý dur
                 horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero,
                     10f * Time.deltaTime); 
             }
-            else if (!isSprinting && currentSpeed > desiredSpeed && currentSpeed < (moveSpeed * sprintMultiplier * 1.1f))
+            else if (!isSprinting && currentSpeed > desiredSpeed && currentSpeed < (moveSpeed * sprintMultiplier * 1.1f))  //sprintten cýkýs aný 
             {
                 horizontalVelocity = desiredVelocity;
             }
-            else if (currentSpeed>desiredSpeed)
-            {
-                Vector3 currentDirection = horizontalVelocity.normalized;
+            //else if (currentSpeed > desiredSpeed)
+            //{
+            //    Debug.Log($"[Momentum] Current Speed: {currentSpeed}, Desired Speed: {desiredSpeed}");
+            //    Vector3 currentDirection = horizontalVelocity.normalized;
 
-                float newSpeed = currentSpeed - (slideSpeedDecay * Time.deltaTime);
-                newSpeed = Mathf.Max(newSpeed, desiredSpeed);
+            //    float newSpeed = currentSpeed - (slideSpeedDecay * Time.deltaTime);
+            //    newSpeed = Mathf.Max(newSpeed, desiredSpeed);
 
-                Vector3 targetDirection = Vector3.Lerp(currentDirection, moveDirection, 
-                    momentumDecayRate * Time.deltaTime);
+            //    Vector3 targetDirection = Vector3.Lerp(currentDirection, moveDirection,
+            //        momentumDecayRate * Time.deltaTime);
 
-                horizontalVelocity = targetDirection.normalized * newSpeed;
-            
-            }
+            //    horizontalVelocity = targetDirection.normalized * newSpeed;
+
+            //}
             else
             {
                 horizontalVelocity = desiredVelocity;
-
             }
 
         }
         else
         {
             horizontalVelocity = Vector3.Lerp(horizontalVelocity, desiredVelocity, 
-                airControlTime * Time.deltaTime);
+                airControlSpeed * Time.deltaTime);
         }
 
         Vector3 verticalMove = velocity * Time.deltaTime;
@@ -261,6 +252,7 @@ public class PlayerController : MonoBehaviour
             Vector3.down , 
             (characterController.height/2 + jumpRayOffset),
             groundMask);
+
         if (physicsGrounded && !wasGrounded)
         {
             OnLanded();
@@ -285,7 +277,6 @@ public class PlayerController : MonoBehaviour
     {
         lastLandTime = Time.time;
         canBunnyHop = true;
-        Debug.Log("[BunnyHop] Landed! Bunny hop window baþladý");
     }
 
     private void CheckBunnyHopWindow()
@@ -304,7 +295,6 @@ public class PlayerController : MonoBehaviour
         }
 
         bunnyHopCoroutine = StartCoroutine(BunnyHopBoost());
-        Debug.Log("[BunnyHop] Boost aktif! Hýz artýþý: " + bunnyHopSpeedBoost);
     }
 
 
@@ -346,8 +336,8 @@ public class PlayerController : MonoBehaviour
             float totalForwardSpeed = currentSlideSpeed + slideJumpForwardBoost;
             horizontalVelocity = slideDirection * totalForwardSpeed;
 
-            Debug.Log($"Slide Jump: Speed = {totalForwardSpeed}, Direction = {slideDirection}");
-            Debug.Log($"Horizontal Velocity after Slide Jump: {horizontalVelocity.magnitude}");
+            //Debug.Log($"Slide Jump: Speed = {totalForwardSpeed}, Direction = {slideDirection}");
+            //Debug.Log($"Horizontal Velocity after Slide Jump: {horizontalVelocity.magnitude}");
         }
         else
         {
@@ -481,7 +471,6 @@ public class PlayerController : MonoBehaviour
 
     public void StartSlide()
     {
-        Debug.Log("Starting Slide");
         slideEnded = false;
         isSliding = true;
         slideTimer = 0f;
@@ -501,7 +490,6 @@ public class PlayerController : MonoBehaviour
 
     public void StopSlide()
     {
-        Debug.Log("Stopping Slide");
         isSliding = false;
 
         characterController.height = standingHeight;
