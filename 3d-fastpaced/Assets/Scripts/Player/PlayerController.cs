@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float sprintMultiplier = 2f;
+    [SerializeField] private float groundStopDeceleration = 10f;
 
     [Header("Jumping")]
     [SerializeField] private float jumpHeight = 2f;
@@ -187,62 +188,74 @@ public class PlayerController : MonoBehaviour
     }
     public void Movement()
     {
-        float speedMultiplier = isSprinting  ? sprintMultiplier : 1f;
-        Vector3 desiredVelocity = moveDirection * moveSpeed * speedMultiplier;
+        Vector3 desiredVelocity = CalculateDesiredVelocity();
 
         if (isSliding)
         {
-            Vector3 verticalMove2 = velocity * Time.deltaTime;
-            Vector3 horizontalMove2 = horizontalVelocity * Time.deltaTime;
-            Vector3 finalMove2 = horizontalMove2 + verticalMove2;
-            characterController.Move(finalMove2);
-            return; 
+            ApplySlideMovement();
+            return;
         }
+
         if (isGrounded)
         {
-            float currentSpeed = horizontalVelocity.magnitude;
-            float desiredSpeed = desiredVelocity.magnitude;
-            if (!isMoving)  //input yok 
-            {
-                //hýzlý dur
-                horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero,
-                    10f * Time.deltaTime); 
-            }
-            else if (!isSprinting && currentSpeed > desiredSpeed && currentSpeed < (moveSpeed * sprintMultiplier * 1.1f))  //sprintten cýkýs aný 
-            {
-                horizontalVelocity = desiredVelocity;
-            }
-            //else if (currentSpeed > desiredSpeed)
-            //{
-            //    Debug.Log($"[Momentum] Current Speed: {currentSpeed}, Desired Speed: {desiredSpeed}");
-            //    Vector3 currentDirection = horizontalVelocity.normalized;
-
-            //    float newSpeed = currentSpeed - (slideSpeedDecay * Time.deltaTime);
-            //    newSpeed = Mathf.Max(newSpeed, desiredSpeed);
-
-            //    Vector3 targetDirection = Vector3.Lerp(currentDirection, moveDirection,
-            //        momentumDecayRate * Time.deltaTime);
-
-            //    horizontalVelocity = targetDirection.normalized * newSpeed;
-
-            //}
-            else
-            {
-                horizontalVelocity = desiredVelocity;
-            }
-
+            horizontalVelocity = CalculateGroundedVelocity(desiredVelocity);
         }
         else
         {
-            horizontalVelocity = Vector3.Lerp(horizontalVelocity, desiredVelocity, 
-                airControlSpeed * Time.deltaTime);
+            horizontalVelocity = CalculateAirVelocity(desiredVelocity);
         }
 
-        Vector3 verticalMove = velocity * Time.deltaTime;
-        Vector3 horizontalMove = horizontalVelocity * Time.deltaTime;   
-        Vector3 finalMove = horizontalMove + verticalMove;
-        characterController.Move(finalMove);
+        ApplyFinalMovement();
+    }
 
+    private Vector3 CalculateDesiredVelocity()
+    {
+        float speedMultiplier = isSprinting ? sprintMultiplier : 1f;
+        return moveDirection * moveSpeed * speedMultiplier;
+    }
+
+    private void ApplySlideMovement()
+    {
+        Vector3 verticalMove = velocity * Time.deltaTime;
+        Vector3 horizontalMove = horizontalVelocity * Time.deltaTime;
+        characterController.Move(horizontalMove + verticalMove);
+    }
+
+    private Vector3 CalculateGroundedVelocity(Vector3 desiredVelocity)
+    {
+        // Yerdeyken hýz fazlasý HER ZAMAN anlýk kesilir (momentum korunmaz).
+        // Slide-jump sonrasý yere inince "sarhoþluk" hissi yaratmamak için bilinçli tercih.
+
+        if (!isMoving)
+        {
+            return Vector3.Lerp(horizontalVelocity, Vector3.zero, groundStopDeceleration * Time.deltaTime);
+        }
+
+        // Sprint býrakma dahil her durumda hedefe anlýk geç.
+        return desiredVelocity;
+    }
+
+    private Vector3 CalculateAirVelocity(Vector3 desiredVelocity)
+    {
+        float currentSpeed = horizontalVelocity.magnitude;
+        float desiredSpeed = desiredVelocity.magnitude;
+
+        if (currentSpeed > desiredSpeed)
+        {
+            // Boost/momentum hýzý korunur, sadece yön input'a doðru yumuþakça çevrilir.
+            Vector3 currentDirection = horizontalVelocity.normalized;
+            Vector3 targetDirection = Vector3.Lerp(currentDirection, moveDirection, airControlSpeed * Time.deltaTime);
+            return targetDirection.normalized * currentSpeed;
+        }
+
+        return Vector3.Lerp(horizontalVelocity, desiredVelocity, airControlSpeed * Time.deltaTime);
+    }
+
+    private void ApplyFinalMovement()
+    {
+        Vector3 verticalMove = velocity * Time.deltaTime;
+        Vector3 horizontalMove = horizontalVelocity * Time.deltaTime;
+        characterController.Move(horizontalMove + verticalMove);
     }
 
     private void GroundCheck()
@@ -252,6 +265,11 @@ public class PlayerController : MonoBehaviour
             Vector3.down , 
             (characterController.height/2 + jumpRayOffset),
             groundMask);
+        bool isAscending = velocity.y > 0.1f;
+        if (isAscending)
+        {
+            physicsGrounded = false;
+        }
 
         if (physicsGrounded && !wasGrounded)
         {
@@ -261,6 +279,11 @@ public class PlayerController : MonoBehaviour
         {
             lastGroundedTime = Time.time;
             isGrounded = true;
+        }
+        else if (isAscending)
+        {
+            // Yükseliyorsak coyote time'ý hiç sorgulama, kesin olarak havadayýz.
+            isGrounded = false;
         }
         else
         {
@@ -272,6 +295,7 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = -2f;
         }
+
     }
     private void OnLanded()
     {
