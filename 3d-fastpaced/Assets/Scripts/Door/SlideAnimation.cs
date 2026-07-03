@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System.Collections;
+using DG.Tweening;
 public class SlideAnimation : MonoBehaviour
 {
     [Header("References")]
@@ -7,7 +8,15 @@ public class SlideAnimation : MonoBehaviour
     [SerializeField] SlidingCameraSO slidingDownCamera;
 
     [Header("Settings")]
-    [SerializeField] float timeScaleForSliding;
+    [SerializeField] float firstStopDuration;
+    [SerializeField] float firstStopScale;
+    [SerializeField] float waitAfterFirst;
+
+    [SerializeField] float secondStopDuration;
+    [SerializeField] float secondStopScale;
+    [SerializeField] float waitAfterSecond;
+
+    [SerializeField] float thirdStopDuration;
     [SerializeField] float followSpeed = 5f;
 
     [Header("Randomness")]
@@ -17,53 +26,20 @@ public class SlideAnimation : MonoBehaviour
     Camera camera2; //instantiated camera
 
     SlidingCameraSO currentCameraSO; //current camera scriptable object
+    Coroutine slidingCoroutine;
 
     private Transform player;
     private float whichCam;
     bool isSliding = false;
     float timer = 0f;
-    float cam1Weight;
-    float cam2Weight;
 
     private void Start()
     {
-        cam1Weight = slidingCamera.CamWeight;
-        cam2Weight = slidingDownCamera.CamWeight;
     }
     private void Update()
     {
         if (!isSliding) return;
-        RandomCamera();
         FollowPlayerCamera(currentCameraSO);
-    }
-
-    private void RandomCamera()
-    {
-        
-
-        if (timer >= waitBetweenCameraChange)
-        {
-            float weight = cam1Weight + cam2Weight;
-            float random = Random.Range(0f, weight);
-            if (random < cam1Weight)
-            {
-                currentCameraSO = slidingCamera;
-                camera1.depth = 10;
-                camera2.depth = -10;
-            }
-            else
-            {
-                currentCameraSO = slidingDownCamera;
-                camera1.depth = -10;
-                camera2.depth = 10;
-            }
-            timer = 0f;
-        }
-        else
-        {
-            timer += Time.unscaledDeltaTime;
-        }
-        
     }
 
     void FollowPlayerCamera(SlidingCameraSO cam)
@@ -80,26 +56,43 @@ public class SlideAnimation : MonoBehaviour
     }
 
     
-    void StartSlidingAnimation(Transform spawnTransform)
+    IEnumerator StartSlidingAnimation(Transform spawnTransform)
     {
         player = spawnTransform;
         isSliding = true; // YENÝ
         timer = 0f;
-
+        
         camera1 = Instantiate(slidingCamera.slidingCamera, spawnTransform.position + slidingCamera.CameraOffset, Quaternion.Euler(slidingCamera.CameraRotation));
         camera2 = Instantiate(slidingDownCamera.slidingCamera, spawnTransform.position + slidingDownCamera.CameraOffset, Quaternion.Euler(slidingDownCamera.CameraRotation));
-
-        currentCameraSO = slidingCamera;
-        Time.timeScale = timeScaleForSliding;
-
         camera1.depth = 10;
-        camera2.depth = -10;
+        currentCameraSO = slidingCamera;
+        
+        while(timer < firstStopDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            Time.timeScale = Mathf.Lerp(1f, firstStopScale, timer / firstStopDuration);
+            yield return null;
+        }
+        timer = 0f;
+        yield return new WaitForSecondsRealtime(waitAfterFirst);
+
+        while (timer < secondStopDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            Time.timeScale = Mathf.Lerp(firstStopScale, secondStopScale, timer / secondStopDuration);   
+            yield return null;
+        }
+        timer = 0f;
     }
+
+
 
     void StopSlidingAnimation()
     {
         isSliding = false;
-
+        StopCoroutine(slidingCoroutine);
         Destroy(camera1.gameObject);
         Destroy(camera2.gameObject);
         camera1 = null;
@@ -113,7 +106,7 @@ public class SlideAnimation : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             InputManager.Instance.LockInput();
-            StartSlidingAnimation(other.transform);
+            slidingCoroutine = StartCoroutine(StartSlidingAnimation(other.transform));
         }
     }
 

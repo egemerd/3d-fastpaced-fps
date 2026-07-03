@@ -10,10 +10,6 @@ public class SlidingCameraSO : ScriptableObject
     [SerializeField] private Vector3 cameraRotation;
 
 
-    [Header("Randomness")]
-    [SerializeField] private float camWeight = 0.8f;
-    
-    public float CamWeight => camWeight;
     public Vector3 CameraOffset => cameraOffset;
 
     public Vector3 CameraRotation => cameraRotation;

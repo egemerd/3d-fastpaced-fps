@@ -96,7 +96,7 @@ MonoBehaviour:
   paintColor: {r: 1, g: 1, b: 1, a: 1}
   decalSize: 8.4
   decalLifetime: 12
-  decalOffset: 0.001
+  decalOffset: 0
   randomRotation: 1
   useFade: 1
   fadeStartTime: 11
