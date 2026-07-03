@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private float coyoteTime = 0.15f;
+    [SerializeField] private float airSpeedDecay = 3f;   // YENÝ
+
 
     [Header("Bunny Hop")]
     [SerializeField] private float bunnyHopSpeedBoost = 3f; // Hýz artýþý miktarý
@@ -242,10 +244,15 @@ public class PlayerController : MonoBehaviour
 
         if (currentSpeed > desiredSpeed)
         {
-            // Boost/momentum hýzý korunur, sadece yön input'a doðru yumuþakça çevrilir.
+            // Yön input'a doðru yumuþakça çevrilir
             Vector3 currentDirection = horizontalVelocity.normalized;
             Vector3 targetDirection = Vector3.Lerp(currentDirection, moveDirection, airControlSpeed * Time.deltaTime);
-            return targetDirection.normalized * currentSpeed;
+
+            // Hýz yavaþça normale doðru azalýr (anlýk kesilmez, boost hissi korunur ama sonsuza kadar sürmez)
+            float newSpeed = currentSpeed - (airSpeedDecay * Time.deltaTime);
+            newSpeed = Mathf.Max(newSpeed, desiredSpeed);
+
+            return targetDirection.normalized * newSpeed;
         }
 
         return Vector3.Lerp(horizontalVelocity, desiredVelocity, airControlSpeed * Time.deltaTime);
