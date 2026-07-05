@@ -128,7 +128,7 @@ public abstract class Gun : MonoBehaviour
             BulletHitFX(hit);
         }
 
-        if(hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Body") || hit.collider.CompareTag("Head"))
+        if(hit.collider.CompareTag("Body") || hit.collider.CompareTag("Head"))
         {
             ApplyDamage(hit);
         }
@@ -140,7 +140,8 @@ public abstract class Gun : MonoBehaviour
         Vector3 hitPoint = hit.point + hit.normal * 0.01f;
         //GameObject hitParticle = Instantiate(gunData.hitParticlePrefab, hitPoint, Quaternion.LookRotation(hit.normal));
         GameObject bulletMark = Instantiate(gunData.bulletMarkPrefab, hitPoint, Quaternion.LookRotation(hit.normal));
-    
+        Debug.Log("Bullet hit: " + hit.collider.name);
+
         //hitParticle.transform.parent = hit.collider.transform;
         bulletMark.transform.parent = hit.collider.transform;
 

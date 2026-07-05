@@ -84,12 +84,6 @@ public class Pistol : Gun
         {
             StartBulletFire(hit.point, hit);
             Debug.Log("Pistol hit: " + hit.collider.name);
-            if (hit.collider.CompareTag("Enemy"))
-            {
-                Debug.Log("Pistol hit enemy: " + hit.collider.name);
-                
-                
-            }
         }
         else
         {

@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class SMG : Gun
 {
+    private WeaponRecoil recoil;
 
+    protected override void Start()
+    {
+        base.Start();
+        recoil = GetComponent<WeaponRecoil>();
+    }
     public override void Update()
     {
         base.Update();
@@ -10,31 +16,38 @@ public class SMG : Gun
         {
             TryShoot();
         }
+        else
+        {
+            recoil?.ResetPattern(); // tetik býrakýlýnca pattern sýfýrlansýn
+        }
         HandleReload();
+
     }
 
 
     public override void Shoot()
     {
+        Quaternion recoilRotation = Quaternion.Euler(
+            -recoil.CurrentAimPitchOffset,  // pitch: yukarý kayma (ekseni modeline göre kontrol et, ters gelirse iþareti deðiþtir)
+            recoil.CurrentAimYawOffset,     // yaw: saða/sola kayma
+            0f
+        );
+        Vector3 shootDirection = recoilRotation * mainCamera.forward;
+
         RaycastHit hit;
-        Vector3 target = Vector3.zero;
-
-        if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange))
+        if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange, gunData.whatToHit))
         {
-            Debug.Log("AR hit: " + hit.collider.name);
-            target = hit.point;
-            if (hit.collider.CompareTag("Enemy"))
-            {
-                Debug.Log("AR hit enemy: " + hit.collider.name);
-                GameEvents.current.TriggerEnemyHit(base.gunData.gunDamage);
-            }
+            Debug.Log("SMG hit: " + hit.collider.name);
 
+            StartBulletFire(hit.point, hit);
         }
         else
         {
-            target = mainCamera.position + mainCamera.forward * gunData.fireRange;
+            Vector3 missTarget = mainCamera.position + mainCamera.forward * gunData.fireRange;
+
+            StartBulletFire(missTarget, hit);
         }
-        StartBulletFire(target, hit);
+        recoil?.ApplyRecoil();
 
     }
 

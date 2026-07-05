@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6821752284477915586}
   - component: {fileID: 1238210918585827071}
+  - component: {fileID: 6869216484270021134}
+  - component: {fileID: 7352544736658305306}
+  - component: {fileID: 7062289082920266101}
+  - component: {fileID: 3808426911038208445}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -31,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8281000497217182517}
-  - {fileID: 3021181655041428640}
+  - {fileID: 3343372282910160027}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1238210918585827071
@@ -52,6 +56,95 @@ MonoBehaviour:
   gunShootParticle: {fileID: 19800000, guid: 4560e456c4ec0d3418fffd368dd1e7ff, type: 3}
   myAnim: {fileID: 0}
   playerController: {fileID: 0}
+--- !u!95 &6869216484270021134
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198120969610030649}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2940d4fe68d8d8a40b396e678b0ef2d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7352544736658305306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198120969610030649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa54d9bd4d13d86479aa2f523a145d97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponFovBoost
+  playerCamera: {fileID: 0}
+  weaponCamera: {fileID: 0}
+  sprintBaseFov: 63
+  sprintMaxFov: 82
+  sprintSpeedThreshold: 10
+  sprintFovTransitionSpeed: 8
+  slideBaseFov: 63
+  slideMaxFov: 90
+  slideSpeedThreshold: 15
+  slideFovTransitionSpeed: 10
+  normalFovTransitionSpeed: 6
+--- !u!114 &7062289082920266101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198120969610030649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584fbb5d95213a942a027b9b27211ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponAnim
+  swaySpeed: 2
+  swayAmount: 0.04
+  maxSway: 5
+--- !u!114 &3808426911038208445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198120969610030649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738980db5966b254487a044a6a52aee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponRecoil
+  weaponModelTransform: {fileID: 3343372282910160027}
+  kickBackPosition: {x: 0, y: 0, z: -0.15}
+  kickPositionSnapSpeed: 25
+  returnPositionSpeed: 8
+  kickRotationPitch: 15
+  kickRotationRandomYaw: 4
+  kickRotationSnapSpeed: 30
+  returnRotationSpeed: 10
+  overshootAmount: 1.3
+  overshootSpeed: 15
+  aimPunchPitch: 1.2
+  aimPunchYawRandom: 0.6
+  aimRecoverySpeed: 6
+  maxPatternMultiplier: 2.5
+  patternGrowthPerShot: 0.18
+  patternResetDelay: 0.15
+  patternResetSpeed: 3
 --- !u!1 &6422735081355715281
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,14 +202,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6694135318355450852}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.000000059604623, y: 0.00000004470347, z: -0.000000048428756, w: 1}
+  m_LocalPosition: {x: 0, y: -0.55600864, z: -0.4600001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5406913529382577356}
   - {fileID: 2763964214069020697}
-  m_Father: {fileID: 6821752284477915586}
+  m_Father: {fileID: 3343372282910160027}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 76.771}
 --- !u!33 &4064336380785419956
 MeshFilter:
@@ -175,6 +268,38 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8098687004966452824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3343372282910160027}
+  m_Layer: 0
+  m_Name: RecoilPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3343372282910160027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8098687004966452824}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.556, z: 0.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3021181655041428640}
+  m_Father: {fileID: 6821752284477915586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2763964214069416601
 PrefabInstance:
   m_ObjectHideFlags: 0
