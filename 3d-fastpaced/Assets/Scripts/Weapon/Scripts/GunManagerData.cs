@@ -11,5 +11,5 @@ public class GunManagerData : ScriptableObject
 public struct AllGunData
 {
     public string gunName;
-    public GunData gunDataSO; 
+    public GunData gunDataSO;
 }

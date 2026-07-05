@@ -26,6 +26,8 @@ public class InputManager : MonoBehaviour
     public InputAction switchWeaponAction2;
     public InputAction switchWeaponAction3;
     public InputAction gamePauseAction;
+    public InputAction switchWeaponAction4;
+    public InputAction switchWeaponAction5;
 
     public bool IsMovingForward => moveInput.y > 0.1f; // w tusu
 
@@ -78,6 +80,8 @@ public class InputManager : MonoBehaviour
         switchWeaponAction1 = playerInput.actions.FindAction("Weapon1");
         switchWeaponAction2 = playerInput.actions.FindAction("Weapon2");
         switchWeaponAction3 = playerInput.actions.FindAction("Weapon3");
+        switchWeaponAction4 = playerInput.actions.FindAction("Weapon4");
+        switchWeaponAction5 = playerInput.actions.FindAction("Weapon5");
         //Pause
         gamePauseAction = playerInput.actions.FindAction("Pause");
     }

@@ -101,7 +101,6 @@ public class ObjectPoolManager : MonoBehaviour
             GameObject newObj = CreateNewObject(pool);
             pool.pooledObjects.Add(newObj);
             newObj.SetActive(true);
-            Debug.Log($"[ObjectPool] '{poolName}' expanded. New size: {pool.pooledObjects.Count}");
             return newObj;
         }
 

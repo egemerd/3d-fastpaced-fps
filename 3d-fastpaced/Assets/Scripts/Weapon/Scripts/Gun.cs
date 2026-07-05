@@ -68,7 +68,10 @@ public abstract class Gun : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
-        myAnim.SetTrigger("Reload");
+        if (myAnim != null)
+        {
+            myAnim.SetTrigger("Reload");
+        }
         Debug.Log("Reloading");
         yield return new WaitForSeconds(gunData.reloadTime);    
         currentAmmo = gunData.magazineSize;

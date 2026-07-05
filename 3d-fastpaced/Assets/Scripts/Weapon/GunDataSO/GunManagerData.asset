@@ -19,3 +19,5 @@ MonoBehaviour:
     gunDataSO: {fileID: 11400000, guid: fe7963a17cf8a614cb1ff310c846736c, type: 2}
   - gunName: MilkGun
     gunDataSO: {fileID: 0}
+  - gunName: SMG
+    gunDataSO: {fileID: 11400000, guid: 5542b39147f9bac4587024c1eb253a51, type: 2}

@@ -5,6 +5,7 @@ public class WeaponSwitching : MonoBehaviour
     [SerializeField] private GunManagerData gunManagerDataSO;
     [SerializeField] private WeaponStateSO weaponStateSO;
     [SerializeField] private GunUIData[] gunUIDataList;
+    [SerializeField] private GameObject[] weaponObjects;
 
     public int selectedWeapon = -1;
     int currentIndex = -1;
@@ -28,6 +29,11 @@ public class WeaponSwitching : MonoBehaviour
             SwitchTo(1);
         else if (InputManager.Instance.switchWeaponAction3.IsPressed())
             SwitchTo(2);
+        else if (InputManager.Instance.switchWeaponAction4.IsPressed())
+            SwitchTo(3);
+        //else if (InputManager.Instance.switchWeaponAction5.IsPressed())
+        //    SwitchTo(4);
+        Debug.Log(InputManager.Instance.switchWeaponAction4.IsPressed());
     }
 
     private void SwitchTo(int index)
@@ -57,20 +63,22 @@ public class WeaponSwitching : MonoBehaviour
 
     private void UpdateWeaponObjects(int index)
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < weaponObjects.Length; i++)
         {
-            GameObject weaponObj = transform.GetChild(i).gameObject;
+            GameObject weaponObj = weaponObjects[i];
+            if (weaponObj == null) continue;
+
             bool shouldBeActive = (i == index);
 
             if (shouldBeActive)
             {
-                weaponObj.SetActive(true); // YENÝ: sadece aktif et, animator'a dokunma - draw animasyonu kendi state machine akýþýnda normal oynasýn
+                weaponObj.SetActive(true);
             }
             else
             {
                 if (weaponObj.activeSelf)
                 {
-                    ResetWeaponAnimator(weaponObj); // sadece KAPATMADAN önce temizle
+                    ResetWeaponAnimator(weaponObj);
                     weaponObj.SetActive(false);
                 }
             }
@@ -108,3 +116,4 @@ public struct GunUIData
     public GameObject bigIcon;
     public GameObject smallIcon;
 }
+
