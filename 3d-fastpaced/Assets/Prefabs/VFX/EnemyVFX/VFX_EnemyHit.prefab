@@ -4854,7 +4854,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   decalMaterial: {fileID: 2100000, guid: c2db6644db3b94a409b796f65eea2c34, type: 2}
-  paintColor: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
+  paintColor: {r: 1, g: 0, b: 0, a: 1}
   decalSize: 1.5
   decalLifetime: 5
   decalOffset: 0

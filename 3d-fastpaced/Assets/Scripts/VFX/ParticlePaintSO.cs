@@ -4,6 +4,6 @@ using UnityEngine;
 public class ParticlePaintSO : ScriptableObject
 {
     [SerializeField] private Color paintColor;
-
+    
     public Color PaintColor => paintColor;
 }

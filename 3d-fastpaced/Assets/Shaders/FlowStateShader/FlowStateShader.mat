@@ -37,11 +37,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Feather: 0.015
-    - _PostExposure: 0
+    - _Feather: 0.89
+    - _PostExposure: 5.11
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Radius: 1.53
+    - _Radius: -1
     - _ShadowLift: 0
     - _VignetteIntensity: 0
     - _VignettePower: 0

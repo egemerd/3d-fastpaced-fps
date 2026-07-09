@@ -1,31 +1,22 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class FlowStateEffect : MonoBehaviour
 {
     [SerializeField] private LevelDataSO currentLevelData;
+    [SerializeField] private Color flowColor = Color.red; 
 
-
-
-
-
-
-    private IEnumerator FlowStateCoroutine()
+    private void Update()
     {
-        float elapsedTime = 0f;
-        float duration = currentLevelData.flowStateDuration;
-        while (elapsedTime < duration)
+        if (InputManager.Instance.crouchAction.WasPressedThisFrame())
         {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-            // Apply the flow state effect based on the level data
-            // For example, you can adjust the player's speed, visual effects, etc.
-            // This is just a placeholder for your actual implementation.
-            ApplyFlowStateEffect(t);
-            yield return null;
+            FlowState();
         }
-        // Reset or end the flow state effect after the duration
-        EndFlowStateEffect();
+    }
+    private void FlowState()
+    {
+        ParticlePaintManager.Instance.ApplyOverride(flowColor);
     }
 }
-}
+
