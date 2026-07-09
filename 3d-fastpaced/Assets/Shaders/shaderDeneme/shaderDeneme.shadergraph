@@ -951,8 +951,8 @@
     "m_PerRendererData": false,
     "m_customAttributes": [],
     "m_Value": {
-        "x": 0.0,
-        "y": -2.180000066757202,
+        "x": 1.409999966621399,
+        "y": -0.800000011920929,
         "z": 0.0,
         "w": 0.0
     }
@@ -2036,7 +2036,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Scale",
     "m_StageCapability": 3,
-    "m_Value": 40.0,
+    "m_Value": 26.0,
     "m_DefaultValue": 500.0,
     "m_Labels": [],
     "m_LiteralMode": false
@@ -2214,7 +2214,7 @@
     "m_ShaderOutputName": "Edge",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 0.014999999664723874,
+        "x": 0.008070000447332859,
         "y": 1.0,
         "z": 1.0,
         "w": 1.0
@@ -3039,7 +3039,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Scale",
     "m_StageCapability": 3,
-    "m_Value": 12.15999984741211,
+    "m_Value": 5.0,
     "m_DefaultValue": 10.0,
     "m_Labels": [],
     "m_LiteralMode": false

@@ -41,6 +41,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AnimationCurve exposureCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     [SerializeField] private GameObject gameOverCanvas;
 
+    [Header("Current Level")]
+    [SerializeField] private LevelDataSO currentLevelData;
+
     private ColorAdjustments colorAdjustments;
     private float originalExposure = 0f;
 
@@ -69,6 +72,10 @@ public class LevelManager : MonoBehaviour
         
         wallMaterial.color = levelDatas[currentLevelIndex].wallColor;
         floorMaterial.color = levelDatas[currentLevelIndex].floorColor;
+
+        currentLevelData.floorColor = levelDatas[currentLevelIndex].floorColor;
+        currentLevelData.wallColor = levelDatas[currentLevelIndex].wallColor;
+
     }
 
     private void Update()

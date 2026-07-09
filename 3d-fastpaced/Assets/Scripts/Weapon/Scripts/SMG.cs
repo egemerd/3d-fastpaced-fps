@@ -2,13 +2,22 @@ using UnityEngine;
 
 public class SMG : Gun
 {
+    [SerializeField] private GameObject magazine;
+    [SerializeField] private float magazineForce;
+    [SerializeField] private float kickUpwardBias = 0.3f; // yukarý yönlü bias
     private WeaponRecoil recoil;
 
+    private Vector3 magazineInitialPos;
+    [SerializeField] private Rigidbody rb;
     protected override void Start()
     {
         base.Start();
         recoil = GetComponent<WeaponRecoil>();
+        magazineInitialPos = magazine.transform.localPosition;
+        ReloadKickAnimation(); // Baþlangýçta tetikleme animasyonunu tetikle
     }
+
+   
     public override void Update()
     {
         base.Update();
@@ -58,6 +67,26 @@ public class SMG : Gun
 
     private void ReloadKickAnimation()
     {
-
+        Debug.Log("Reload kick animation triggered");
+        Vector3 kickDirection = (mainCamera.forward + Vector3.up * kickUpwardBias).normalized;
+        rb.AddForce(kickDirection * magazineForce, ForceMode.VelocityChange);
     }
+
+    private void onMagazineDrop()
+    {
+        if (magazine != null)
+        {
+            magazine.SetActive(true);
+            Animator animator = magazine.GetComponent<Animator>();
+        }
+    }
+
+    private void onMagazineEnd()
+    {
+        ReloadKickAnimation();
+        //magazine.transform.position = magazineInitialPos;
+        //magazine.SetActive(false);
+    }
+
+    
 }
