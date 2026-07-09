@@ -37,8 +37,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _VignetteIntensity: 1
-    - _VignettePower: 2
-    m_Colors: []
+    - _Feather: 0.015
+    - _PostExposure: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Radius: 1.53
+    - _ShadowLift: 0
+    - _VignetteIntensity: 0
+    - _VignettePower: 0
+    - _WhiteAmount: -0.66
+    - _WhiteoutStrength: 0
+    m_Colors:
+    - _EffectCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

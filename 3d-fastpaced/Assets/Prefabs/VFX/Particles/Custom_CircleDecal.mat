@@ -25,6 +25,9 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _Complexity: 2
+    - _Distortion: 0.5
+    - _Seed: 0
     - _Smoothness: 0.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
