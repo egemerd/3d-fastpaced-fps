@@ -30,5 +30,9 @@ public class ParticlePaintManager : MonoBehaviour
         CurrentColor = color;
     }
 
+    public void RevertToDefault()
+    {
+        CurrentColor = Color.white;
+    }
 
 }
