@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5160401887177905935}
   - component: {fileID: 6832843125955464406}
   - component: {fileID: -415167416014271654}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: VFX_EnemyHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

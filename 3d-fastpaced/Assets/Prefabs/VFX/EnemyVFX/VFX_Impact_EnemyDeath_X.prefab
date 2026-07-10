@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8109687240491397945}
   - component: {fileID: 3277598332365532908}
   - component: {fileID: 8539677137146063566}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: VFX_Impact_EnemyDeath_X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4828,7 +4828,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &8539677137146063566
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4874,6 +4874,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4905,7 +4906,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &513860182968458721
 GameObject:
   m_ObjectHideFlags: 0
@@ -4917,7 +4917,7 @@ GameObject:
   - component: {fileID: 3834264634874673894}
   - component: {fileID: 7777363180103140434}
   - component: {fileID: 2497693628348224166}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Particle System (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9722,7 +9722,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &2497693628348224166
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9768,6 +9768,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -9799,7 +9800,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &2232474420173993284
 GameObject:
   m_ObjectHideFlags: 0
@@ -9811,7 +9811,7 @@ GameObject:
   - component: {fileID: 421629208522779375}
   - component: {fileID: 4967394856000770369}
   - component: {fileID: 5906569887713421382}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Particle System (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14616,7 +14616,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &5906569887713421382
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -14662,6 +14662,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -14693,7 +14694,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &4565801519571705155
 GameObject:
   m_ObjectHideFlags: 0
@@ -14705,7 +14705,7 @@ GameObject:
   - component: {fileID: 8635602362561551734}
   - component: {fileID: 3667973885850167626}
   - component: {fileID: 8541198947774002810}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Particle System (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19528,7 +19528,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &8541198947774002810
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -19574,6 +19574,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -19605,4 +19606,3 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0

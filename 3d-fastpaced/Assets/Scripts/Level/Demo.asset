@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Demo
   m_EditorClassIdentifier: Assembly-CSharp::LevelDataSO
   sliderSpeed: 0.5
-  wallColor: {r: 0.33333334, g: 0.39607844, b: 0.2509804, a: 0}
-  floorColor: {r: 0.5943396, g: 0.08130119, b: 0.30962148, a: 0}
+  sliperOpenAmount: 0
+  wallColor: {r: 0.9529412, g: 0.4117647, b: 0.050980393, a: 0}
+  floorColor: {r: 0.007843138, g: 0.28627452, b: 0.30588236, a: 0}
