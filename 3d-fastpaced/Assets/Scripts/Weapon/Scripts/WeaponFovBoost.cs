@@ -163,8 +163,8 @@ public class WeaponFovBoost : MonoBehaviour
             weaponCamera.fieldOfView = initialWeaponFov;
         }
 
-        targetPlayerFov = initialPlayerFov;
-        targetWeaponFov = initialWeaponFov;
+        targetPlayerFov = Mathf.Lerp(playerCamera.fieldOfView , initialPlayerFov ,Time.deltaTime * normalFovTransitionSpeed);
+        targetWeaponFov = Mathf.Lerp(weaponCamera.fieldOfView, initialWeaponFov, Time.deltaTime * normalFovTransitionSpeed);
     }
 
     /// <summary>

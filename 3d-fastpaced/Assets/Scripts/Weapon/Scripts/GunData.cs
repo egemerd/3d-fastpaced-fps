@@ -34,4 +34,10 @@ public class GunData : ScriptableObject
     public float shootAnimDuration;
     public float returnShootAnimDuration;
     public float movementDistance;
+
+    [Header("Camera Shoot Effect")]
+    public float zPositionAmount;
+    public float xRotationAmount;
+    public float yShakeAmount;
+
 }

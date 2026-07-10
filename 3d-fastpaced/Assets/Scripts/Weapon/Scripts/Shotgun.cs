@@ -31,7 +31,7 @@ public class Shotgun : Gun
         AudioManager.Instance.PlaySFX("Shotgun", 0.7f);
         if (cameraShootEffect != null)
         {
-            cameraShootEffect.ApplyShootImpact();
+            cameraShootEffect.ApplyShootImpact(gunData.zPositionAmount, gunData.xRotationAmount, gunData.yShakeAmount);
         }
         WeaponShootAnimation();
         for (int i = 0; i < gunData.bulletsPerShot; i++)
@@ -39,7 +39,7 @@ public class Shotgun : Gun
             Vector3 spreadDirection = GetSpreadDirection();
             
 
-            if (Physics.Raycast(mainCamera.position,spreadDirection,out hit,gunData.fireRange))
+            if (Physics.Raycast(mainCamera.position,spreadDirection,out hit,gunData.fireRange,gunData.whatToHit))
             {
                 StartBulletFire(hit.point,hit);
             }
