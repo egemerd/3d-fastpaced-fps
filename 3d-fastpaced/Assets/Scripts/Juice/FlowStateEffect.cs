@@ -39,7 +39,7 @@ public class FlowStateEffect : MonoBehaviour
 
     private void Update()
     {
-        if (InputManager.Instance.crouchAction.WasPressedThisFrame())
+        if (InputManager.Instance.switchWeaponAction4.WasPressedThisFrame())
         {
             ToggleFlowState();
         }

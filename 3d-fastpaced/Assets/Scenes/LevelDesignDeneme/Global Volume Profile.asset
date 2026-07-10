@@ -128,7 +128,7 @@ MonoBehaviour:
   active: 0
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 0
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2
@@ -222,7 +222,7 @@ MonoBehaviour:
     m_Value: -0.53
   contrast:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 4
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -278,7 +278,7 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0.04889976}
   highlights:
     m_OverrideState: 0
-    m_Value: {x: 1, y: 0.86455685, z: 0.9556744, w: 1}
+    m_Value: {x: 1, y: 0, z: 0.3318119, w: 1}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0

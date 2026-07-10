@@ -8,6 +8,8 @@ public class SpeedLinesController : MonoBehaviour
 
     private bool wasSliding = false;
 
+    [SerializeField] private float speedThreshold = 5f; // Hýz eþiði
+
     private void Awake()
     {
         // PlayerController'ý otomatik bul
@@ -36,13 +38,15 @@ public class SpeedLinesController : MonoBehaviour
         // Slide durumunu kontrol et
         bool isSliding = playerController.isSliding;
 
+        float playerSpeed = playerController.GetCurrentSpeed();
+
         // Slide baþladý
-        if (isSliding && !wasSliding)
+        if (playerSpeed >= speedThreshold)
         {
             speedlinesParticle.Play();
         }
         // Slide bitti
-        else if (!isSliding && wasSliding)
+        else 
         {
             speedlinesParticle.Stop();
         }

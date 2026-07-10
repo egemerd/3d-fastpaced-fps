@@ -188,6 +188,11 @@ public class PlayerController : MonoBehaviour
     {
         velocity.y = 0f;
     }
+
+    public float GetCurrentSpeed()
+    {
+        return horizontalVelocity.magnitude;
+    }
     public void Movement()
     {
         Vector3 desiredVelocity = CalculateDesiredVelocity();
