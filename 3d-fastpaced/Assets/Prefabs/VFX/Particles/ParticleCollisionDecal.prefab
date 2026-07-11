@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8962292581782830036}
   - component: {fileID: 2282933623109384906}
   - component: {fileID: 2056367904163901928}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ParticleCollisionDecal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,6 +89,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &2056367904163901928
 MeshCollider:

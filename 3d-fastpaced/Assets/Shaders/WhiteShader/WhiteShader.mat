@@ -57,6 +57,6 @@ Material:
     - _width: 1
     m_Colors:
     - _blackColor: {r: 0, g: 0, b: 0, a: 1}
-    - _whiteColor: {r: 1, g: 1, b: 1, a: 1}
+    - _whiteColor: {r: 0.6509434, g: 0.38381097, b: 0.38381097, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

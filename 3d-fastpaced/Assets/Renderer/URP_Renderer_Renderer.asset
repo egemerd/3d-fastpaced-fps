@@ -17,6 +17,26 @@ MonoBehaviour:
     renderPassEvent: 500
     outlineThickness: 4
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &-4283711945322719448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6b4686861ccb841bb4e71efb1b87f3, type: 3}
+  m_Name: WhiteoutRevealFeature
+  m_EditorClassIdentifier: Assembly-CSharp::WhiteoutRevealFeature
+  m_Active: 0
+  settings:
+    excludedLayers:
+      serializedVersion: 2
+      m_Bits: 33024
+    stencilWriteShader: {fileID: 4800000, guid: 679af34a692e0804880fd4e8b635be74, type: 3}
+    whiteoutShader: {fileID: 4800000, guid: d6a5cc2f621095d4e946ce029bd302f3, type: 3}
+    renderPassEvent: 300
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,7 +65,9 @@ MonoBehaviour:
   - {fileID: 8583916667154451935}
   - {fileID: -7032549269546944670}
   - {fileID: 758558792116160238}
-  m_RendererFeatureMap: dfcd4bafba32207762b7380bb35d679eee4655d133f1860a
+  - {fileID: -4283711945322719448}
+  - {fileID: 1222357846617308612}
+  m_RendererFeatureMap: dfcd4bafba32207762b7380bb35d679eee4655d133f1860a2817f18aae328dc4c43d0934fcaff610
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -94,6 +116,23 @@ MonoBehaviour:
   passIndex: 0
   bindDepthStencilAttachment: 0
   m_Version: 1
+--- !u!114 &1222357846617308612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f855413a36f78d42adb70051da314aa, type: 3}
+  m_Name: EdgeDetection
+  m_EditorClassIdentifier: Assembly-CSharp::EdgeDetection
+  m_Active: 0
+  settings:
+    renderPassEvent: 500
+    outlineThickness: 3
+    outlineColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &8583916667154451935
 MonoBehaviour:
   m_ObjectHideFlags: 0
