@@ -29,13 +29,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6b4686861ccb841bb4e71efb1b87f3, type: 3}
   m_Name: WhiteoutRevealFeature
   m_EditorClassIdentifier: Assembly-CSharp::WhiteoutRevealFeature
-  m_Active: 0
+  m_Active: 1
   settings:
     excludedLayers:
       serializedVersion: 2
       m_Bits: 33024
     stencilWriteShader: {fileID: 4800000, guid: 679af34a692e0804880fd4e8b635be74, type: 3}
-    whiteoutShader: {fileID: 4800000, guid: d6a5cc2f621095d4e946ce029bd302f3, type: 3}
+    whiteoutShader: {fileID: 4800000, guid: 34fc3d9f4cfef8a489861663d0ff4af8, type: 3}
     renderPassEvent: 300
 --- !u!114 &11400000
 MonoBehaviour:
