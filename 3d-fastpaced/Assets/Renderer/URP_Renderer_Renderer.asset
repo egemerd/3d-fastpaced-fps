@@ -15,8 +15,30 @@ MonoBehaviour:
   m_Active: 0
   settings:
     renderPassEvent: 500
-    outlineThickness: 4
-    outlineColor: {r: 0, g: 0, b: 0, a: 1}
+    outlineThickness: 3
+    outlineColor: {r: 0.6509434, g: 0.24011216, b: 0.18115878, a: 1}
+--- !u!114 &-4848821747590584139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa432b7cae4198a43b1a9a7cb70e4ecd, type: 3}
+  m_Name: EdgeDetection2
+  m_EditorClassIdentifier: Assembly-CSharp::EdgeDetection2
+  m_Active: 0
+  settings:
+    renderPassEvent: 500
+    outlineThickness: 5
+    outlineColor: {r: 1, g: 0, b: 0.15351725, a: 1}
+    wiggleAmount: 100.82
+    wiggleScale: 0.07
+    thicknessVariation: 1
+    thicknessNoiseScale: 0.13
+    thicknessThreshold: 0
 --- !u!114 &-4283711945322719448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +89,8 @@ MonoBehaviour:
   - {fileID: 758558792116160238}
   - {fileID: -4283711945322719448}
   - {fileID: 6253085366937135331}
-  m_RendererFeatureMap: dfcd4bafba32207762b7380bb35d679eee4655d133f1860a2817f18aae328dc4e3287bce026cc756
+  - {fileID: -4848821747590584139}
+  m_RendererFeatureMap: dfcd4bafba32207762b7380bb35d679eee4655d133f1860a2817f18aae328dc4e3287bce026cc756b5a8ac8b4f86b5bc
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -131,13 +154,13 @@ MonoBehaviour:
   m_Active: 1
   settings:
     renderPassEvent: 500
-    outlineThickness: 9
+    outlineThickness: 8
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
-    wiggleAmount: 4.04
+    wiggleAmount: 1.6
     wiggleScale: 0.02
-    thicknessVariation: 0.335
+    thicknessVariation: 0.628
     thicknessNoiseScale: -6.02
-    thicknessThreshold: 0.322
+    thicknessThreshold: 0.385
 --- !u!114 &8583916667154451935
 MonoBehaviour:
   m_ObjectHideFlags: 0

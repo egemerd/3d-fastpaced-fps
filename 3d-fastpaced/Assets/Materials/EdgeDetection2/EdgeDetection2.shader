@@ -162,7 +162,7 @@ Shader "Hidden/Edge Detection 2"
                 float normal_threshold = 1 / 4.0f;
                 edge_normal = edge_normal > normal_threshold ? 1 : 0;
                 
-                float luminance_threshold = 1 / 0.5f;
+                float luminance_threshold = 0.15f;
                 edge_luminance = edge_luminance > luminance_threshold ? 1 : 0;
                 
                 // Combine the edges from depth/normals/luminance using the max operator.

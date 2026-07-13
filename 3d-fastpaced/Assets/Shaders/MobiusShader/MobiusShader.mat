@@ -38,7 +38,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _HatchTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d7bdd1a257792d64e945309f1335af1b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 091a85d300c62014e97dd2f9ddbbb518, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,15 +59,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FirstShadowStep: -0.156
-    - _FirstShadowThreshold: 0.94
+    - _FirstShadowStep: 0.01
+    - _FirstShadowThreshold: 0.847
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SecondShadowStep: 0
-    - _SecondShadowThreshold: 0.75
-    - _ShadowStep: 0.25
-    - _ThirdShadowThreshold: 0.5
+    - _SecondShadowThreshold: 0.726
+    - _ShadowStep: 5.25
+    - _TextureScale: 49.4
+    - _ThirdShadowThreshold: 0.433
     m_Colors:
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 0.764151, g: 0.2270826, b: 0.2270826, a: 1}
+    - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowPatternColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
