@@ -39,6 +39,10 @@ MonoBehaviour:
     thicknessVariation: 1
     thicknessNoiseScale: 0.13
     thicknessThreshold: 0
+    depthThreshold: 0.005
+    normalThreshold: 0.25
+    luminanceThreshold: 0.15
+    luminanceSampleSpread: 1
 --- !u!114 &-4283711945322719448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6b4686861ccb841bb4e71efb1b87f3, type: 3}
   m_Name: WhiteoutRevealFeature
   m_EditorClassIdentifier: Assembly-CSharp::WhiteoutRevealFeature
-  m_Active: 1
+  m_Active: 0
   settings:
     excludedLayers:
       serializedVersion: 2
@@ -131,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
   m_Name: FullScreenPassRendererFeature
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
-  m_Active: 1
+  m_Active: 0
   injectionPoint: 600
   fetchColorBuffer: 1
   requirements: 0
@@ -161,6 +165,10 @@ MonoBehaviour:
     thicknessVariation: 0.628
     thicknessNoiseScale: -6.02
     thicknessThreshold: 0.385
+    depthThreshold: 0.005
+    normalThreshold: 0.25
+    luminanceThreshold: 0.21
+    luminanceSampleSpread: 1
 --- !u!114 &8583916667154451935
 MonoBehaviour:
   m_ObjectHideFlags: 0

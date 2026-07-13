@@ -51,7 +51,10 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ShadowScale: 0.7
+    - _UseGradient: 0
     m_Colors:
+    - _GradientColorBottom: {r: 0.18867922, g: 0.047169805, b: 0.047169805, a: 1}
+    - _GradientColotTop: {r: 0.8962264, g: 0.6721698, b: 0.6721698, a: 1}
     - _MainColor: {r: 0.5566038, g: 0.2546725, b: 0.2546725, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
