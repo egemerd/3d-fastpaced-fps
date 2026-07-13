@@ -18,6 +18,11 @@ public class EdgeDetection2 : ScriptableRendererFeature
         private static readonly int ThicknessNoiseScaleProperty = Shader.PropertyToID("_ThicknessNoiseScale");
         private static readonly int ThicknessThresholdProperty = Shader.PropertyToID("_ThicknessThreshold");
 
+        private static readonly int DepthThresholdProperty = Shader.PropertyToID("_DepthThreshold");
+        private static readonly int NormalThresholdProperty = Shader.PropertyToID("_NormalThreshold");
+        private static readonly int LuminanceThresholdProperty = Shader.PropertyToID("_LuminanceThreshold");
+        private static readonly int LuminanceSampleSpreadProperty = Shader.PropertyToID("_LuminanceSampleSpread");
+
         public EdgeDetectionPass()
         {
             profilingSampler = new ProfilingSampler(nameof(EdgeDetectionPass));
@@ -35,6 +40,11 @@ public class EdgeDetection2 : ScriptableRendererFeature
             material.SetFloat(ThicknessVariationProperty, settings.thicknessVariation);
             material.SetFloat(ThicknessNoiseScaleProperty, settings.thicknessNoiseScale);
             material.SetFloat(ThicknessThresholdProperty, settings.thicknessThreshold);
+
+            material.SetFloat(DepthThresholdProperty, settings.depthThreshold);
+            material.SetFloat(NormalThresholdProperty, settings.normalThreshold);
+            material.SetFloat(LuminanceThresholdProperty, settings.luminanceThreshold);
+            material.SetFloat(LuminanceSampleSpreadProperty, settings.luminanceSampleSpread);
         }
 
         private class PassData
@@ -76,6 +86,20 @@ public class EdgeDetection2 : ScriptableRendererFeature
         [Range(0, 1)]
         [Tooltip("Noise'un hangi degerin ustunde 'kalin' bolge sayilacagini belirler.")]
         public float thicknessThreshold = 0.5f;
+
+        [Header("Edge Detection Thresholds")]
+        [Tooltip("Derinlik farkinin kenar sayilmasi icin gereken minimum esik. Dusuk = daha fazla ince detay yakalanir, gurultu artar.")]
+        [Range(0.0001f, 0.05f)] public float depthThreshold = 0.005f;
+
+        [Tooltip("Yuzey normal farkinin kenar sayilmasi icin gereken esik. Dusuk = yumusak yuzeylerde bile cizgi cikar.")]
+        [Range(0.01f, 1f)] public float normalThreshold = 0.25f;
+
+        [Tooltip("Golge/isik gecisi gibi renk farklarinin kenar sayilmasi icin esik. Toon ramp'inin band kontrastina gore ayarla.")]
+        [Range(0.01f, 1.41f)] public float luminanceThreshold = 0.15f;
+
+        [Header("Soft Shadow Edge - Luminance Sample Spread")]
+        [Tooltip("Karakter uzerindeki yumusak NdotL/golge gecislerini yakalamak icin luminance orneklerini kac texel mesafeden alacagini belirler. 1 = eski davranis (dar), yukselttikce yumusak gecisler de kenar olarak yakalanir.")]
+        [Range(1f, 20f)] public float luminanceSampleSpread = 1f;
     }
 
     [SerializeField] private EdgeDetectionSettings settings;

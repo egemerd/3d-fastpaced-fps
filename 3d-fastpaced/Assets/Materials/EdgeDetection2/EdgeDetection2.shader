@@ -13,6 +13,11 @@ Shader "Hidden/Edge Detection 2"
         _ThicknessVariation ("Thickness Variation", Range(0, 1)) = 0.6
         _ThicknessNoiseScale ("Thickness Noise Scale (buyuk = genis bolgeler)", Float) = 4.0
         _ThicknessThreshold ("Thickness Threshold", Range(0, 1)) = 0.5
+
+        [Header(Edge Detection Thresholds)]
+        _DepthThreshold ("Depth Threshold", Range(0.0001, 0.05)) = 0.005
+        _NormalThreshold ("Normal Threshold", Range(0.01, 1)) = 0.25
+        _LuminanceThreshold ("Luminance Threshold", Range(0.01, 1.41)) = 0.15
     }
 
     SubShader
@@ -46,6 +51,10 @@ Shader "Hidden/Edge Detection 2"
             float _ThicknessVariation;
             float _ThicknessNoiseScale;
             float _ThicknessThreshold;
+
+            float _DepthThreshold;
+            float _NormalThreshold;
+            float _LuminanceThreshold;
 
             #pragma vertex Vert // vertex shader is provided by the Blit.hlsl include
             #pragma fragment frag
@@ -155,15 +164,10 @@ Shader "Hidden/Edge Detection 2"
                 float edge_normal = RobertsCross(normal_samples);
                 float edge_luminance = RobertsCross(luminance_samples);
                 
-                // Threshold the edges (discontinuity must be above certain threshold to be counted as an edge). The sensitivities are hardcoded here.
-                float depth_threshold = 1 / 200.0f;
-                edge_depth = edge_depth > depth_threshold ? 1 : 0;
-                
-                float normal_threshold = 1 / 4.0f;
-                edge_normal = edge_normal > normal_threshold ? 1 : 0;
-                
-                float luminance_threshold = 0.15f;
-                edge_luminance = edge_luminance > luminance_threshold ? 1 : 0;
+                // Threshold the edges (discontinuity must be above certain threshold to be counted as an edge). Now inspector-adjustable.
+                edge_depth = edge_depth > _DepthThreshold ? 1 : 0;
+                edge_normal = edge_normal > _NormalThreshold ? 1 : 0;
+                edge_luminance = edge_luminance > _LuminanceThreshold ? 1 : 0;
                 
                 // Combine the edges from depth/normals/luminance using the max operator.
                 float edge = max(edge_depth, max(edge_normal, edge_luminance));
