@@ -5,15 +5,6 @@ Shader "Hidden/Edge Detection 2"
         _OutlineThickness ("Outline Thickness", Float) = 1
         _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
 
-        [Header(Moebius Wiggle)]
-        _WiggleAmount ("Wiggle Amount (texel)", Float) = 2.0
-        _WiggleScale ("Wiggle Noise Scale", Float) = 0.02
-
-        [Header(Moebius Thickness Variation)]
-        _ThicknessVariation ("Thickness Variation", Range(0, 1)) = 0.6
-        _ThicknessNoiseScale ("Thickness Noise Scale (buyuk = genis bolgeler)", Float) = 4.0
-        _ThicknessThreshold ("Thickness Threshold", Range(0, 1)) = 0.5
-
         [Header(Edge Detection Thresholds)]
         _DepthThreshold ("Depth Threshold", Range(0.0001, 0.05)) = 0.005
         _NormalThreshold ("Normal Threshold", Range(0.01, 1)) = 0.25
@@ -45,12 +36,6 @@ Shader "Hidden/Edge Detection 2"
 
             float _OutlineThickness;
             float4 _OutlineColor;
-
-            float _WiggleAmount;
-            float _WiggleScale;
-            float _ThicknessVariation;
-            float _ThicknessNoiseScale;
-            float _ThicknessThreshold;
 
             float _DepthThreshold;
             float _NormalThreshold;
@@ -88,61 +73,15 @@ Shader "Hidden/Edge Detection 2"
                 return color.r * 0.3 + color.g * 0.59 + color.b * 0.11;
             }
 
-            // --- Moebius stili icin: el yapimi basit bir value noise fonksiyonu ---
-            // Shader Graph'taki "Simple Noise" node'unun raw HLSL karsiligi gibi dusun.
-            float Hash21(float2 p)
-            {
-                p = frac(p * float2(123.34, 456.21));
-                p += dot(p, p + 45.32);
-                return frac(p.x * p.y);
-            }
-
-            float ValueNoise(float2 p)
-            {
-                float2 i = floor(p);
-                float2 f = frac(p);
-
-                float a = Hash21(i);
-                float b = Hash21(i + float2(1.0, 0.0));
-                float c = Hash21(i + float2(0.0, 1.0));
-                float d = Hash21(i + float2(1.0, 1.0));
-
-                // Smoothstep ile yumusak gecis (blocky degil, organik gorunum icin)
-                float2 u = f * f * (3.0 - 2.0 * f);
-                return lerp(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-            }
-
             half4 frag(Varyings IN) : SV_TARGET
             {
                 // Screen-space coordinates which we will use to sample.
                 float2 uv = IN.texcoord;
                 float2 texel_size = float2(1.0 / _ScreenParams.x, 1.0 / _ScreenParams.y);
 
-                // --- MOEBIUS WIGGLE ---
-                // Orijinal uv'yi dusuk frekansli noise ile hafifce kaydiriyoruz.
-                // Bu, kenar tespitinin "nereye baktigini" titretir - duz cizgi yerine
-                // elle cizilmis, titrek bir cizgi hissi verir.
-                float2 wiggleNoise = float2(
-                    ValueNoise(uv / _WiggleScale),
-                    ValueNoise(uv / _WiggleScale + 17.0)
-                ) - 0.5; // -0.5..0.5 araligina cek, her iki yone de kayabilsin
-                uv += wiggleNoise * texel_size * _WiggleAmount;
-
-                // --- MOEBIUS THICKNESS VARIATION ---
-                // Kalinligi da ayri, daha yavas degisen bir noise ile belirli bolgelerde
-                // kalin, belirli bolgelerde ince olacak sekilde moduluyoruz.
-                float thicknessNoise = ValueNoise(uv / _ThicknessNoiseScale);
-                float thicknessFactor = smoothstep(_ThicknessThreshold - 0.15, _ThicknessThreshold + 0.15, thicknessNoise);
-                float variedThickness = lerp(
-                    _OutlineThickness * (1.0 - _ThicknessVariation),
-                    _OutlineThickness * (1.0 + _ThicknessVariation),
-                    thicknessFactor
-                );
-                variedThickness = max(variedThickness, 0.0);
-
                 // Generate 4 diagonally placed samples.
-                const float half_width_f = floor(variedThickness * 0.5);
-                const float half_width_c = ceil(variedThickness * 0.5);
+                const float half_width_f = floor(_OutlineThickness * 0.5);
+                const float half_width_c = ceil(_OutlineThickness * 0.5);
 
                 float2 uvs[4];
                 uvs[0] = uv + texel_size * float2(half_width_f, half_width_c) * float2(-1, 1);  // top left

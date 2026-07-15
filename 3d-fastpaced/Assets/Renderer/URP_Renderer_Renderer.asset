@@ -16,7 +16,7 @@ MonoBehaviour:
   settings:
     renderPassEvent: 500
     outlineThickness: 3
-    outlineColor: {r: 0.6509434, g: 0.24011216, b: 0.18115878, a: 1}
+    outlineColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &-4848821747590584139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,16 +158,16 @@ MonoBehaviour:
   m_Active: 1
   settings:
     renderPassEvent: 500
-    outlineThickness: 8
+    outlineThickness: 3
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
-    wiggleAmount: 1.6
+    wiggleAmount: 1.09
     wiggleScale: 0.02
-    thicknessVariation: 0.628
-    thicknessNoiseScale: -6.02
-    thicknessThreshold: 0.385
-    depthThreshold: 0.005
-    normalThreshold: 0.25
-    luminanceThreshold: 0.21
+    thicknessVariation: 0.211
+    thicknessNoiseScale: -0.13
+    thicknessThreshold: 0.466
+    depthThreshold: 0.0163
+    normalThreshold: 0.472
+    luminanceThreshold: 0.3
     luminanceSampleSpread: 1
 --- !u!114 &8583916667154451935
 MonoBehaviour:

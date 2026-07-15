@@ -12,11 +12,6 @@ public class EdgeDetection2 : ScriptableRendererFeature
 
         private static readonly int OutlineThicknessProperty = Shader.PropertyToID("_OutlineThickness");
         private static readonly int OutlineColorProperty = Shader.PropertyToID("_OutlineColor");
-        private static readonly int WiggleAmountProperty = Shader.PropertyToID("_WiggleAmount");
-        private static readonly int WiggleScaleProperty = Shader.PropertyToID("_WiggleScale");
-        private static readonly int ThicknessVariationProperty = Shader.PropertyToID("_ThicknessVariation");
-        private static readonly int ThicknessNoiseScaleProperty = Shader.PropertyToID("_ThicknessNoiseScale");
-        private static readonly int ThicknessThresholdProperty = Shader.PropertyToID("_ThicknessThreshold");
 
         private static readonly int DepthThresholdProperty = Shader.PropertyToID("_DepthThreshold");
         private static readonly int NormalThresholdProperty = Shader.PropertyToID("_NormalThreshold");
@@ -35,11 +30,6 @@ public class EdgeDetection2 : ScriptableRendererFeature
 
             material.SetFloat(OutlineThicknessProperty, settings.outlineThickness);
             material.SetColor(OutlineColorProperty, settings.outlineColor);
-            material.SetFloat(WiggleAmountProperty, settings.wiggleAmount);
-            material.SetFloat(WiggleScaleProperty, settings.wiggleScale);
-            material.SetFloat(ThicknessVariationProperty, settings.thicknessVariation);
-            material.SetFloat(ThicknessNoiseScaleProperty, settings.thicknessNoiseScale);
-            material.SetFloat(ThicknessThresholdProperty, settings.thicknessThreshold);
 
             material.SetFloat(DepthThresholdProperty, settings.depthThreshold);
             material.SetFloat(NormalThresholdProperty, settings.normalThreshold);
@@ -70,22 +60,6 @@ public class EdgeDetection2 : ScriptableRendererFeature
         public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingTransparents;
         [Range(0, 15)] public int outlineThickness = 3;
         public Color outlineColor = Color.black;
-
-        [Header("Moebius Wiggle")]
-        [Tooltip("Cizginin ne kadar titreyecegi (texel biriminde). 0 = duz cizgi, buyudukce daha titrek.")]
-        public float wiggleAmount = 2.0f;
-        [Tooltip("Titreme noise'unun buyuklugu. Kucuk = sik/hizli titreme, buyuk = yumusak/yavas dalgalanma.")]
-        public float wiggleScale = 0.02f;
-
-        [Header("Moebius Thickness Variation")]
-        [Range(0, 1)]
-        [Tooltip("Kalinlik farkinin siddeti. 0 = her yerde ayni kalinlik, 1 = maksimum kalin/ince fark.")]
-        public float thicknessVariation = 0.6f;
-        [Tooltip("Kalin/ince bolgelerin buyuklugu. Buyuk deger = genis, yavas degisen bolgeler.")]
-        public float thicknessNoiseScale = 4.0f;
-        [Range(0, 1)]
-        [Tooltip("Noise'un hangi degerin ustunde 'kalin' bolge sayilacagini belirler.")]
-        public float thicknessThreshold = 0.5f;
 
         [Header("Edge Detection Thresholds")]
         [Tooltip("Derinlik farkinin kenar sayilmasi icin gereken minimum esik. Dusuk = daha fazla ince detay yakalanir, gurultu artar.")]
