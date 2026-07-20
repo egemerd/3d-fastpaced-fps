@@ -80,16 +80,10 @@ public class Pistol : Gun
     {
         RaycastHit hit;
         AudioManager.Instance.PlaySFX("LaserShot" , 1.4f);
-        if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange))
+        if (Physics.Raycast(mainCamera.position, mainCamera.forward, out hit, gunData.fireRange, gunData.whatToHit))
         {
             StartBulletFire(hit.point, hit);
             Debug.Log("Pistol hit: " + hit.collider.name);
-            if (hit.collider.CompareTag("Enemy"))
-            {
-                Debug.Log("Pistol hit enemy: " + hit.collider.name);
-                
-                
-            }
         }
         else
         {

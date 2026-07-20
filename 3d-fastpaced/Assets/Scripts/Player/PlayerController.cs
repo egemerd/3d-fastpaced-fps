@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private InputManager input;
     CameraShakeMovement cameraShake;
     Climbing climbing;
+    PlayerMovementCamera playerMovementCamera;
 
     private Camera mainCamera;
     private CharacterController characterController;
@@ -23,17 +24,11 @@ public class PlayerController : MonoBehaviour
     [Header("Input")]
     private Vector2 moveInput;
     private Vector2 lookInput;
-    private float verticalRotation;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float sprintMultiplier = 2f;
-    [SerializeField] private float airMovementController = 0.8f;
-
-
-    [Header("Look")]
-    [SerializeField] private float mouseSens;
-    [SerializeField] private float lookRange;
+    [SerializeField] private float groundStopDeceleration = 10f;
 
     [Header("Jumping")]
     [SerializeField] private float jumpHeight = 2f;
@@ -41,11 +36,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = -15f;
     [SerializeField] private float fallGravity = 1.5f;
     [SerializeField] private float jumpGravity = 1.5f;
-    [SerializeField] private float airControlTime = -9.81f;
+    [SerializeField] private float airControlSpeed = -9.81f;
     [SerializeField] private float jumpRayOffset = 0.5f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private float coyoteTime = 0.15f;
+    [SerializeField] private float airSpeedDecay = 3f;   // YENÝ
+
 
     [Header("Bunny Hop")]
     [SerializeField] private float bunnyHopSpeedBoost = 3f; // Hýz artýþý miktarý
@@ -59,13 +56,12 @@ public class PlayerController : MonoBehaviour
     [Header("Sliding")]
     [SerializeField] private float slideSpeed = 15f;
     [SerializeField] private float slideSpeedDecay = 5f;
-    [SerializeField] private float minSlideSpeed = 1f; // min to stay sliding
     [SerializeField] private float minSlideInitialSpeed = 1f; // min to start sliding
-    [SerializeField] private float slideDuration = 2f;
     [SerializeField] private float slideCooldown = 0.1f;
     [SerializeField] private float slideControlMultiplier = 0.5f;
     [SerializeField] private float crouchHeight = 1f;
     [SerializeField] private float standingHeight = 2f;
+    [SerializeField] private Vector3 slidingRotation;
 
     [Header("Slide Jump Boost")]
     [SerializeField] private float slideJumpHeightMultiplier = 1.5f; // Jump boost (1.5 = 50% higher)
@@ -117,8 +113,8 @@ public class PlayerController : MonoBehaviour
 
         cameraShake = GetComponent<CameraShakeMovement>();
         climbing = GetComponent<Climbing>();    
+        playerMovementCamera = GetComponent<PlayerMovementCamera>();    
 
-        
 
         originalCameraHeight = cameraHead.localPosition.y;
         targetCameraHeight = originalCameraHeight;
@@ -156,7 +152,7 @@ public class PlayerController : MonoBehaviour
             velocity.y = 0f;
         }
         SmoothCameraHeight();
-        Debug.Log("[PlayerController] isSliding" + isSliding);
+
         currentState.UpdateState(this,climbing);
         //cameraShake.SprintSway(moveInput); 
         //cameraShake.SprintFovBoost(isSprinting,isSliding,moveInput);
@@ -193,64 +189,86 @@ public class PlayerController : MonoBehaviour
     {
         velocity.y = 0f;
     }
+
+    public float GetCurrentSpeed()
+    {
+        return horizontalVelocity.magnitude;
+    }
     public void Movement()
     {
-        float speedMultiplier = isSprinting  ? sprintMultiplier : 1f;
-        Vector3 desiredVelocity = moveDirection * moveSpeed * speedMultiplier;
+        Vector3 desiredVelocity = CalculateDesiredVelocity();
 
         if (isSliding)
         {
-            Vector3 verticalMove2 = velocity * Time.deltaTime;
-            Vector3 horizontalMove2 = horizontalVelocity * Time.deltaTime;
-            Vector3 finalMove2 = horizontalMove2 + verticalMove2;
-            characterController.Move(finalMove2);
-            return; 
+            ApplySlideMovement();
+            return;
         }
+
         if (isGrounded)
         {
-            float currentSpeed = horizontalVelocity.magnitude;
-            float desiredSpeed = desiredVelocity.magnitude;
-            if (!isMoving)
-            {
-                //hýzlý dur
-                horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero,
-                    10f * Time.deltaTime); 
-            }
-            else if (!isSprinting && currentSpeed > desiredSpeed && currentSpeed < (moveSpeed * sprintMultiplier * 1.1f))
-            {
-                horizontalVelocity = desiredVelocity;
-            }
-            else if (currentSpeed>desiredSpeed)
-            {
-                Vector3 currentDirection = horizontalVelocity.normalized;
-
-                float newSpeed = currentSpeed - (slideSpeedDecay * Time.deltaTime);
-                newSpeed = Mathf.Max(newSpeed, desiredSpeed);
-
-                Vector3 targetDirection = Vector3.Lerp(currentDirection, moveDirection, 
-                    momentumDecayRate * Time.deltaTime);
-
-                horizontalVelocity = targetDirection.normalized * newSpeed;
-            
-            }
-            else
-            {
-                horizontalVelocity = desiredVelocity;
-
-            }
-
+            horizontalVelocity = CalculateGroundedVelocity(desiredVelocity);
         }
         else
         {
-            horizontalVelocity = Vector3.Lerp(horizontalVelocity, desiredVelocity, 
-                airControlTime * Time.deltaTime);
+            horizontalVelocity = CalculateAirVelocity(desiredVelocity);
         }
 
-        Vector3 verticalMove = velocity * Time.deltaTime;
-        Vector3 horizontalMove = horizontalVelocity * Time.deltaTime;   
-        Vector3 finalMove = horizontalMove + verticalMove;
-        characterController.Move(finalMove);
+        ApplyFinalMovement();
+    }
 
+    private Vector3 CalculateDesiredVelocity()
+    {
+        float speedMultiplier = isSprinting ? sprintMultiplier : 1f;
+        return moveDirection * moveSpeed * speedMultiplier;
+    }
+
+    private void ApplySlideMovement()
+    {
+        Vector3 verticalMove = velocity * Time.deltaTime;
+        Vector3 horizontalMove = horizontalVelocity * Time.deltaTime;
+        characterController.Move(horizontalMove + verticalMove);
+    }
+
+    private Vector3 CalculateGroundedVelocity(Vector3 desiredVelocity)
+    {
+        // Yerdeyken hýz fazlasý HER ZAMAN anlýk kesilir (momentum korunmaz).
+        // Slide-jump sonrasý yere inince "sarhoþluk" hissi yaratmamak için bilinçli tercih.
+
+        if (!isMoving)
+        {
+            return Vector3.Lerp(horizontalVelocity, Vector3.zero, groundStopDeceleration * Time.deltaTime);
+        }
+
+        // Sprint býrakma dahil her durumda hedefe anlýk geç.
+        return desiredVelocity;
+    }
+
+    private Vector3 CalculateAirVelocity(Vector3 desiredVelocity)
+    {
+        float currentSpeed = horizontalVelocity.magnitude;
+        float desiredSpeed = desiredVelocity.magnitude;
+
+        if (currentSpeed > desiredSpeed)
+        {
+            // Yön input'a doðru yumuþakça çevrilir
+            Vector3 currentDirection = horizontalVelocity.normalized;
+            Vector3 targetDirection = Vector3.Lerp(currentDirection, moveDirection, airControlSpeed * Time.deltaTime);
+
+            // Hýz yavaþça normale doðru azalýr (anlýk kesilmez, boost hissi korunur ama sonsuza kadar sürmez)
+            float newSpeed = currentSpeed - (airSpeedDecay * Time.deltaTime);
+            newSpeed = Mathf.Max(newSpeed, desiredSpeed);
+
+            return targetDirection.normalized * newSpeed;
+        }
+
+        return Vector3.Lerp(horizontalVelocity, desiredVelocity, airControlSpeed * Time.deltaTime);
+    }
+
+    private void ApplyFinalMovement()
+    {
+        Vector3 verticalMove = velocity * Time.deltaTime;
+        Vector3 horizontalMove = horizontalVelocity * Time.deltaTime;
+        characterController.Move(horizontalMove + verticalMove);
     }
 
     private void GroundCheck()
@@ -260,6 +278,12 @@ public class PlayerController : MonoBehaviour
             Vector3.down , 
             (characterController.height/2 + jumpRayOffset),
             groundMask);
+        bool isAscending = velocity.y > 0.1f;
+        if (isAscending)
+        {
+            physicsGrounded = false;
+        }
+
         if (physicsGrounded && !wasGrounded)
         {
             OnLanded();
@@ -268,6 +292,11 @@ public class PlayerController : MonoBehaviour
         {
             lastGroundedTime = Time.time;
             isGrounded = true;
+        }
+        else if (isAscending)
+        {
+            // Yükseliyorsak coyote time'ý hiç sorgulama, kesin olarak havadayýz.
+            isGrounded = false;
         }
         else
         {
@@ -279,12 +308,12 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = -2f;
         }
+
     }
     private void OnLanded()
     {
         lastLandTime = Time.time;
         canBunnyHop = true;
-        Debug.Log("[BunnyHop] Landed! Bunny hop window baþladý");
     }
 
     private void CheckBunnyHopWindow()
@@ -303,7 +332,6 @@ public class PlayerController : MonoBehaviour
         }
 
         bunnyHopCoroutine = StartCoroutine(BunnyHopBoost());
-        Debug.Log("[BunnyHop] Boost aktif! Hýz artýþý: " + bunnyHopSpeedBoost);
     }
 
 
@@ -345,8 +373,8 @@ public class PlayerController : MonoBehaviour
             float totalForwardSpeed = currentSlideSpeed + slideJumpForwardBoost;
             horizontalVelocity = slideDirection * totalForwardSpeed;
 
-            Debug.Log($"Slide Jump: Speed = {totalForwardSpeed}, Direction = {slideDirection}");
-            Debug.Log($"Horizontal Velocity after Slide Jump: {horizontalVelocity.magnitude}");
+            //Debug.Log($"Slide Jump: Speed = {totalForwardSpeed}, Direction = {slideDirection}");
+            //Debug.Log($"Horizontal Velocity after Slide Jump: {horizontalVelocity.magnitude}");
         }
         else
         {
@@ -395,6 +423,7 @@ public class PlayerController : MonoBehaviour
 
     public void CalculateMoveDirection()
     {
+        if (InputManager.Instance.IsInputLocked) return;
         Vector3 forward = transform.forward;
         Vector3 right = transform.right;
         forward.y = 0;
@@ -448,15 +477,18 @@ public class PlayerController : MonoBehaviour
 
     public void HandleSliding()
     {
-        if (!isSliding) return; 
+        if (!isSliding) return;
 
-        bool crouchReleased = input.crouchAction.ReadValue<float>() == 0f;
-        bool sprintReleased = !isSprinting;
-
-        if (crouchReleased || sprintReleased)
+        if (!InputManager.Instance.IsInputLocked) // YENÝ: sadece kilitli DEÐÝLKEN input kontrolü yap
         {
-            slideEnded = true;
-            return; 
+            bool crouchReleased = input.crouchAction.ReadValue<float>() == 0f;
+            bool sprintReleased = !isSprinting;
+
+            if (crouchReleased || sprintReleased)
+            {
+                slideEnded = true;
+                return;
+            }
         }
 
         slideTimer += Time.deltaTime;
@@ -476,7 +508,6 @@ public class PlayerController : MonoBehaviour
 
     public void StartSlide()
     {
-        Debug.Log("Starting Slide");
         slideEnded = false;
         isSliding = true;
         slideTimer = 0f;
@@ -488,17 +519,21 @@ public class PlayerController : MonoBehaviour
         //cameraHead.localPosition = new Vector3(0, -0.150000006f, -0.0160000008f);
         characterController.height = crouchHeight;
         targetCameraHeight = originalCameraHeight - (standingHeight - crouchHeight);
+        bodyTransform.localRotation = Quaternion.Euler(slidingRotation.x, 0f, 0f);
 
-        
+
+
     }
 
     public void StopSlide()
     {
-        Debug.Log("Stopping Slide");
         isSliding = false;
 
         characterController.height = standingHeight;
         targetCameraHeight = originalCameraHeight;
+
+        bodyTransform.localRotation = Quaternion.Euler(0f, bodyTransform.localRotation.y, bodyTransform.localRotation.z);
+
         //cameraHead.localPosition = originalHeadTransform.localPosition;
         StartCoroutine(SlideCooldown());
         
@@ -510,6 +545,13 @@ public class PlayerController : MonoBehaviour
         canSlide = false;
         yield return new WaitForSeconds(slideCooldown);
         canSlide = true;
+    }
+
+    public void SlideCameraMovement()
+    {
+        Debug.Log("Sliding Camera Movement");   
+        playerMovementCamera.UpdateTiltBlend();
+        playerMovementCamera.LerpCamera();
     }
 
     private void SmoothCameraHeight()

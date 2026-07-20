@@ -23,11 +23,22 @@ public class ParticlePaint : MonoBehaviour
     private ParticleSystem ps;
     private ParticleCollisionEvent[] collisionEvents;
 
+    private Color originalColor;
+
+    private Color EffectiveColor =>
+        ParticlePaintManager.Instance != null
+            ? ParticlePaintManager.Instance.CurrentColor
+            : paintColor;
+
+
     private void Awake()
     {
         ps = GetComponent<ParticleSystem>();
         collisionEvents = new ParticleCollisionEvent[16];
+        originalColor = paintColor;
     }
+
+
 
     private bool IsInTargetLayer(GameObject obj)
     {
@@ -93,13 +104,13 @@ public class ParticlePaint : MonoBehaviour
             {
                 // Material'i clone'la (shared material deðiþmesin)
                 renderer.material = new Material(decalMaterial);
-                renderer.material.color = paintColor;
+                renderer.material.color = EffectiveColor;
             }
             else
             {
                 // Fallback: Basit unlit material
                 Material fallbackMat = new Material(Shader.Find("Unlit/Color"));
-                fallbackMat.color = paintColor;
+                fallbackMat.color = EffectiveColor;
                 renderer.material = fallbackMat;
             }
 

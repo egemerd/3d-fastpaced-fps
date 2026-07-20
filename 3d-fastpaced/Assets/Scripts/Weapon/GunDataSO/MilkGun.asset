@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6612a8b942fbbbc4aad4c012e2a75e68, type: 3}
+  m_Name: MilkGun
+  m_EditorClassIdentifier: Assembly-CSharp::GunData
+  gunName: MilkGun
+  whatToHit:
+    serializedVersion: 2
+    m_Bits: 192
+  spreadAngle: 0
+  bulletsPerShot: 0
+  fireRate: 1
+  fireRange: 30
+  reloadTime: 0
+  magazineSize: 50
+  reloadAoutomatic: 0
+  gunDamage: 10
+  headshotMultiplier: 7
+  gunTrailPrefab: {fileID: 0}
+  bulletSpeed: 0
+  bulletMarkPrefab: {fileID: 0}
+  hitParticlePrefab: {fileID: 0}
+  shootAnimDuration: 0
+  returnShootAnimDuration: 0
+  movementDistance: 0

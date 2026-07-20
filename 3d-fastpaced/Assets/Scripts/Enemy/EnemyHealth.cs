@@ -2,21 +2,28 @@ using UnityEngine;
 using System.Collections;
 using static UnityEngine.ParticleSystem;
 
-public class EnemyHealth : MonoBehaviour , IDamageable
+public class EnemyHealth : MonoBehaviour , IDamageable,IBurnable
 {
     [SerializeField] private EnemyDataSO enemyData;
+    [SerializeField] private WeaponStateSO weaponStateSO;
     public float currentHealth;
     bool isEnemyDied =false;
+
 
     private bool isPlayingHurtParticle = false;
     private float hurtParticleCooldown = 0.1f;
 
     private WeaponSwitching weaponSwitching;
 
+    [SerializeField]
+    private bool _IsBurning;
+    public bool IsBurning { get => _IsBurning; set => _IsBurning = value; }
+
+    private Coroutine BurnCoroutine;
+
     private void Awake()
     {
         currentHealth = enemyData.health;
-        weaponSwitching = FindObjectOfType<WeaponSwitching>();
     }
 
     private void Update()
@@ -86,13 +93,15 @@ public class EnemyHealth : MonoBehaviour , IDamageable
         isEnemyDied = true;
 
         Debug.Log("[EnemyHealth] Die() called - Starting death sequence");
-        if (weaponSwitching.selectedWeapon == 0)
+        if (weaponStateSO.selectedGunIndex == 0)
         {
             EnemyParticle("EnemyDeathParticle");
+            Debug.Log("[EnemyHealth] EnemyDeathParticle played for selectedGunIndex 0");
         }
-        else if (weaponSwitching.selectedWeapon == 1)
+        else if (weaponStateSO.selectedGunIndex == 1)
         {
             EnemyParticle("EnemyDeathParticlePistol");
+            Debug.Log("[EnemyHealth] EnemyDeathParticlePistol played for selectedGunIndex 1");
         }
         TimeStopEffect.Instance.TimeStopPreset("EnemyDeath");
         if (GameEvents.current != null)
@@ -129,12 +138,44 @@ public class EnemyHealth : MonoBehaviour , IDamageable
         {
             StartCoroutine(PlayHurtParticleWithCooldown());
         }
-        //Debug.Log($"{gameObject.name} HP: {currentHealth}");
+        
+    }
 
-        //if (currentHealth <= 0)
-        //{
-        //    Die();
-        //}
+    public void BurningTakeDamage(float damage)
+    {
+        currentHealth -= damage;
+    }
+    public void StartBurning(float damagePerSecond)
+    {
+        IsBurning = true;
+        if (BurnCoroutine != null)
+        {
+            StopCoroutine(BurnCoroutine);
+        }
+
+        BurnCoroutine = StartCoroutine(Burn(damagePerSecond));
+    }
+
+    public void StopBurning()
+    {
+        IsBurning = false;
+        if (BurnCoroutine != null)
+        {
+            StopCoroutine(BurnCoroutine);
+        }
+    }
+
+
+
+    private IEnumerator Burn(float damagePerSecond)
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.3f);
+
+        while (IsBurning)
+        {
+            TakeDamage(damagePerSecond);
+            yield return wait;
+        }
     }
 
     

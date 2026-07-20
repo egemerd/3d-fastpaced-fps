@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5160401887177905935}
   - component: {fileID: 6832843125955464406}
   - component: {fileID: -415167416014271654}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: VFX_EnemyHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4760,7 +4760,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &6832843125955464406
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4806,6 +4806,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4837,7 +4838,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!114 &-415167416014271654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4854,10 +4854,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   decalMaterial: {fileID: 2100000, guid: c2db6644db3b94a409b796f65eea2c34, type: 2}
-  paintColor: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
+  paintColor: {r: 1, g: 0, b: 0, a: 1}
   decalSize: 1.5
   decalLifetime: 5
-  decalOffset: 0.2
+  decalOffset: 0
   randomRotation: 1
   useFade: 1
   fadeStartTime: 6

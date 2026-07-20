@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Damage(float damage)
     {
-        health = Mathf.Clamp(health-damage,0,100);
+        health = health - damage;
         healthText.text = "Health: " + health.ToString("0");
         PlayerDie();
         Debug.Log("Taken damage. New Health: " + health);

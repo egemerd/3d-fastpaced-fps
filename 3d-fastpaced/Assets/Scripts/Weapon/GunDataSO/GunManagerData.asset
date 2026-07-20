@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf1d57365ec57d49b357fa6b080c71c, type: 3}
+  m_Name: GunManagerData
+  m_EditorClassIdentifier: Assembly-CSharp::GunManagerData
+  guns:
+  - gunName: MilkShotgun
+    gunDataSO: {fileID: 11400000, guid: c0979e5ee40f3bc48ab6d985f610f52a, type: 2}
+  - gunName: BarcodePistol
+    gunDataSO: {fileID: 11400000, guid: fe7963a17cf8a614cb1ff310c846736c, type: 2}
+  - gunName: MilkGun
+    gunDataSO: {fileID: 0}
+  - gunName: SMG
+    gunDataSO: {fileID: 11400000, guid: 5542b39147f9bac4587024c1eb253a51, type: 2}

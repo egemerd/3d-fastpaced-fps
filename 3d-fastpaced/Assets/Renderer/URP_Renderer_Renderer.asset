@@ -12,11 +12,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f855413a36f78d42adb70051da314aa, type: 3}
   m_Name: EdgeDetection
   m_EditorClassIdentifier: Assembly-CSharp::EdgeDetection
-  m_Active: 1
+  m_Active: 0
   settings:
     renderPassEvent: 500
-    outlineThickness: 3
+    outlineThickness: 4
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &-4848821747590584139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa432b7cae4198a43b1a9a7cb70e4ecd, type: 3}
+  m_Name: EdgeDetection2
+  m_EditorClassIdentifier: Assembly-CSharp::EdgeDetection2
+  m_Active: 0
+  settings:
+    renderPassEvent: 500
+    outlineThickness: 5
+    outlineColor: {r: 1, g: 0, b: 0.15351725, a: 1}
+    depthThreshold: 0.005
+    normalThreshold: 0.25
+    luminanceThreshold: 0.15
+    luminanceSampleSpread: 1
+--- !u!114 &-4283711945322719448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6b4686861ccb841bb4e71efb1b87f3, type: 3}
+  m_Name: WhiteoutRevealFeature
+  m_EditorClassIdentifier: Assembly-CSharp::WhiteoutRevealFeature
+  m_Active: 1
+  settings:
+    excludedLayers:
+      serializedVersion: 2
+      m_Bits: 33024
+    stencilWriteShader: {fileID: 4800000, guid: 679af34a692e0804880fd4e8b635be74, type: 3}
+    whiteoutShader: {fileID: 4800000, guid: 34fc3d9f4cfef8a489861663d0ff4af8, type: 3}
+    renderPassEvent: 300
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,7 +85,11 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 8583916667154451935}
   - {fileID: -7032549269546944670}
-  m_RendererFeatureMap: dfcd4bafba32207762b7380bb35d679e
+  - {fileID: 758558792116160238}
+  - {fileID: -4283711945322719448}
+  - {fileID: 6253085366937135331}
+  - {fileID: -4848821747590584139}
+  m_RendererFeatureMap: dfcd4bafba32207762b7380bb35d679eee4655d133f1860a2817f18aae328dc4e3287bce026cc756b5a8ac8b4f86b5bc
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -73,6 +118,47 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &758558792116160238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
+  m_Name: FullScreenPassRendererFeature
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
+  m_Active: 0
+  injectionPoint: 600
+  fetchColorBuffer: 1
+  requirements: 0
+  passMaterial: {fileID: 2100000, guid: 35df0be39b756e74d977987a98476fe3, type: 2}
+  passIndex: 0
+  bindDepthStencilAttachment: 0
+  m_Version: 1
+--- !u!114 &6253085366937135331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa432b7cae4198a43b1a9a7cb70e4ecd, type: 3}
+  m_Name: EdgeDetection2
+  m_EditorClassIdentifier: Assembly-CSharp::EdgeDetection2
+  m_Active: 1
+  settings:
+    renderPassEvent: 500
+    outlineThickness: 3
+    outlineColor: {r: 0, g: 0, b: 0, a: 1}
+    depthThreshold: 0.0065
+    normalThreshold: 0.353
+    luminanceThreshold: 0.56
+    luminanceSampleSpread: 1
 --- !u!114 &8583916667154451935
 MonoBehaviour:
   m_ObjectHideFlags: 0

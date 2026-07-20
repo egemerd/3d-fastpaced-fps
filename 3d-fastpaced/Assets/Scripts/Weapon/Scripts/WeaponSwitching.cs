@@ -2,74 +2,118 @@ using UnityEngine;
 
 public class WeaponSwitching : MonoBehaviour
 {
-    public int selectedWeapon = 0;
+    [SerializeField] private GunManagerData gunManagerDataSO;
+    [SerializeField] private WeaponStateSO weaponStateSO;
+    [SerializeField] private GunUIData[] gunUIDataList;
+    [SerializeField] private GameObject[] weaponObjects;
 
-    [SerializeField] GameObject shotgunCrosshair;
-    [SerializeField] GameObject pistolCrosshair;
-
-    [SerializeField] GameObject shotgunBig;
-    [SerializeField] GameObject pistolBig;
-
-    [SerializeField] GameObject shotgunSmall;
-    [SerializeField] GameObject pistolSmall;
-    
+    public int selectedWeapon = -1;
+    int currentIndex = -1;
+    private AllGunData[] guns;
     void Start()
     {
-        SelectWeapon();
+        guns = gunManagerDataSO.guns;
+        SwitchTo(0);
     }
 
-    
-    void Update()
+    private void Update()
     {
         SwitchInput();
-        SelectWeapon();
     }
 
-    void SwitchInput()
+    private void SwitchInput()
     {
         if (InputManager.Instance.switchWeaponAction1.IsPressed())
-        {
-            selectedWeapon = 0;
-            shotgunCrosshair.SetActive(true);
-            pistolCrosshair.SetActive(false);
-            ShotgunEquip();
-
-        }
+            SwitchTo(0);
         else if (InputManager.Instance.switchWeaponAction2.IsPressed())
-        {
-            selectedWeapon = 1;
-            shotgunCrosshair.SetActive(false);
-            pistolCrosshair.SetActive(true);
-            PistolEquip();
-        }
+            SwitchTo(1);
+        else if (InputManager.Instance.switchWeaponAction3.IsPressed())
+            SwitchTo(2);
+        else if (InputManager.Instance.switchWeaponAction4.IsPressed())
+            SwitchTo(3);
+        //else if (InputManager.Instance.switchWeaponAction5.IsPressed())
+        //    SwitchTo(4);
+        Debug.Log(InputManager.Instance.switchWeaponAction4.IsPressed());
     }
 
-    void SelectWeapon()
+    private void SwitchTo(int index)
     {
-        int i = 0;
-        foreach(Transform weapon in transform)
+        if (index == selectedWeapon) return;
+
+
+        SetUI(selectedWeapon, false);
+
+        selectedWeapon = index;
+        weaponStateSO.selectedGunIndex = index;
+
+        SetUI(selectedWeapon, true);
+
+        EquipGun(index);
+    }
+
+    private void SetUI(int index, bool isActive)
+    {
+        if (index < 0 || index >= gunUIDataList.Length) return;
+
+        var ui = gunUIDataList[index];
+        if (ui.crosshair != null) ui.crosshair.SetActive(isActive);
+        if (ui.bigIcon != null) ui.bigIcon.SetActive(isActive);
+        if (ui.smallIcon != null) ui.smallIcon.SetActive(!isActive); // Small ters çalýþýyor
+    }
+
+    private void UpdateWeaponObjects(int index)
+    {
+        for (int i = 0; i < weaponObjects.Length; i++)
         {
-            if (i == selectedWeapon)
-                weapon.gameObject.SetActive(true);
+            GameObject weaponObj = weaponObjects[i];
+            if (weaponObj == null) continue;
+
+            bool shouldBeActive = (i == index);
+
+            if (shouldBeActive)
+            {
+                weaponObj.SetActive(true);
+            }
             else
-                weapon.gameObject.SetActive(false);
-            i++;
+            {
+                if (weaponObj.activeSelf)
+                {
+                    ResetWeaponAnimator(weaponObj);
+                    weaponObj.SetActive(false);
+                }
+            }
         }
     }
 
-    private void ShotgunEquip()
+    public void EquipGun(int index)
     {
-        shotgunBig.SetActive(true);
-        pistolBig.SetActive(false);
-        shotgunSmall.SetActive(false);
-        pistolSmall.SetActive(true);
+        if (index == currentIndex) return;
+        if (index < 0 || index >= guns.Length) return;
+
+        currentIndex = index;
+        UpdateWeaponObjects(index);
     }
 
-    private void PistolEquip()
+    private void ResetWeaponAnimator(GameObject weaponObj)
     {
-        pistolBig.SetActive(true);
-        shotgunBig.SetActive(false);
-        pistolSmall.SetActive(false);
-        shotgunSmall.SetActive(true);
+        Animator animator = weaponObj.GetComponent<Animator>();
+        if (animator != null)
+        {
+            // Idle yerine, Animator Controller'ýndaki GERÇEK state ismini yaz
+            // Örneðin "Idle", "WeaponIdle", "Rest" ne ise onu kullan
+            animator.Rebind();
+            animator.Play("Idle", 0, 0f);
+            animator.Update(0f);
+        }
     }
 }
+
+[System.Serializable]
+public struct GunUIData
+{
+    public string gunName; 
+    public GameObject crosshair;
+    public GameObject bigIcon;
+    public GameObject smallIcon;
+}
+

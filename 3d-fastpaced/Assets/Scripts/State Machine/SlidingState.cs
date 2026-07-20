@@ -29,7 +29,8 @@ public class SlidingState : IState
         player.CalculateMoveDirection();
         player.HandleSliding();
         player.Movement();
-         
+        player.SlideCameraMovement();
+
         if (player.GetJumpAction().triggered && player.isGrounded)
         {
             player.Jump(); 

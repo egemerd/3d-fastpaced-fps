@@ -57,7 +57,8 @@ public abstract class EnemyAI : MonoBehaviour
     private void Attack()
     {
         LookPlayerYAxis();
-        EnemyAttack();
+        if (Time.time >= nextShootTime)
+            EnemyAttack();
     }
 
     protected void SetMovementSpeed()

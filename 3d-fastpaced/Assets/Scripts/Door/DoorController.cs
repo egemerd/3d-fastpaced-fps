@@ -55,18 +55,15 @@ public class DoorController : MonoBehaviour
     private void OnDisable()
     {
         // DoorController.OnEnable çalýþýyor mu? Kontrol 1:
-        Debug.Log("DoorController OnDisnable çalýþtý.");
 
         if (GameEvents.current != null)
         {
             GameEvents.current.onEnemyDeath -= OpenDoor;
             // Abonelik baþarýlý oldu mu? Kontrol 2:
-            Debug.Log("Kapý, onEnemyDeath eventine baþarýyla abone oldu.");
         }
         else
         {
             // Event sistemi hazýr deðil! Kontrol 3: Sorun burada olabilir.
-            Debug.LogError("HATA: GameEvents.current null! Abonelik baþarýsýz.");
         }
     }
 
@@ -116,7 +113,7 @@ public class DoorController : MonoBehaviour
 
         Debug.Log("Player entered door trigger");
         if (!other.CompareTag("Player")) return;
-        LevelManager.Instance.ActivateLevelEndCanvas();
+        //LevelManager.Instance.ActivateLevelEndCanvas();
     }
 
     

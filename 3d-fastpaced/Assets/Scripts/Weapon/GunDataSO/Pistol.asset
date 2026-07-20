@@ -15,7 +15,7 @@ MonoBehaviour:
   gunName: Pistol
   whatToHit:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 8388800
   spreadAngle: 0
   bulletsPerShot: 0
   fireRate: 10
@@ -32,3 +32,6 @@ MonoBehaviour:
   shootAnimDuration: 0.08
   returnShootAnimDuration: 0.3
   movementDistance: 1
+  zPositionAmount: 0
+  xRotationAmount: 0
+  yShakeAmount: 0

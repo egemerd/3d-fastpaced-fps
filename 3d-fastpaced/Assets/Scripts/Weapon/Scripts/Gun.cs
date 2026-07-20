@@ -11,9 +11,9 @@ public abstract class Gun : MonoBehaviour
     public PlayerController playerController;
     
 
-    private int currentAmmo = 0;    
+    protected int currentAmmo = 0;    
     private float nextTimeToFire = 0f;   
-    private bool isReloading = false;
+    protected bool isReloading = false;
     private Coroutine reloadRoutine;
     
 
@@ -68,7 +68,10 @@ public abstract class Gun : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
-        myAnim.SetTrigger("Reload");
+        if (myAnim != null)
+        {
+            myAnim.SetTrigger("Reload");
+        }
         Debug.Log("Reloading");
         yield return new WaitForSeconds(gunData.reloadTime);    
         currentAmmo = gunData.magazineSize;
@@ -81,7 +84,7 @@ public abstract class Gun : MonoBehaviour
 
     
 
-    public void TryShoot()
+    public virtual void TryShoot()
     {
         if (isReloading || currentAmmo <= 0)
             return;
@@ -125,7 +128,7 @@ public abstract class Gun : MonoBehaviour
             BulletHitFX(hit);
         }
 
-        if(hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Body") || hit.collider.CompareTag("Head"))
+        if(hit.collider.CompareTag("Body") || hit.collider.CompareTag("Head"))
         {
             ApplyDamage(hit);
         }
@@ -137,7 +140,8 @@ public abstract class Gun : MonoBehaviour
         Vector3 hitPoint = hit.point + hit.normal * 0.01f;
         //GameObject hitParticle = Instantiate(gunData.hitParticlePrefab, hitPoint, Quaternion.LookRotation(hit.normal));
         GameObject bulletMark = Instantiate(gunData.bulletMarkPrefab, hitPoint, Quaternion.LookRotation(hit.normal));
-    
+        Debug.Log("Bullet hit: " + hit.collider.name);
+
         //hitParticle.transform.parent = hit.collider.transform;
         bulletMark.transform.parent = hit.collider.transform;
 
