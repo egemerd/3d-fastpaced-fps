@@ -17,6 +17,7 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] private float tiltAngle = 5f; // Kameranýn yatma açýsý
     [SerializeField] private float tiltSpeed = 10f;
 
+    [SerializeField] private bool isCameraLocked = false;
     private float currentTilt = 0f;
     private float xRotation = 0f; 
     private float yRotation = 0f; 
@@ -47,7 +48,9 @@ public class PlayerCameraController : MonoBehaviour
 
     private void Update()
     {
+        LockCamera();
         if (InputManager.Instance.IsInputLocked) return;
+        if (isCameraLocked) return;
         lookInput = inputActions.Gameplay.Look.ReadValue<Vector2>();
     }
 
@@ -59,6 +62,14 @@ public class PlayerCameraController : MonoBehaviour
         LeftRightMovement();
     }
 
+    private void LockCamera()
+    {
+        bool input =InputManager.Instance.lockCameraAction.WasPressedThisFrame();
+        if (input)
+        {
+            isCameraLocked = !isCameraLocked;
+        }
+    }
     private void OnEnable()
     {
         inputActions.Gameplay.Enable();

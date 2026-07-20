@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private InputManager input;
     CameraShakeMovement cameraShake;
     Climbing climbing;
+    PlayerMovementCamera playerMovementCamera;
 
     private Camera mainCamera;
     private CharacterController characterController;
@@ -112,8 +113,8 @@ public class PlayerController : MonoBehaviour
 
         cameraShake = GetComponent<CameraShakeMovement>();
         climbing = GetComponent<Climbing>();    
+        playerMovementCamera = GetComponent<PlayerMovementCamera>();    
 
-        
 
         originalCameraHeight = cameraHead.localPosition.y;
         targetCameraHeight = originalCameraHeight;
@@ -544,6 +545,13 @@ public class PlayerController : MonoBehaviour
         canSlide = false;
         yield return new WaitForSeconds(slideCooldown);
         canSlide = true;
+    }
+
+    public void SlideCameraMovement()
+    {
+        Debug.Log("Sliding Camera Movement");   
+        playerMovementCamera.UpdateTiltBlend();
+        playerMovementCamera.LerpCamera();
     }
 
     private void SmoothCameraHeight()

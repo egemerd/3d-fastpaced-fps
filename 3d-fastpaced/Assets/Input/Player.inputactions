@@ -131,6 +131,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LockCamera",
+                    "type": "Button",
+                    "id": "8a0629d1-8943-4636-90f3-bc3f014c208e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -329,6 +338,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Weapon5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20ba92a2-f665-4592-af3d-c994e330f7da",
+                    "path": "<Keyboard>/f4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LockCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

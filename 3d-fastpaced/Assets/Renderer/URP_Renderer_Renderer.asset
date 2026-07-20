@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Active: 0
   settings:
     renderPassEvent: 500
-    outlineThickness: 3
+    outlineThickness: 4
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &-4848821747590584139
 MonoBehaviour:
@@ -34,11 +34,6 @@ MonoBehaviour:
     renderPassEvent: 500
     outlineThickness: 5
     outlineColor: {r: 1, g: 0, b: 0.15351725, a: 1}
-    wiggleAmount: 100.82
-    wiggleScale: 0.07
-    thicknessVariation: 1
-    thicknessNoiseScale: 0.13
-    thicknessThreshold: 0
     depthThreshold: 0.005
     normalThreshold: 0.25
     luminanceThreshold: 0.15
@@ -55,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6b4686861ccb841bb4e71efb1b87f3, type: 3}
   m_Name: WhiteoutRevealFeature
   m_EditorClassIdentifier: Assembly-CSharp::WhiteoutRevealFeature
-  m_Active: 0
+  m_Active: 1
   settings:
     excludedLayers:
       serializedVersion: 2
@@ -160,14 +155,9 @@ MonoBehaviour:
     renderPassEvent: 500
     outlineThickness: 3
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
-    wiggleAmount: 1.09
-    wiggleScale: 0.02
-    thicknessVariation: 0.211
-    thicknessNoiseScale: -0.13
-    thicknessThreshold: 0.466
-    depthThreshold: 0.0163
-    normalThreshold: 0.472
-    luminanceThreshold: 0.3
+    depthThreshold: 0.0065
+    normalThreshold: 0.353
+    luminanceThreshold: 0.56
     luminanceSampleSpread: 1
 --- !u!114 &8583916667154451935
 MonoBehaviour:

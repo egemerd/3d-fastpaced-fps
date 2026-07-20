@@ -217,6 +217,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LockCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a0629d1-8943-4636-90f3-bc3f014c208e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -417,6 +426,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Weapon5"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20ba92a2-f665-4592-af3d-c994e330f7da"",
+                    ""path"": ""<Keyboard>/f4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LockCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -439,6 +459,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         m_Gameplay_Weapon4 = m_Gameplay.FindAction("Weapon4", throwIfNotFound: true);
         m_Gameplay_Weapon5 = m_Gameplay.FindAction("Weapon5", throwIfNotFound: true);
+        m_Gameplay_LockCamera = m_Gameplay.FindAction("LockCamera", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -533,6 +554,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Pause;
     private readonly InputAction m_Gameplay_Weapon4;
     private readonly InputAction m_Gameplay_Weapon5;
+    private readonly InputAction m_Gameplay_LockCamera;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -601,6 +623,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Weapon5 => m_Wrapper.m_Gameplay_Weapon5;
         /// <summary>
+        /// Provides access to the underlying input action "Gameplay/LockCamera".
+        /// </summary>
+        public InputAction @LockCamera => m_Wrapper.m_Gameplay_LockCamera;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
@@ -668,6 +694,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Weapon5.started += instance.OnWeapon5;
             @Weapon5.performed += instance.OnWeapon5;
             @Weapon5.canceled += instance.OnWeapon5;
+            @LockCamera.started += instance.OnLockCamera;
+            @LockCamera.performed += instance.OnLockCamera;
+            @LockCamera.canceled += instance.OnLockCamera;
         }
 
         /// <summary>
@@ -721,6 +750,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Weapon5.started -= instance.OnWeapon5;
             @Weapon5.performed -= instance.OnWeapon5;
             @Weapon5.canceled -= instance.OnWeapon5;
+            @LockCamera.started -= instance.OnLockCamera;
+            @LockCamera.performed -= instance.OnLockCamera;
+            @LockCamera.canceled -= instance.OnLockCamera;
         }
 
         /// <summary>
@@ -859,5 +891,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWeapon5(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LockCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLockCamera(InputAction.CallbackContext context);
     }
 }
